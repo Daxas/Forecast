@@ -2,7 +2,7 @@
 import Foundation
 import Mapper
 
-class NetWorkAPI {
+class ForecastClient {
     
     func forecastURL(lat: Float, long: Float) -> URL {
         let urlString = String(format:

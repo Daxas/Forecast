@@ -2,14 +2,8 @@
 import UIKit
 import Mapper
 
-class ViewController: UIViewController {
+class ForecastViewController: UIViewController {
 
-   //var currently: [String: Any]?
-   //var hourly: [String: Any]?
-    //var daily: [String: Any]?
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -18,11 +12,6 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-    
-    
-    
-   
-    
     @IBAction func buttonAction(_ sender: UIButton) {
         
         let url = forecastURL(lat: 0, long: 0)
@@ -37,15 +26,18 @@ class ViewController: UIViewController {
                     if let jsonString = self.performForecastRequest(with: url),
                         let jsonDictionary = self.parse(json: jsonString)  {
                         let forecast = Forecast.from(jsonDictionary)
+                        for dataPoint in (forecast?.dailyData)! {
+                            print(dataPoint.icon)
+                        }
                         print("summary", forecast?.summary)
+                       
                         }
                 }
             }
         })
         dataTask.resume()
         
-        
-        
+       
     }
     
     func forecastURL(lat: Float, long: Float) -> URL {

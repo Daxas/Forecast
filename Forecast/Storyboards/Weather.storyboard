@@ -1,37 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="atr-CF-SEe">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Locations-->
-        <scene sceneID="V1W-eq-JsP">
-            <objects>
-                <viewController id="Dir-aD-HLp" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4Xi-XD-vci">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="JMT-8n-HOE"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Locations" id="l3X-Ov-84T"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gTf-B2-rDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="181" y="217"/>
-        </scene>
         <!--Weather-->
         <scene sceneID="5Le-GD-s5z">
             <objects>
-                <viewController id="atr-CF-SEe" customClass="ViewController" customModule="Forecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="atr-CF-SEe" customClass="ForecastViewController" customModule="Forecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FSA-d3-OGa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Fk-I4-v5b">
@@ -113,24 +93,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4fq-oX-ECF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="180" y="-447.52623688155927"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="TAe-m5-Bkr">
-            <objects>
-                <tabBarController id="vng-ZN-222" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ggs-qN-jfU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="atr-CF-SEe" kind="relationship" relationship="viewControllers" id="y8r-lL-WDx"/>
-                        <segue destination="Dir-aD-HLp" kind="relationship" relationship="viewControllers" id="CfQ-aU-uwF"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QPI-mz-SFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-772" y="-115"/>
         </scene>
     </scenes>
 </document>
