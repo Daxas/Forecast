@@ -1,9 +1,11 @@
 
 import UIKit
+import MapKit
 //import Mapper
 
 class ForecastViewController: UIViewController {
 
+    let forecastClient = ForecastClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,9 +16,11 @@ class ForecastViewController: UIViewController {
     }
 
     @IBAction func buttonAction(_ sender: UIButton) {
-        let forecastClient = ForecastClient(key: "", lat: 0, long: 0)
-        forecastClient.sessionMenedger()
         
+        let location = CLLocationCoordinate2DMake(56.23, 43.411) 
+        forecastClient.getForecast(for: location, completion: {forecast in print(forecast.summary)  }, failure: {error in print(error)})
+        
+         
     }
     
     

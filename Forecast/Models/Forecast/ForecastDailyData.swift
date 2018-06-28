@@ -2,15 +2,17 @@
 import Foundation
 import Mapper
 
-struct HourlyWeatherDataPoint: Mappable {
+struct ForecastDailyData: Mappable {
     
     let time: Int
-    let temperature: Double
+    let minTemp: Double
+    let maxTemp: Double
     let icon: String
     
     init(map: Mapper) throws {
         time = try map.from("time")
-        temperature = try map.from("temperature")
+        minTemp = try map.from("temperatureLow")
+        maxTemp = try map.from("temperatureHigh")
         icon = try map.from("icon")
     }
     

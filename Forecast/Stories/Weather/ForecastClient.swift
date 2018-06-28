@@ -1,74 +1,71 @@
 
 import Foundation
 import Mapper
+import MapKit
+
+enum ForecastClientError: Error {
+    case urlError
+    case responceError
+    case mappingError
+}
 
 class ForecastClient {
-    var key: String
-    var lat: Double
-    var long: Double
     
-    init(key: String, lat: Double, long: Double) {
-        self.key = key
-        self.lat = lat
-        self.long = long
+    struct Configuration {
+        static var apiKey = "cfb098593c0899de76d374e96d68c8e3"
+        static let baseURL = "https://api.forecast.io/forecast/"
     }
     
-    private func forecastURL(lat: Double, long: Double) -> URL {
-        let urlString = String(format:
-            "https://api.forecast.io/forecast/cfb098593c0899de76d374e96d68c8e3/56.23,43.411")
-        /*let urlString = String(format:
-         "https://api.forecast.io/forecast/cfb098593c0899de76d374e96d68c8e3/%@,%@", lat, long)*/
+    private let urlSession = URLSession.shared
+    private var dataTask: URLSessionDataTask?
+    
+    private var baseURL: String {
+        return Configuration.baseURL + Configuration.apiKey
+    }
+    
+    private func forecastURL(for coordinate: CLLocationCoordinate2D) -> URL? {
+        let path = baseURL + "/" + "56.23,43.411"
+       //let path = baseURL + "/" + String(format: "%2.2d, %2.2d", coordinate.latitude, coordinate.longitude)
         
-        let url = URL(string: urlString)
-        return url!
+        return URL(string: path)
     }
     
-    private func performForecastRequest(with url: URL) -> String? {
-        do {
-            return try String(contentsOf: url, encoding: .utf8)
-        } catch {
-            print("Download Error: \(error)")
-            return nil
+    func getForecast(for location: CLLocationCoordinate2D,
+                     completion: @escaping (Forecast) -> Void,
+                     failure: @escaping (Error) -> Void) {
+        
+        guard let url = forecastURL(for: location) else {
+            failure(ForecastClientError.urlError)
+            return
         }
-    }
-    
-    private func parse(json: String) ->  NSDictionary? {
-        guard let data = json.data(using: .utf8, allowLossyConversion: false)
-            else { return nil }
-        do {
-            return try JSONSerialization.jsonObject(
-                with: data, options: []) as? NSDictionary
-        } catch {
-            print("JSON Error: \(error)")
-            return nil
-        }
-    }
-    
-    func sessionMenedger() {
-        let url = forecastURL(lat: 0, long: 0)
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: url, completionHandler: {
-            data, response, error in
-            if let error = error {
-                print("Failure! \(error)")
-            } else {
-                let queue = DispatchQueue.global()
-                queue.async {
-                    if let jsonString = self.performForecastRequest(with: url),
-                        let jsonDictionary = self.parse(json: jsonString)  {
-                        let forecast = Forecast.from(jsonDictionary)
-                        for dataPoint in (forecast?.dailyData)! {
-                            print(dataPoint.icon)
-                        }
-                        print("summary", forecast?.summary)
-                        
-                    }
+       
+       // let queue = DispatchQueue.global()
+      // queue.async {
+       dataTask = urlSession.dataTask(with: url) { (data, response, error) in
+        
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                        failure(ForecastClientError.responceError)
+                        return
                 }
-            }
-        })
-        dataTask.resume()
+        if let data = data {
+                 do {
+                let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary
+                        
+                    guard let json = jsonData, let forecast = Forecast.from(json) else {
+                        failure(ForecastClientError.mappingError)
+                        return
+                    }
+                    completion(forecast)
+                        
+                 } catch {
+                    failure(error)
+                }
+        }
+        
+        }
+        dataTask?.resume()
+
     }
-    
 }
 
     
