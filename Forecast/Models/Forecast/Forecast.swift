@@ -13,8 +13,8 @@ class Forecast: Mappable {
     var hourlyData = [ForecastHourlyData]()
     var dailyData = [ForecastDailyData ]()
     
-   required init(map: Mapper) throws {
-    
+    required init(map: Mapper) throws {
+        
         try summary = map.from("currently.summary")
         try icon = map.from("currently.icon")
         try temperature = map.from("currently.temperature")
