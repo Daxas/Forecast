@@ -7,6 +7,7 @@ enum ForecastClientError: Error {
     case urlError
     case responceError
     case mappingError
+    case dataError
 }
 
 class ForecastClient {
@@ -17,7 +18,7 @@ class ForecastClient {
     }
     
     private let urlSession = URLSession.shared
-    private var dataTask: URLSessionDataTask?
+   private var dataTask: URLSessionDataTask?
     
     private var baseURL: String {
         return Configuration.baseURL + Configuration.apiKey
@@ -26,7 +27,7 @@ class ForecastClient {
     private func forecastURL(for coordinate: CLLocationCoordinate2D) -> URL? {
         let lat = coordinate.latitude.toString(afterPoint: 3)
         let long = coordinate.longitude.toString(afterPoint: 3)
-        let path = baseURL + "/" + lat + "," + long
+        let path = baseURL + "/" + lat + "," + long 
         return URL(string: path)
     }
     
@@ -42,20 +43,30 @@ class ForecastClient {
         }
         
         dataTask = urlSession.dataTask(with: url) { (data, response, error) in
-            
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            guard error == nil else {
                 DispatchQueue.main.async {
-                    failure(ForecastClientError.responceError)
+                failure(ForecastClientError.dataError)
                 }
                 return
             }
-            if let data = data {
+            guard let data = data else {
+                DispatchQueue.main.async {
+                failure(ForecastClientError.dataError)
+                }
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                DispatchQueue.main.async {
+                failure(ForecastClientError.responceError)
+                }
+                return
+            }
                 do {
                     let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary
                     
                     guard let json = jsonData, let forecast = Forecast.from(json) else {
                         DispatchQueue.main.async {
-                            failure(ForecastClientError.mappingError)
+                        failure(ForecastClientError.mappingError)
                         }
                         return
                     }
@@ -67,7 +78,7 @@ class ForecastClient {
                         failure(error)
                     }
                 }
-            }
+            
             
         }
         dataTask?.resume()

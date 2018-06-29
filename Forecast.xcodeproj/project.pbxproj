@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8429B54720E55F1400456D3A /* ExtensionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8429B54620E55F1400456D3A /* ExtensionDouble.swift */; };
 		846442AA20E0DA5E006197AC /* ForecastClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846442A920E0DA5E006197AC /* ForecastClient.swift */; };
 		846442AC20E21EB8006197AC /* ForecastHourlyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846442AB20E21EB8006197AC /* ForecastHourlyData.swift */; };
 		846442AE20E21EE8006197AC /* ForecastDailyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846442AD20E21EE8006197AC /* ForecastDailyData.swift */; };
@@ -62,12 +61,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		8429B54820E5683900456D3A /* Menegers */ = {
+		8429B54820E5683900456D3A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				846442A920E0DA5E006197AC /* ForecastClient.swift */,
 			);
-			path = Menegers;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		846442AF20E230C1006197AC /* Models */ = {
@@ -134,7 +133,7 @@
 		8479EE6F20DC211600F37C4E /* Forecast */ = {
 			isa = PBXGroup;
 			children = (
-				8429B54820E5683900456D3A /* Menegers */,
+				8429B54820E5683900456D3A /* Managers */,
 				8429B54520E55EEE00456D3A /* Extensions */,
 				8479EE7020DC211600F37C4E /* AppDelegate.swift */,
 				846442B020E23119006197AC /* Stories */,
