@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -202,28 +203,28 @@
                                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vP3-Zj-IIm">
-                                                            <rect key="frame" x="0.0" y="20" width="50" height="48"/>
-                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APO-LI-2SY">
                                                             <rect key="frame" x="2" y="71" width="46" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vP3-Zj-IIm">
+                                                            <rect key="frame" x="12" y="32" width="26" height="24"/>
+                                                        </imageView>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
                                                     <constraint firstItem="APO-LI-2SY" firstAttribute="leading" secondItem="ioD-H3-VhG" secondAttribute="leading" constant="2" id="2R0-xy-ke5"/>
                                                     <constraint firstAttribute="bottom" secondItem="APO-LI-2SY" secondAttribute="bottom" constant="2" id="3pX-nd-nkm"/>
-                                                    <constraint firstItem="vP3-Zj-IIm" firstAttribute="top" secondItem="cjS-rD-vMJ" secondAttribute="bottom" constant="3" id="8gp-dE-VMa"/>
-                                                    <constraint firstItem="vP3-Zj-IIm" firstAttribute="leading" secondItem="ioD-H3-VhG" secondAttribute="leading" id="KvJ-zI-bcK"/>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="vP3-Zj-IIm" secondAttribute="trailing" constant="4" id="BRz-je-G8Z"/>
+                                                    <constraint firstItem="vP3-Zj-IIm" firstAttribute="top" secondItem="cjS-rD-vMJ" secondAttribute="bottom" constant="15" id="DLL-PN-QYY"/>
                                                     <constraint firstItem="cjS-rD-vMJ" firstAttribute="top" secondItem="ioD-H3-VhG" secondAttribute="top" constant="2" id="MMD-4V-V5u"/>
-                                                    <constraint firstAttribute="trailing" secondItem="vP3-Zj-IIm" secondAttribute="trailing" id="aSG-EI-8V0"/>
                                                     <constraint firstAttribute="trailing" secondItem="APO-LI-2SY" secondAttribute="trailing" constant="2" id="cRN-lm-G3r"/>
+                                                    <constraint firstItem="vP3-Zj-IIm" firstAttribute="leading" secondItem="ioD-H3-VhG" secondAttribute="leadingMargin" constant="4" id="e83-XP-Mgw"/>
                                                     <constraint firstAttribute="trailing" secondItem="cjS-rD-vMJ" secondAttribute="trailing" constant="2" id="fId-uy-rFr"/>
-                                                    <constraint firstItem="vP3-Zj-IIm" firstAttribute="centerY" secondItem="ioD-H3-VhG" secondAttribute="centerY" id="fVD-0J-Rja"/>
                                                     <constraint firstItem="cjS-rD-vMJ" firstAttribute="leading" secondItem="ioD-H3-VhG" secondAttribute="leading" constant="2" id="lCM-xD-FcJ"/>
+                                                    <constraint firstItem="APO-LI-2SY" firstAttribute="top" secondItem="vP3-Zj-IIm" secondAttribute="bottom" constant="15" id="lxm-or-Pqx"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="hourlyImage" destination="vP3-Zj-IIm" id="eBh-Az-vhu"/>
