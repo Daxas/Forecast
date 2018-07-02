@@ -10,6 +10,10 @@
 		841E8AA120E6B5E4008F4EA4 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA020E6B5E4008F4EA4 /* InfoCollectionViewCell.swift */; };
 		841E8AA320E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */; };
 		841E8AA520E7810D008F4EA4 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */; };
+		8439F3A320EA068A005691FD /* Double+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8429B54620E55F1400456D3A /* Double+String.swift */; };
+		8439F3A520EA2B00005691FD /* DailyTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A420EA2B00005691FD /* DailyTablePresenter.swift */; };
+		8439F3A720EA2CFF005691FD /* HourlyCollectionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A620EA2CFF005691FD /* HourlyCollectionPresenter.swift */; };
+		8439F3A920EABBA0005691FD /* DateFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A820EABBA0005691FD /* DateFormatterFactory.swift */; };
 		846442AA20E0DA5E006197AC /* ForecastClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846442A920E0DA5E006197AC /* ForecastClient.swift */; };
 		846442AC20E21EB8006197AC /* ForecastHourlyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846442AB20E21EB8006197AC /* ForecastHourlyData.swift */; };
 		846442AE20E21EE8006197AC /* ForecastDailyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846442AD20E21EE8006197AC /* ForecastDailyData.swift */; };
@@ -28,7 +32,10 @@
 		841E8AA020E6B5E4008F4EA4 /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
 		841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
-		8429B54620E55F1400456D3A /* ExtensionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDouble.swift; sourceTree = "<group>"; };
+		8429B54620E55F1400456D3A /* Double+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+String.swift"; sourceTree = "<group>"; };
+		8439F3A420EA2B00005691FD /* DailyTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTablePresenter.swift; sourceTree = "<group>"; };
+		8439F3A620EA2CFF005691FD /* HourlyCollectionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionPresenter.swift; sourceTree = "<group>"; };
+		8439F3A820EABBA0005691FD /* DateFormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterFactory.swift; sourceTree = "<group>"; };
 		846442A920E0DA5E006197AC /* ForecastClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastClient.swift; sourceTree = "<group>"; };
 		846442AB20E21EB8006197AC /* ForecastHourlyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastHourlyData.swift; sourceTree = "<group>"; };
 		846442AD20E21EE8006197AC /* ForecastDailyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDailyData.swift; sourceTree = "<group>"; };
@@ -62,7 +69,7 @@
 		8429B54520E55EEE00456D3A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8429B54620E55F1400456D3A /* ExtensionDouble.swift */,
+				8429B54620E55F1400456D3A /* Double+String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -71,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				846442A920E0DA5E006197AC /* ForecastClient.swift */,
+				8439F3A820EABBA0005691FD /* DateFormatterFactory.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -87,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				846442B120E23190006197AC /* Weather */,
-				846442B220E231A3006197AC /* Favorites */,
 			);
 			path = Stories;
 			sourceTree = "<group>";
@@ -96,18 +103,13 @@
 			isa = PBXGroup;
 			children = (
 				8479EE7220DC211600F37C4E /* ForecastViewController.swift */,
+				8439F3A420EA2B00005691FD /* DailyTablePresenter.swift */,
+				8439F3A620EA2CFF005691FD /* HourlyCollectionPresenter.swift */,
 				841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */,
 				841E8AA020E6B5E4008F4EA4 /* InfoCollectionViewCell.swift */,
 				841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */,
 			);
 			path = Weather;
-			sourceTree = "<group>";
-		};
-		846442B220E231A3006197AC /* Favorites */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Favorites;
 			sourceTree = "<group>";
 		};
 		846442B320E23213006197AC /* Storyboards */ = {
@@ -296,12 +298,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				841E8AA520E7810D008F4EA4 /* DailyTableViewCell.swift in Sources */,
+				8439F3A720EA2CFF005691FD /* HourlyCollectionPresenter.swift in Sources */,
 				8479EE7320DC211600F37C4E /* ForecastViewController.swift in Sources */,
+				8439F3A320EA068A005691FD /* Double+String.swift in Sources */,
 				8479EE8320DC283B00F37C4E /* Forecast.swift in Sources */,
 				841E8AA120E6B5E4008F4EA4 /* InfoCollectionViewCell.swift in Sources */,
+				8439F3A520EA2B00005691FD /* DailyTablePresenter.swift in Sources */,
 				841E8AA320E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift in Sources */,
 				8479EE7120DC211600F37C4E /* AppDelegate.swift in Sources */,
 				846442AC20E21EB8006197AC /* ForecastHourlyData.swift in Sources */,
+				8439F3A920EABBA0005691FD /* DateFormatterFactory.swift in Sources */,
 				846442AA20E0DA5E006197AC /* ForecastClient.swift in Sources */,
 				846442AE20E21EE8006197AC /* ForecastDailyData.swift in Sources */,
 			);

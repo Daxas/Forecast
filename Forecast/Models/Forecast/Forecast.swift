@@ -10,32 +10,24 @@ class Forecast: Mappable {
     let pressure: Double
     let windSpeed: Double
     
-    var hourlyData = [ForecastHourlyData]()
-    var dailyData = [ForecastDailyData ]()
+    var hourlyData: [ForecastHourlyData]?
+    var dailyData: [ForecastDailyData]?
     
-    init() {
-        summary = ""
-        icon = ""
-        temperature = 0
-        humidity = 0
-        pressure = 0
-        windSpeed = 0
-        hourlyData = [ForecastHourlyData()]
-        dailyData = [ForecastDailyData()]
-    }
     
     required init(map: Mapper) throws {
-        
-        try summary = map.from("currently.summary")
-        try icon = map.from("currently.icon")
-        try temperature = map.from("currently.temperature")
-        try humidity = map.from("currently.humidity")
-        try pressure = map.from("currently.pressure")
-        try windSpeed = map.from("currently.windSpeed")
+        do {
+        summary =  try map.from("currently.summary")
+        icon =  try map.from("currently.icon")
+        temperature = try map.from("currently.temperature")
+        humidity = try map.from("currently.humidity")
+        pressure = try map.from("currently.pressure")
+        windSpeed = try map.from("currently.windSpeed")
         
         hourlyData = map.optionalFrom("hourly.data") ?? [ForecastHourlyData]()
         dailyData = map.optionalFrom("daily.data") ?? [ForecastDailyData]()
+        } catch {
+            throw error
+        }
     }
-    
 }
 
