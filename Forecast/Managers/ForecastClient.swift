@@ -24,14 +24,15 @@ class ForecastClient {
         return Configuration.baseURL + Configuration.apiKey
     }
     
-    private func forecastURL(for coordinate: CLLocationCoordinate2D) -> URL? {
-        let lat = String(coordinate.latitude) //.toString(afterPoint: 3)
-        let long = String(coordinate.longitude) //.toString(afterPoint: 3)
+    private func forecastURL(for location: CLLocation) -> URL? {
+      
+        let lat = location.coordinate.latitude.toString(afterPoint: 3)
+        let long = location.coordinate.longitude.toString(afterPoint: 3)
         let path = baseURL + "/" + lat + "," + long + "?units=si"
         return URL(string: path)
     }
     
-    func getForecast(for location: CLLocationCoordinate2D,
+    func getForecast(for location: CLLocation,
                      completion: @escaping (Forecast) -> Void,
                      failure: @escaping (Error) -> Void) {
         

@@ -1,6 +1,7 @@
 
 import UIKit
-import MapKit
+//import MapKit
+import CoreLocation
 
 enum Identifier: String {
     case hourlyCell = "HourlyCell"
@@ -8,17 +9,7 @@ enum Identifier: String {
     case dailyTableCell = "Daily"
 }
 
-enum DateFormatterType: String {
-    case weekday = "EEEE"
-    case hour = "hh:mm"
-    case date = "dd MMM"
-    
-    var formatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = self.rawValue
-        return formatter
-    }
-}
+
 
 class ForecastViewController: UIViewController {
     
@@ -27,7 +18,9 @@ class ForecastViewController: UIViewController {
     
     private lazy var dailyTablePresenter = DailyTablePresenter(with: self.tableView)
     private lazy var hourlyCollectionPresenter = HourlyCollectionPresenter(with: self.collectionView)
+
     
+    @IBOutlet var adressLabel: UILabel!
     @IBOutlet var tempLabel: UILabel!
     @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var iconImage: UIImageView!
@@ -37,9 +30,9 @@ class ForecastViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presentForecast(for: CLLocationCoordinate2DMake(56.23, 43.411))
-        dailyTablePresenter.tableView.reloadData()
-        hourlyCollectionPresenter.collectionView.reloadData()
+        let location = CLLocation(latitude: 56.23, longitude: 43.411)
+        adressLabel.text = GeoCoder().geoCode(for: location)
+        presentForecast(for: location)
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,29 +41,25 @@ class ForecastViewController: UIViewController {
     
     // MARK: - Private
     
-    private func presentForecast(for location: CLLocationCoordinate2D) {
+    private func presentForecast(for location: CLLocation) {
         forecastClient.getForecast(for: location, completion: {[weak self] in
             self?.forecast = $0
             self?.dailyTablePresenter.update(with: $0)
             self?.hourlyCollectionPresenter.update(with: $0)
             self?.show($0)
-        }, failure: {print($0)})
+            self?.adressLabel.text = GeoCoder().geoCode(for: location)
+            }, failure: {print($0)})
     }
     
     private func show(_ forecast: Forecast){
-        tempLabel.text = forecast.temperature.rounded().toString(afterPoint: 0)
+        let dateFormatter = DateFormatter()
+        tempLabel.text = dateFormatter.temperature(temp: forecast.temperature)
         summaryLabel.text = forecast.summary
         iconImage.image = UIImage(named: forecast.icon)
-        dailyTablePresenter.tableView.reloadData()
-        hourlyCollectionPresenter.collectionView.reloadData()
+       
     }
     
-    private func getDateFromTimeInterval(time: Date, to type: DateFormatterType) -> String {
-        let dayTimePeriodFormatter = DateFormatter()
-        dayTimePeriodFormatter.dateFormat = type.rawValue
-        let dateString = dayTimePeriodFormatter.string(from: time as Date)
-        return dateString
-    }
+    
     
 }
 
