@@ -21,9 +21,9 @@ extension DateFormatter {
     }
     
     func date(date: Date) -> String {
-        var date = getDateFromTimeInterval(time: date, to: .date)
+        let date = getDateFromTimeInterval(time: date, to: .date)
         if date.first == "0" {
-            return String(date.removeFirst())
+            return String(date.dropFirst() )
         } else {
             return date
         }

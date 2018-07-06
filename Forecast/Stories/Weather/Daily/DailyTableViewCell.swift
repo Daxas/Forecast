@@ -1,6 +1,8 @@
-
-
 import UIKit
+
+struct Identifier {
+    static let dailyTableCell = "Daily"
+}
 
 class DailyTableViewCell: UITableViewCell {
 
@@ -10,7 +12,7 @@ class DailyTableViewCell: UITableViewCell {
     @IBOutlet var weekDayLabel: UILabel!
     @IBOutlet var iconDaily: UIImageView!
     
-    override func awakeFromNib() {
+    /*override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
@@ -20,5 +22,5 @@ class DailyTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+*/
 }

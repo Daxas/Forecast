@@ -10,8 +10,8 @@ class Forecast: Mappable {
     let pressure: Double
     let windSpeed: Double
     
-    var hourlyData: [ForecastHourlyData]?
-    var dailyData: [ForecastDailyData]?
+    var hourlyData = [ForecastHourlyData]()
+    var dailyData = [ForecastDailyData]()
     
     
     required init(map: Mapper) throws {

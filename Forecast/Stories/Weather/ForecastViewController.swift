@@ -1,25 +1,13 @@
 
 import UIKit
-//import MapKit
 import CoreLocation
-
-enum Identifier: String {
-    case hourlyCell = "HourlyCell"
-    case infoCell = "infoCell"
-    case dailyTableCell = "Daily"
-}
-
-
 
 class ForecastViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var collectionView: UICollectionView!
     
-    private lazy var dailyTablePresenter = DailyTablePresenter(with: self.tableView)
-    private lazy var hourlyCollectionPresenter = HourlyCollectionPresenter(with: self.collectionView)
-
-    
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var adressLabel: UILabel!
     @IBOutlet var tempLabel: UILabel!
     @IBOutlet var summaryLabel: UILabel!
@@ -27,36 +15,45 @@ class ForecastViewController: UIViewController {
     
     let forecastClient = ForecastClient()
     var forecast: Forecast?
+    private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
+    private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
+    let dateFormatter = DateFormatter()
+    var geoCoder = GeoCoder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let location = CLLocation(latitude: 56.23, longitude: 43.411)
-        adressLabel.text = GeoCoder().geoCode(for: location)
-        presentForecast(for: location)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        adressLabel.text = geoCoder.geoCode(for: location, completion: {[weak self] address in
+            
+            self?.adressLabel.text = address}, failure: {print($0)})
+        fetchForecast(for: location)
     }
     
     // MARK: - Private
     
-    private func presentForecast(for location: CLLocation) {
+    private func handleForecast(_ forecast: Forecast){
+        self.forecast = forecast
+        dailyTablePresenter.update(with: forecast)
+        hourlyCollectionPresenter.update(with: forecast)
+        show(forecast: forecast)
+    }
+    
+    private func fetchForecast(for location: CLLocation) {
         forecastClient.getForecast(for: location, completion: {[weak self] in
-            self?.forecast = $0
-            self?.dailyTablePresenter.update(with: $0)
-            self?.hourlyCollectionPresenter.update(with: $0)
-            self?.show($0)
-            self?.adressLabel.text = GeoCoder().geoCode(for: location)
+            self?.activityIndicator.startAnimating()
+            self?.handleForecast($0)
+            self?.activityIndicator.stopAnimating()} , failure: {print($0)})
+        adressLabel.text = geoCoder.geoCode(for: location, completion: {[weak self] address in
+            self?.activityIndicator.startAnimating()
+            self?.adressLabel.text = address
+             self?.activityIndicator.stopAnimating()
             }, failure: {print($0)})
     }
     
-    private func show(_ forecast: Forecast){
-        let dateFormatter = DateFormatter()
+    private func show(forecast: Forecast){
         tempLabel.text = dateFormatter.temperature(temp: forecast.temperature)
         summaryLabel.text = forecast.summary
         iconImage.image = UIImage(named: forecast.icon)
-       
     }
     
     
