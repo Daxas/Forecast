@@ -6,33 +6,34 @@ enum GeoCoderError: String, Error {
 }
 
 class GeoCoder {
-    private var text = "-.-"
     
-    func geoCode(for location: CLLocation, completion: @escaping (String) -> Void,
-                 failure: @escaping (Error) -> Void) -> String {
+    func geoCode(for location: CLLocation, completion: @escaping ([String]) -> Void,
+                 failure: @escaping (Error) -> Void){
         
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
             if let error = error {
                 failure(error)
                 return
             }
-            self.text = self.processResponse(with: placemarks)
-            completion(self.text)
-            //
-            //self.text = address
+            let currentAddress = self.processResponse(with: placemarks)
+            completion(currentAddress)
         })
-        return text
+        return
     }
     
-    private func processResponse(with placemarks: [CLPlacemark]?) -> String {
+    private func processResponse(with placemarks: [CLPlacemark]?) -> [String] {
         guard let placemarks = placemarks else {
-            return GeoCoderError.noPlacesFound.rawValue
+            return [GeoCoderError.noPlacesFound.rawValue]
         }
-        var adress = ""
+        var address = [String]()
         for placemark in placemarks {
-            adress.append(placemark.locality! + ", " + placemark.thoroughfare!)
+            if let locality = placemark.locality, let subAdministrativeArea = placemark.subAdministrativeArea,
+                let thoroughfare = placemark.thoroughfare {
+            address.append(locality)
+            address.append(subAdministrativeArea + ", " + thoroughfare)
+            }
         }
-        return adress
+        return address
     }
     
 }
