@@ -10,6 +10,7 @@ class GeoCoder {
     
     func geoCode(for location: CLLocation, completion: @escaping (String) -> Void,
                  failure: @escaping (Error) -> Void) -> String {
+        
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
             if let error = error {
                 failure(error)

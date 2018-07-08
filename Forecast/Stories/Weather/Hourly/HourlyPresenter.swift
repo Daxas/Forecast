@@ -1,6 +1,12 @@
 import Foundation
 import UIKit
 
+struct Constants {
+    static let infoCellWidth = CGFloat(100)
+    static let hourlyCellWidth = CGFloat(50)
+    static let cellHeight = CGFloat(88)
+}
+
 enum Sections: Int {
     case info = 0
     case hourlyData
@@ -57,6 +63,7 @@ class HourlyPresenter: NSObject {
         self.collectionView = collectionView
         super.init()
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
 }
 
@@ -98,8 +105,8 @@ extension HourlyPresenter: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                                  layout collectionViewLayout: UICollectionViewLayout,
                                  sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = indexPath.section == 0 ? CGFloat(100) : CGFloat(50)
-        return CGSize(width: width, height: CGFloat(88))
+        let width = indexPath.section == 0 ? Constants.infoCellWidth : Constants.hourlyCellWidth
+        return CGSize(width: width, height: Constants.cellHeight)
     }
     
 }
