@@ -16,8 +16,9 @@ enum DateFormatterType: String {
 
 extension DateFormatter {
     func temperature(temp: Double) -> String {
-        let temperature = temp.rounded().toString(afterPoint: 0)
-        return temp > 0 ? "+" + temperature : temperature
+        var temperature = temp.rounded().toString(afterPoint: 0)
+        temperature = temp > 0 ? "+" + temperature : temperature
+        return temperature + "°"
     }
     
     func date(date: Date) -> String {

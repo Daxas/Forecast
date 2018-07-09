@@ -27,10 +27,9 @@ class GeoCoder {
         }
         var address = [String]()
         for placemark in placemarks {
-            if let locality = placemark.locality, let subAdministrativeArea = placemark.subAdministrativeArea,
-                let thoroughfare = placemark.thoroughfare {
+            if let locality = placemark.locality, let thoroughfare = placemark.thoroughfare {
             address.append(locality)
-            address.append(subAdministrativeArea + ", " + thoroughfare)
+            address.append(thoroughfare)
             }
         }
         return address

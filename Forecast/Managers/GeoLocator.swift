@@ -3,7 +3,7 @@ import Foundation
 import CoreLocation
 
 protocol GeoLocatorDelegate: class {
-    func geoLocatorGetLocation(geoLocator: GeoLocator, receved location: CLLocation)
+    func geoLocatorGetLocation(_ geoLocator: GeoLocator, didReceved location: CLLocation)
 }
 
 enum GeoLocatorError: String, Error {
@@ -38,7 +38,7 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.last {
             locationManager.stopUpdatingLocation()
-            delegate?.geoLocatorGetLocation(geoLocator: self, receved: currentLocation)
+            delegate?.geoLocatorGetLocation(self, didReceved: currentLocation)
             print("user longitude = \(currentLocation.coordinate.longitude)")
         }
     }
