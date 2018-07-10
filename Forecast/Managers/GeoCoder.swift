@@ -7,7 +7,7 @@ enum GeoCoderError: String, Error {
 
 class GeoCoder {
     
-    func geoCode(for location: CLLocation, completion: @escaping ([String]) -> Void,
+    func geoCode(for location: CLLocation, completion: @escaping ([CLPlacemark]) -> Void,
                  failure: @escaping (Error) -> Void){
         
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
@@ -15,24 +15,13 @@ class GeoCoder {
                 failure(error)
                 return
             }
-            let currentAddress = self.processResponse(with: placemarks)
-            completion(currentAddress)
+           
+            guard let placemarks = placemarks else {
+                return 
+            }
+            completion(placemarks)
         })
         return
-    }
-    
-    private func processResponse(with placemarks: [CLPlacemark]?) -> [String] {
-        guard let placemarks = placemarks else {
-            return [GeoCoderError.noPlacesFound.rawValue]
-        }
-        var address = [String]()
-        for placemark in placemarks {
-            if let locality = placemark.locality, let thoroughfare = placemark.thoroughfare {
-            address.append(locality)
-            address.append(thoroughfare)
-            }
-        }
-        return address
     }
     
 }

@@ -15,23 +15,20 @@ class ForecastViewController: UIViewController {
     @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var iconImage: UIImageView!
     
-    var forecast: Forecast?
-    var address: [String]?
-    
+    var forecastPoint: ForecastPoint?
     var forecastAdapter = ForecastAdapter()
-    var geoLocator = GeoLocator()
+    
     private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
     private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
     let dateFormatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateLabels(with: forecast, and: address)
-        geoLocator.delegate = forecastAdapter
-        forecastAdapter.delegate = self
-        geoLocator.getLocation()
-        updateLabels(with: forecast, and: address)
-        //activityIndicator.stopAnimating()
+        updateLabels(with: forecastPoint)
+        forecastAdapter.getCurrentForecast(completion: {forecastPoint in
+            self.forecastPoint = forecastPoint
+            self.updateLabels(with: forecastPoint)
+        }, failure: {print($0)})
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -41,42 +38,26 @@ class ForecastViewController: UIViewController {
     
     // MARK: - Private
     
-    private func updateLabels(with forecast: Forecast?, and address: [String]?) {
-        if let forecast = forecast {
-            //activityIndicator.stopAnimating()
+    private func updateLabels(with forecastPoint: ForecastPoint?) {
+        if let forecast = forecastPoint?.forecast {
             tempLabel.text = dateFormatter.temperature(temp: forecast.temperature)
             summaryLabel.text = forecast.summary
             iconImage.image = UIImage(named: forecast.icon)
             dailyTablePresenter.update(with: forecast)
             hourlyCollectionPresenter.update(with: forecast)
         } else {
-            //activityIndicator.startAnimating()
             tempLabel.text = ""
             summaryLabel.text = ""
         }
-        if let address = address {
-            //activityIndicator.stopAnimating()
-            cityLabel.text = address[0]
-            streetLabel.text = address[1]
+        if let address = forecastPoint?.address {
+            cityLabel.text = address.city
+            streetLabel.text = address.detail
         } else {
-            //activityIndicator.startAnimating()
             cityLabel.text = "-.-"
             streetLabel.text = "-"
         }
-        
     }
     
 }
 
-// MARK: - Delegate
 
-extension ForecastViewController: ForecastAdapterDelegate {
-    
-    func forecastAdapterDelegate(_ forecastAdapter: ForecastAdapter, didReceved location: [String]) {
-        updateLabels(with: forecast, and: location)
-    }
-    
-    func forecastAdapterDelegate(_ forecastAdapter: ForecastAdapter, didReceved forecast: Forecast) {
-        updateLabels(with: forecast, and: address)
-    }
-}

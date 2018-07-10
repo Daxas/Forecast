@@ -2,10 +2,6 @@
 import Foundation
 import CoreLocation
 
-protocol GeoLocatorDelegate: class {
-    func geoLocatorGetLocation(_ geoLocator: GeoLocator, didReceved location: CLLocation)
-}
-
 enum GeoLocatorError: String, Error {
     case disableLocator = "Location service disabled"
     case locationError = "Did fail location"
@@ -13,32 +9,40 @@ enum GeoLocatorError: String, Error {
 
 class GeoLocator: NSObject, CLLocationManagerDelegate {
     
-    private let locationManager = CLLocationManager()
-    private var currentLocation: CLLocation?
-    weak var delegate: GeoLocatorDelegate?
+    typealias GeoLocatorCompletion = (CLLocation?, Error?) -> Void
     
-    func getLocation(){
+    lazy var locationManager: CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        return manager
+    }()
+    
+    private var completion: GeoLocatorCompletion?
+    private var currentLocation: CLLocation?
+    
+    func requestLocation(completion: @escaping GeoLocatorCompletion){
         CLLocationManager.authorizationStatus()
         guard CLLocationManager.locationServicesEnabled() else {
             print(GeoLocatorError.disableLocator.rawValue)
             return
         }
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.startUpdatingLocation()
     }
-    
     
     // MARK: - CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        completion?(nil, error)
+        completion = nil
         print(GeoLocatorError.locationError.rawValue)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let currentLocation = locations.last {
             locationManager.stopUpdatingLocation()
-            delegate?.geoLocatorGetLocation(self, didReceved: currentLocation)
+            completion?(currentLocation, nil)
+            completion = nil
             print("user longitude = \(currentLocation.coordinate.longitude)")
         }
     }
