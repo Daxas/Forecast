@@ -5,7 +5,6 @@ enum DateFormatterType: String {
     case weekday = "EEEE"
     case hour = "hh:mm"
     case date = "dd MMMM"
-    case day = "dd"
     
     var formatter: DateFormatter {
         let formatter = DateFormatter()
@@ -14,12 +13,8 @@ enum DateFormatterType: String {
     }
 }
 
+
 extension DateFormatter {
-    func temperature(temp: Double) -> String {
-        var temperature = temp.rounded().toString(afterPoint: 0)
-        temperature = temp > 0 ? "+" + temperature : temperature
-        return temperature + "°"
-    }
     
     func date(date: Date) -> String {
         let date = getDateFromTimeInterval(time: date, to: .date)
@@ -31,21 +26,13 @@ extension DateFormatter {
     }
     
     func weekDay(date: Date) -> String {
-        let day = Int(getDateFromTimeInterval(time: date, to: .day))
-        if day == currentDay() {
-            return "Today"
-        } else if day == currentDay() + 1 {
-            return "Tomorrow"
+        if Calendar.current.isDateInToday(date) {
+            return "Today".localized()
+        } else if Calendar.current.isDateInTomorrow(date) {
+            return "Tomorrow".localized()
         } else {
         return getDateFromTimeInterval(time: date, to: .weekday)
         }
-    }
-    
-    private func currentDay() -> Int{
-        let date = Date()
-        let calendar = Calendar.current
-        let day = calendar.component(.day, from: date)
-       return day
     }
     
     func getDateFromTimeInterval(time: Date, to type: DateFormatterType) -> String {

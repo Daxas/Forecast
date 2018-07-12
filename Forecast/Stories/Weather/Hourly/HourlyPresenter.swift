@@ -30,6 +30,7 @@ class HourlyPresenter: NSObject {
     private var collectionView: UICollectionView
     private var forecast: Forecast?
     private let dateFormatter = DateFormatter()
+    private let numberFormatter = NumberFormatter()
     
     func update(with hourlyForecast: Forecast) {
         forecast = hourlyForecast
@@ -46,7 +47,7 @@ class HourlyPresenter: NSObject {
         }
         let item = forecast.hourlyData[indexPath.row]
         cell.hourlyImage.image = UIImage(named: item.icon)
-        cell.hourlyTempLabel.text = dateFormatter.temperature(temp: item.temperature)
+        cell.hourlyTempLabel.text = numberFormatter.getTemperatureFrom(number: item.temperature)
         cell.timeLabel.text = dateFormatter.getDateFromTimeInterval(time: item.time, to: .hour)
         
     }

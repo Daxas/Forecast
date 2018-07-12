@@ -6,9 +6,13 @@ enum GeoCoderError: String, Error {
 }
 
 class GeoCoder {
+   
+    
     
     func geoCode(for location: CLLocation, completion: @escaping ([CLPlacemark]) -> Void,
                  failure: @escaping (Error) -> Void){
+        
+      //  CLGeocoder().reverseGeocodeLocation(<#T##location: CLLocation##CLLocation#>, completionHandler: <#T##CLGeocodeCompletionHandler##CLGeocodeCompletionHandler##([CLPlacemark]?, Error?) -> Void#>)
         
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
             if let error = error {

@@ -25,9 +25,8 @@ class ForecastClient {
     }
     
     private func forecastURL(for location: CLLocation) -> URL? {
-      
-        let lat = location.coordinate.latitude.toString(afterPoint: 3)
-        let long = location.coordinate.longitude.toString(afterPoint: 3)
+        let lat = String(format: "%.3f", location.coordinate.latitude)
+        let long = String(format: "%.3f", location.coordinate.longitude)
         let path = baseURL + "/" + lat + "," + long + "?units=si"
         return URL(string: path)
     }

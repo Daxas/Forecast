@@ -1,21 +1,17 @@
 import Foundation
 
-/*
-
 extension NumberFormatter {
     
     func getTemperatureFrom(number temperature: Double) -> String {
         
-        var formatter = NumberFormatter()
-        formatter.numberStyle = .none
-        let temp = formatter.string(from: temperature as NSNumber)
-        if temperature > 0 {
-            formatter.plusSign
-        }
+        let temp = temperature.rounded()
+        let measurement = Measurement(value: temp, unit: UnitTemperature.celsius)
+        let measurementFormatter = MeasurementFormatter()
+        measurementFormatter.unitOptions = .providedUnit
+        var strTemperature = measurementFormatter.string(from: measurement)
+        strTemperature = temperature > 0 ? "+" + strTemperature : strTemperature
+        return strTemperature
     }
     
-    
-
-    
 }
-*/
+

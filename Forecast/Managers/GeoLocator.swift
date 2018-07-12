@@ -2,6 +2,8 @@
 import Foundation
 import CoreLocation
 
+
+
 enum GeoLocatorError: String, Error {
     case disableLocator = "Location service disabled"
     case locationError = "Did fail location"
@@ -9,7 +11,7 @@ enum GeoLocatorError: String, Error {
 
 class GeoLocator: NSObject, CLLocationManagerDelegate {
     
-    typealias GeoLocatorCompletion = (CLLocation?, Error?) -> Void
+  typealias GeoLocatorCompletion = (CLLocation?, Error?) -> Void
     
     lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -19,7 +21,7 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
     }()
     
     private var completion: GeoLocatorCompletion?
-    private var currentLocation: CLLocation?
+ //   private var currentLocation: CLLocation?
     
     func requestLocation(completion: @escaping GeoLocatorCompletion){
         CLLocationManager.authorizationStatus()
@@ -27,6 +29,7 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
             print(GeoLocatorError.disableLocator.rawValue)
             return
         }
+        self.completion = completion
         locationManager.startUpdatingLocation()
     }
     
@@ -34,7 +37,7 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         completion?(nil, error)
-        completion = nil
+        //completion = nil
         print(GeoLocatorError.locationError.rawValue)
     }
     
@@ -42,7 +45,8 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
         if let currentLocation = locations.last {
             locationManager.stopUpdatingLocation()
             completion?(currentLocation, nil)
-            completion = nil
+          //  completion = nil
+           
             print("user longitude = \(currentLocation.coordinate.longitude)")
         }
     }
