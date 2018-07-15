@@ -21,7 +21,6 @@ struct ForecastHourlyData: Mappable {
         } catch {
             throw error
         }
-        
     }
     
 }

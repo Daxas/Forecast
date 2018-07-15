@@ -13,7 +13,6 @@ class ForecastPoint: NSObject {
         if let placemark = placemark {
             self.address = ForecastAddress(with: placemark)
         }
-        
     }
 }
 
@@ -29,6 +28,6 @@ class ForecastAddress {
         }
         self.city = city
         self.detail = detail
-        }
+    }
     
 }

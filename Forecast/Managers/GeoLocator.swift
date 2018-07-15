@@ -1,8 +1,5 @@
-
 import Foundation
 import CoreLocation
-
-
 
 enum GeoLocatorError: String, Error {
     case disableLocator = "Location service disabled"
@@ -21,7 +18,6 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
     }()
     
     private var completion: GeoLocatorCompletion?
- //   private var currentLocation: CLLocation?
     
     func requestLocation(completion: @escaping GeoLocatorCompletion){
         CLLocationManager.authorizationStatus()
@@ -37,7 +33,6 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         completion?(nil, error)
-        //completion = nil
         print(GeoLocatorError.locationError.rawValue)
     }
     
@@ -45,8 +40,6 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
         if let currentLocation = locations.last {
             locationManager.stopUpdatingLocation()
             completion?(currentLocation, nil)
-          //  completion = nil
-           
             print("user longitude = \(currentLocation.coordinate.longitude)")
         }
     }

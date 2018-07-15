@@ -21,12 +21,13 @@ class ForecastViewController: UIViewController {
     private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
     private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
     
-    let dateFormatter = DateFormatter()
-    let numberFormatter = NumberFormatter()
+    private let dateFormatter = DateFormatter()
+    private let temperatureUtils = TemperatureUtils()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLabels(with: forecastPoint)
+        
         forecastAdapter.getForecastForCurrentPoint(completion: { (forecastPoint) in
             self.forecastPoint = forecastPoint
             self.updateLabels(with: forecastPoint)
@@ -43,7 +44,7 @@ class ForecastViewController: UIViewController {
     
     private func updateLabels(with forecastPoint: ForecastPoint?) {
         if let forecast = forecastPoint?.forecast {
-            tempLabel.text = numberFormatter.getTemperatureFrom(number: forecast.temperature)
+            tempLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature) 
             summaryLabel.text = forecast.summary.localized()
             iconImage.image = UIImage(named: forecast.icon)
             dailyTablePresenter.update(with: forecast)

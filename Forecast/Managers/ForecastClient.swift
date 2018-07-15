@@ -37,6 +37,7 @@ class ForecastClient {
         
         guard let url = forecastURL(for: location) else {
             DispatchQueue.main.async {
+                print("url error")
                 failure(ForecastClientError.urlError)
            }
             return
@@ -45,18 +46,21 @@ class ForecastClient {
         dataTask = urlSession.dataTask(with: url) { (data, response, error) in
             guard error == nil else {
                 DispatchQueue.main.async {
+                    print("error dataTask")
                 failure(ForecastClientError.dataError)
                 }
                 return
             }
             guard let data = data else {
                 DispatchQueue.main.async {
+                    print("no data")
                 failure(ForecastClientError.dataError)
                 }
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                 DispatchQueue.main.async {
+                    print("no httpResponse")
                 failure(ForecastClientError.responceError)
                 }
                 return
@@ -66,6 +70,7 @@ class ForecastClient {
                     
                     guard let json = jsonData, let forecast = Forecast.from(json) else {
                         DispatchQueue.main.async {
+                            print("can't convert JSON")
                         failure(ForecastClientError.mappingError)
                         }
                         return
@@ -75,12 +80,12 @@ class ForecastClient {
                     }
                 } catch {
                     DispatchQueue.main.async {
+                        print("getForecast error")
                         failure(error)
                     }
                 }
             
-            
-        }
+            }
         dataTask?.resume()
         
     }

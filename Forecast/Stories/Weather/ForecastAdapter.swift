@@ -18,8 +18,12 @@ class ForecastAdapter {
             self.getForecast(for: point, completion: { (point) in
                 currentPoint = point
                 completion(currentPoint)
-            }, failure: { print($0) })
-        }, failure: { print($0) })
+            }, failure: { print($0)
+                print("222")
+            })
+        }, failure: { print($0)
+            print("NO getForecastForCurrentPoint")
+        })
     }
     
     
@@ -28,6 +32,7 @@ class ForecastAdapter {
         geoLocator.requestLocation { (location, error) in
             if let error = error  {
                 print(error)
+                print("111")
                 return
             }
             guard let location = location else {
@@ -35,10 +40,9 @@ class ForecastAdapter {
             }
             let point = ForecastPoint(with: location)
             self.getAddress(for: point, completion: { (address) in
-                //point.address = address
                 completion(point)
             }, failure: { (error) in
-                print("NO address found")
+                print("error getCurrentPoint")
             })
         }
     }
@@ -52,7 +56,9 @@ class ForecastAdapter {
                     completion(point)
                 }
             }
-        }, failure: { print($0) })
+        }, failure: { print($0)
+            print("NO adress for current point")
+        })
     }
     
     func getForecast(for point: ForecastPoint, completion: @escaping ForecastAdapterCompletion,

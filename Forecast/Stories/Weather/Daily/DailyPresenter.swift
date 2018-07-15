@@ -5,8 +5,8 @@ class DailyPresenter: NSObject {
     
     private let tableView: UITableView
     private var forecast: Forecast?
-    private let dateFormatter = DateFormatter()
-    private let numberFormatter = NumberFormatter()
+    private let dateUtils = DateUtils()
+    private let temperatureUtils = TemperatureUtils()
     
     func update(with dailyForecast: Forecast) {
         forecast = dailyForecast
@@ -18,10 +18,10 @@ class DailyPresenter: NSObject {
             return
         }
         let item = forecast.dailyData[indexPath.row]
-        cell.dateLabel.text =  dateFormatter.date(date: item.time)
-        cell.weekDayLabel.text = dateFormatter.weekDay(date: item.time)
-        cell.minTempLabel.text = numberFormatter.getTemperatureFrom(number: item.minTemp)
-        cell.maxTempLabel.text = numberFormatter.getTemperatureFrom(number: item.maxTemp)
+        cell.dateLabel.text =  dateUtils.date(date: item.time)
+        cell.weekDayLabel.text = dateUtils.weekDay(date: item.time)
+        cell.minTempLabel.text = temperatureUtils.getTemperatureFrom(number: item.minTemp)
+        cell.maxTempLabel.text = temperatureUtils.getTemperatureFrom(number: item.maxTemp)
         cell.iconDaily.image = UIImage(named: (item.icon + "_"))
     }
     
