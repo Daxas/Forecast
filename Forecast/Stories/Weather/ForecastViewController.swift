@@ -1,6 +1,7 @@
 
 import UIKit
 import CoreLocation
+import MBProgressHUD
 
 class ForecastViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class ForecastViewController: UIViewController {
     
     var forecastPoint: ForecastPoint?
     var forecastAdapter = ForecastAdapter()
+    var spinnerActivity = MBProgressHUD()
     
     private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
     private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
@@ -28,10 +30,23 @@ class ForecastViewController: UIViewController {
         super.viewDidLoad()
         updateLabels(with: forecastPoint)
         
-        forecastAdapter.getForecastForCurrentPoint(completion: { (forecastPoint) in
-            self.forecastPoint = forecastPoint
-            self.updateLabels(with: forecastPoint)
-        }, failure: {print($0)})
+        spinnerActivity = MBProgressHUD.showAdded(to: self.view, animated: true);
+        spinnerActivity.label.text = "Loading";
+        spinnerActivity.detailsLabel.text = "Please Wait!!"
+        spinnerActivity.isUserInteractionEnabled = false
+        
+       
+        let queue = DispatchQueue.global()
+       
+        queue.async {
+            self.forecastAdapter.getForecastForCurrentPoint(completion: { (forecastPoint) in
+                self.forecastPoint = forecastPoint
+                DispatchQueue.main.async {
+                    self.spinnerActivity.hide(animated: true)
+                    self.updateLabels(with: self.forecastPoint)
+                }
+            }, failure: {print($0)})
+        }
        
     }
     

@@ -4,5 +4,6 @@ platform :ios, '9.0'
 target 'Forecast' do
   use_frameworks!
 pod "ModelMapper"
+pod 'MBProgressHUD', '~> 1.1.0'
 
 end
