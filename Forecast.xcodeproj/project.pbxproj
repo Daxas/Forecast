@@ -27,6 +27,7 @@
 		8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8479EE7720DC211B00F37C4E /* Assets.xcassets */; };
 		8479EE7B20DC211B00F37C4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8479EE7920DC211B00F37C4E /* LaunchScreen.storyboard */; };
 		8479EE8320DC283B00F37C4E /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479EE8220DC283B00F37C4E /* Forecast.swift */; };
+		84972C6E20FE7C1400EC1E94 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84972C7020FE7C1400EC1E94 /* Localizable.strings */; };
 		84F24E2320EE5CF1005AE351 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */; };
 		84F24E2520EFAF3F005AE351 /* GeoLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2420EFAF3F005AE351 /* GeoLocator.swift */; };
 		84F24E2B20F2A251005AE351 /* ForecastAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */; };
@@ -46,7 +47,6 @@
 		846442AD20E21EE8006197AC /* ForecastDailyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDailyData.swift; sourceTree = "<group>"; };
 		846442B420E232CF006197AC /* Favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		84733D7720F69C46001DE585 /* String+Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localizable.swift"; sourceTree = "<group>"; };
-		84733D7920F69DFD001DE585 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		84733D7A20F69DFE001DE585 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		84733D7C20F69E5F001DE585 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ru; path = ru.lproj/Weather.storyboard; sourceTree = "<group>"; };
 		84733D7E20F78B95001DE585 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Weather.storyboard; sourceTree = "<group>"; };
@@ -60,6 +60,8 @@
 		8479EE7A20DC211B00F37C4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8479EE7C20DC211B00F37C4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8479EE8220DC283B00F37C4E /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		84972C6F20FE7C1400EC1E94 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84972C7120FE7C1A00EC1E94 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		84F24E2420EFAF3F005AE351 /* GeoLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocator.swift; sourceTree = "<group>"; };
 		84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAdapter.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				846442AF20E230C1006197AC /* Models */,
 				846442B320E23213006197AC /* Storyboards */,
 				8479EE7720DC211B00F37C4E /* Assets.xcassets */,
+				84972C7020FE7C1400EC1E94 /* Localizable.strings */,
 				8479EE7C20DC211B00F37C4E /* Info.plist */,
 			);
 			path = Forecast;
@@ -264,6 +267,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 8479EE6420DC211500F37C4E;
 			productRefGroup = 8479EE6E20DC211600F37C4E /* Products */;
@@ -281,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8479EE7B20DC211B00F37C4E /* LaunchScreen.storyboard in Resources */,
+				84972C6E20FE7C1400EC1E94 /* Localizable.strings in Resources */,
 				84733D7B20F69E5F001DE585 /* Weather.storyboard in Resources */,
 				8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */,
 				846442B520E232CF006197AC /* Favorites.storyboard in Resources */,
@@ -383,9 +388,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				8479EE7A20DC211B00F37C4E /* Base */,
-				84733D7920F69DFD001DE585 /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		84972C7020FE7C1400EC1E94 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84972C6F20FE7C1400EC1E94 /* en */,
+				84972C7120FE7C1A00EC1E94 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -15,6 +15,7 @@ class ForecastClient {
     struct Configuration {
         static var apiKey  = "cfb098593c0899de76d374e96d68c8e3"
         static let baseURL = "https://api.forecast.io/forecast/"
+        static let language = "en".localized()
     }
     
     private let urlSession = URLSession.shared
@@ -27,7 +28,7 @@ class ForecastClient {
     private func forecastURL(for location: CLLocation) -> URL? {
         let lat = String(format: "%.3f", location.coordinate.latitude)
         let long = String(format: "%.3f", location.coordinate.longitude)
-        let path = baseURL + "/" + lat + "," + long + "?units=si"
+        let path = baseURL + "/" + lat + "," + long + "?units=si" + "&lang=" + Configuration.language
         return URL(string: path)
     }
     

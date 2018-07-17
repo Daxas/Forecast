@@ -246,9 +246,6 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ggn-4W-QNW">
-                                        <rect key="frame" x="177" y="120" width="20" height="20"/>
-                                    </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZJ-rY-H3Q">
                                         <rect key="frame" x="8" y="48.5" width="359" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -275,13 +272,11 @@
                                     <constraint firstItem="Vwz-Oc-Cq1" firstAttribute="leading" secondItem="T9a-NI-hea" secondAttribute="leading" constant="15" id="PUd-jC-yGU"/>
                                     <constraint firstItem="MZJ-rY-H3Q" firstAttribute="top" secondItem="HnC-Uo-MGQ" secondAttribute="bottom" constant="2" id="Qyr-Fq-rXk"/>
                                     <constraint firstItem="HnC-Uo-MGQ" firstAttribute="top" secondItem="T9a-NI-hea" secondAttribute="top" constant="20" id="WDW-66-27v"/>
-                                    <constraint firstItem="ggn-4W-QNW" firstAttribute="centerY" secondItem="T9a-NI-hea" secondAttribute="centerY" id="WF1-Bd-mVW"/>
                                     <constraint firstItem="tF5-V3-aDi" firstAttribute="centerX" secondItem="T9a-NI-hea" secondAttribute="centerX" id="eWE-hZ-lXd"/>
                                     <constraint firstItem="HnC-Uo-MGQ" firstAttribute="leading" secondItem="T9a-NI-hea" secondAttribute="leading" constant="8" id="hma-mh-UQN"/>
                                     <constraint firstItem="MZJ-rY-H3Q" firstAttribute="leading" secondItem="T9a-NI-hea" secondAttribute="leading" constant="8" id="qGH-fe-wCi"/>
                                     <constraint firstAttribute="trailing" secondItem="Gpk-Oy-TEa" secondAttribute="trailing" id="tQY-Zy-Npe"/>
                                     <constraint firstItem="Gpk-Oy-TEa" firstAttribute="top" secondItem="Vwz-Oc-Cq1" secondAttribute="bottom" constant="8" id="tnT-b0-Aip"/>
-                                    <constraint firstItem="ggn-4W-QNW" firstAttribute="centerX" secondItem="T9a-NI-hea" secondAttribute="centerX" id="xIt-5x-Goq"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -299,7 +294,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" id="9Tb-Bm-L1f"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="ggn-4W-QNW" id="yoo-Y4-Jka"/>
                         <outlet property="cityLabel" destination="HnC-Uo-MGQ" id="7Nm-oq-vZS"/>
                         <outlet property="collectionView" destination="Gpk-Oy-TEa" id="cYr-4d-dYJ"/>
                         <outlet property="iconImage" destination="zYV-eL-DSk" id="Hje-bR-3g0"/>
