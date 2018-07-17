@@ -27,6 +27,7 @@
 		8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8479EE7720DC211B00F37C4E /* Assets.xcassets */; };
 		8479EE7B20DC211B00F37C4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8479EE7920DC211B00F37C4E /* LaunchScreen.storyboard */; };
 		8479EE8320DC283B00F37C4E /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479EE8220DC283B00F37C4E /* Forecast.swift */; };
+		84972C6B20FE70C700EC1E94 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84972C6A20FE70C700EC1E94 /* Localizable.strings */; };
 		84F24E2320EE5CF1005AE351 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */; };
 		84F24E2520EFAF3F005AE351 /* GeoLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2420EFAF3F005AE351 /* GeoLocator.swift */; };
 		84F24E2B20F2A251005AE351 /* ForecastAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */; };
@@ -60,6 +61,7 @@
 		8479EE7A20DC211B00F37C4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8479EE7C20DC211B00F37C4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8479EE8220DC283B00F37C4E /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		84972C6A20FE70C700EC1E94 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		84F24E2420EFAF3F005AE351 /* GeoLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocator.swift; sourceTree = "<group>"; };
 		84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAdapter.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				84733D7D20F69E5F001DE585 /* Weather.storyboard */,
 				8479EE7420DC211600F37C4E /* Main.storyboard */,
 				846442B420E232CF006197AC /* Favorites.storyboard */,
+				84972C6A20FE70C700EC1E94 /* Localizable.strings */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8479EE7B20DC211B00F37C4E /* LaunchScreen.storyboard in Resources */,
+				84972C6B20FE70C700EC1E94 /* Localizable.strings in Resources */,
 				84733D7B20F69E5F001DE585 /* Weather.storyboard in Resources */,
 				8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */,
 				846442B520E232CF006197AC /* Favorites.storyboard in Resources */,
