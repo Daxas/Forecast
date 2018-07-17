@@ -7,8 +7,7 @@ class ForecastViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var collectionView: UICollectionView!
-    
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet var headerView: UIView!
     
     @IBOutlet var streetLabel: UILabel!
     @IBOutlet var cityLabel: UILabel!
@@ -19,6 +18,7 @@ class ForecastViewController: UIViewController {
     var forecastPoint: ForecastPoint?
     var forecastAdapter = ForecastAdapter()
     var spinnerActivity = MBProgressHUD()
+    var refresher: UIRefreshControl!
     
     private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
     private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
@@ -26,36 +26,58 @@ class ForecastViewController: UIViewController {
     private let dateFormatter = DateFormatter()
     private let temperatureUtils = TemperatureUtils()
     
+    // MARK: - Life cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startSpinner()
+        fetchCurrentForecast()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addRefresher()
         updateLabels(with: forecastPoint)
-        
-        spinnerActivity = MBProgressHUD.showAdded(to: self.view, animated: true);
-        spinnerActivity.label.text = "Loading";
-        spinnerActivity.detailsLabel.text = "Please Wait!!"
+    }
+    
+    // MARK: - Data
+    
+    private func addRefresher() {
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh".localized())
+        refresher.addTarget(self, action: #selector(ForecastViewController.refreshForecast), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refresher)
+    }
+    
+    private func startSpinner() {
+        spinnerActivity = MBProgressHUD.showAdded(to: self.view, animated: true)
+        spinnerActivity.label.text = "Loading".localized()
+        spinnerActivity.detailsLabel.text = "Please Wait!".localized()
         spinnerActivity.isUserInteractionEnabled = false
-        
-       
-        let queue = DispatchQueue.global()
-       
-        queue.async {
-            self.forecastAdapter.getForecastForCurrentPoint(completion: { (forecastPoint) in
-                self.forecastPoint = forecastPoint
-                DispatchQueue.main.async {
-                    self.spinnerActivity.hide(animated: true)
-                    self.updateLabels(with: self.forecastPoint)
-                }
+    }
+    
+    private func stopSpinner() {
+        spinnerActivity.hide(animated: true)
+    }
+    
+    private func fetchCurrentForecast() {
+        forecastAdapter.getForecastForCurrentPoint(completion: { [weak self] in
+            self?.handleForecastPoint($0)
             }, failure: {print($0)})
-        }
-       
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    private func handleForecastPoint(_ forecastPoint: ForecastPoint) {
+        self.forecastPoint = forecastPoint
+        self.stopSpinner()
+        self.updateLabels(with: self.forecastPoint)
     }
-    
     
     // MARK: - Private
+    
+    @objc private func refreshForecast() {
+        fetchCurrentForecast()
+        refresher.endRefreshing()
+    }
     
     private func updateLabels(with forecastPoint: ForecastPoint?) {
         if let forecast = forecastPoint?.forecast {
@@ -77,6 +99,11 @@ class ForecastViewController: UIViewController {
         }
     }
     
+    // MARK: - Override
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 
