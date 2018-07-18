@@ -140,40 +140,40 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="windIcon" translatesAutoresizingMaskIntoConstraints="NO" id="rVa-sT-q85">
-                                                            <rect key="frame" x="16" y="4" width="16" height="12"/>
+                                                            <rect key="frame" x="0.0" y="4" width="16" height="12"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="12" id="6ru-6K-sZm"/>
                                                                 <constraint firstAttribute="width" constant="16" id="Qkt-BQ-4yo"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VqE-Cy-iFR">
-                                                            <rect key="frame" x="42" y="2" width="54" height="14.5"/>
+                                                            <rect key="frame" x="26" y="2" width="70" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pressureIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Ked-qe-CXc">
-                                                            <rect key="frame" x="18" y="31" width="12" height="12"/>
+                                                            <rect key="frame" x="2" y="31" width="12" height="12"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="12" id="Sbo-4n-l2K"/>
                                                                 <constraint firstAttribute="height" constant="12" id="lgB-3b-ppP"/>
                                                             </constraints>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="humidityIcon" translatesAutoresizingMaskIntoConstraints="NO" id="0Vp-fZ-zfS">
-                                                            <rect key="frame" x="18" y="60" width="12" height="10"/>
+                                                            <rect key="frame" x="2" y="60" width="12" height="10"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="10" id="GaZ-5Q-L7l"/>
                                                                 <constraint firstAttribute="width" constant="12" id="Wp1-ld-AFX"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wb-k3-dji">
-                                                            <rect key="frame" x="42" y="57.5" width="54" height="14.5"/>
+                                                            <rect key="frame" x="26" y="57.5" width="70" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQZ-ku-pVL">
-                                                            <rect key="frame" x="42" y="30" width="54" height="14.5"/>
+                                                            <rect key="frame" x="26" y="30" width="70" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -181,7 +181,7 @@
                                                     </subviews>
                                                 </view>
                                                 <constraints>
-                                                    <constraint firstItem="rVa-sT-q85" firstAttribute="leading" secondItem="yRF-Dz-0Eu" secondAttribute="leading" constant="16" id="0lY-mm-a3o"/>
+                                                    <constraint firstItem="rVa-sT-q85" firstAttribute="leading" secondItem="yRF-Dz-0Eu" secondAttribute="leading" id="0lY-mm-a3o"/>
                                                     <constraint firstItem="VqE-Cy-iFR" firstAttribute="leading" secondItem="rVa-sT-q85" secondAttribute="trailing" constant="10" id="86y-BX-Fhy"/>
                                                     <constraint firstAttribute="trailing" secondItem="9wb-k3-dji" secondAttribute="trailing" constant="4" id="DWt-4g-x37"/>
                                                     <constraint firstAttribute="trailing" secondItem="VqE-Cy-iFR" secondAttribute="trailing" constant="4" id="Fr4-BI-wV3"/>

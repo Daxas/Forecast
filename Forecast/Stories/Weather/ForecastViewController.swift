@@ -38,6 +38,8 @@ class ForecastViewController: UIViewController {
         super.viewDidLoad()
         addRefresher()
         updateLabels(with: forecastPoint)
+        
+        collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
     }
     
     // MARK: - Data
