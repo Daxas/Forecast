@@ -36,20 +36,28 @@ class ForecastViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addRefresher()
+        configure()
         updateLabels(with: forecastPoint)
         
-        collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
+        
     }
     
-    // MARK: - Data
+    private func configure() {
+        tabBarItem.title = "Weather.title".localized()
+        collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
+        configureRefresher()
+    }
     
-    private func addRefresher() {
+    private func configureRefresher() {
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh".localized())
         refresher.addTarget(self, action: #selector(ForecastViewController.refreshForecast), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
+        
     }
+    
+    // MARK: - Data
+    
     
     private func startSpinner() {
         spinnerActivity = MBProgressHUD.showAdded(to: self.view, animated: true)

@@ -8,3 +8,6 @@
 " m/c" = " м/с";
 " hPA" = " мPC";
 "en" = "ru";
+
+/* --Weather-- */
+"Weather.title" = "Погода";

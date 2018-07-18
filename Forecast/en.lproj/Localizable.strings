@@ -6,3 +6,6 @@
 " m/c" = " m/c";
 " hPA" = " hPA";
 "en" = "en";
+
+/* --Weather-- */
+"Weather.title" = "Weather";
