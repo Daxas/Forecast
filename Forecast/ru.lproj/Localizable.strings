@@ -1,9 +1,16 @@
-/* 
-  Localizable.strings
-  Forecast
+/* -- ACTIVITY SPINNER -- */
+"Loading" = "Загрузка";
+"Please Wait!" = "Пожалуйста подождите!";
 
-  Created by Admin on 18.07.2018.
-  Copyright © 2018 Admin. All rights reserved.
-*/
-/* --Weather-- */
-"Weather.title" = "Погода day";
+/* -- DAILY FORECAST -- */
+"Today" = "cегодня";
+"Tomorrow" = "завтра";
+
+/* -- INFO CELL -- */
+" m/c" = " м/с";
+" hPA" = " мPC";
+"en" = "ru";
+
+/* -- WEATHER -- */
+"Weather.title" = "Погода";
+

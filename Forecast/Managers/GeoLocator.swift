@@ -20,7 +20,8 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
     private var completion: GeoLocatorCompletion?
     
     func requestLocation(completion: @escaping GeoLocatorCompletion){
-        CLLocationManager.authorizationStatus()
+        //TODO: handle authorization
+        locationManager.requestWhenInUseAuthorization()
         guard CLLocationManager.locationServicesEnabled() else {
             print(GeoLocatorError.disableLocator.rawValue)
             return

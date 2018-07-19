@@ -13,7 +13,7 @@
         <scene sceneID="TAe-m5-Bkr">
             <objects>
                 <tabBarController id="vng-ZN-222" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionIndicatorImage="blueStar" id="ggs-qN-jfU">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ggs-qN-jfU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -48,7 +48,4 @@
             <point key="canvasLocation" x="181" y="217"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="blueStar" width="28" height="26"/>
-    </resources>
 </document>

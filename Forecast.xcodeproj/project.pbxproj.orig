@@ -27,7 +27,11 @@
 		8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8479EE7720DC211B00F37C4E /* Assets.xcassets */; };
 		8479EE7B20DC211B00F37C4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8479EE7920DC211B00F37C4E /* LaunchScreen.storyboard */; };
 		8479EE8320DC283B00F37C4E /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479EE8220DC283B00F37C4E /* Forecast.swift */; };
+<<<<<<< HEAD
+		84972C7420FF0B6F00EC1E94 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84972C7620FF0B6F00EC1E94 /* Localizable.strings */; };
+=======
 		84972C6E20FE7C1400EC1E94 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84972C7020FE7C1400EC1E94 /* Localizable.strings */; };
+>>>>>>> dev
 		84F24E2320EE5CF1005AE351 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */; };
 		84F24E2520EFAF3F005AE351 /* GeoLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2420EFAF3F005AE351 /* GeoLocator.swift */; };
 		84F24E2B20F2A251005AE351 /* ForecastAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */; };
@@ -58,8 +62,13 @@
 		8479EE7A20DC211B00F37C4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8479EE7C20DC211B00F37C4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8479EE8220DC283B00F37C4E /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
+		84972C7520FF0B6F00EC1E94 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84972C7720FF0B7400EC1E94 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+=======
 		84972C6F20FE7C1400EC1E94 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84972C7120FE7C1A00EC1E94 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+>>>>>>> dev
 		84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		84F24E2420EFAF3F005AE351 /* GeoLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocator.swift; sourceTree = "<group>"; };
 		84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAdapter.swift; sourceTree = "<group>"; };
@@ -284,7 +293,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8479EE7B20DC211B00F37C4E /* LaunchScreen.storyboard in Resources */,
+<<<<<<< HEAD
+				84972C7420FF0B6F00EC1E94 /* Localizable.strings in Resources */,
+=======
 				84972C6E20FE7C1400EC1E94 /* Localizable.strings in Resources */,
+>>>>>>> dev
 				84733D7B20F69E5F001DE585 /* Weather.storyboard in Resources */,
 				8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */,
 				846442B520E232CF006197AC /* Favorites.storyboard in Resources */,
@@ -389,11 +402,19 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
+		84972C7620FF0B6F00EC1E94 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84972C7520FF0B6F00EC1E94 /* ru */,
+				84972C7720FF0B7400EC1E94 /* en */,
+=======
 		84972C7020FE7C1400EC1E94 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				84972C6F20FE7C1400EC1E94 /* en */,
 				84972C7120FE7C1A00EC1E94 /* ru */,
+>>>>>>> dev
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
