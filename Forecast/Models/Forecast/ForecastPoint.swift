@@ -2,7 +2,7 @@
 import Foundation
 import CoreLocation
 
-class ForecastPoint: NSObject {
+class ForecastPoint: NSObject/*, NSCoding*/ {
     
     let location: CLLocation
     var address: ForecastAddress?
@@ -14,6 +14,19 @@ class ForecastPoint: NSObject {
             self.address = ForecastAddress(with: placemark)
         }
     }
+    
+  /*  required init?(coder aDecoder: NSCoder) {
+        location = aDecoder.decodeObject(forKey: "Location") as! CLLocation
+        address = aDecoder.decodeObject(forKey: "Address") as? ForecastAddress
+        forecast = aDecoder.decodeObject(forKey: "Forecast") as? Forecast
+        super.init()
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(location, forKey: "Location")
+        aCoder.encode(address, forKey: "Address")
+        aCoder.encode(forecast, forKey: "Forecast")
+    }*/
 }
 
 
@@ -31,3 +44,11 @@ class ForecastAddress {
     }
     
 }
+
+
+
+
+    
+    
+
+
