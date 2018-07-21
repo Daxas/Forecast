@@ -34,6 +34,7 @@
 		84972C802101167600EC1E94 /* FavoritesTablePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C7F2101167600EC1E94 /* FavoritesTablePresenter.swift */; };
 		84972C822101C19D00EC1E94 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C812101C19D00EC1E94 /* Store.swift */; };
 		84972C842101D6EE00EC1E94 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C832101D6EE00EC1E94 /* TableViewCell.swift */; };
+		84972C862102679300EC1E94 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C852102679300EC1E94 /* GradientView.swift */; };
 		84F24E2320EE5CF1005AE351 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */; };
 		84F24E2520EFAF3F005AE351 /* GeoLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2420EFAF3F005AE351 /* GeoLocator.swift */; };
 		84F24E2B20F2A251005AE351 /* ForecastAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */; };
@@ -72,6 +73,7 @@
 		84972C7F2101167600EC1E94 /* FavoritesTablePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTablePresenter.swift; sourceTree = "<group>"; };
 		84972C812101C19D00EC1E94 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		84972C832101D6EE00EC1E94 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		84972C852102679300EC1E94 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		84F24E2420EFAF3F005AE351 /* GeoLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocator.swift; sourceTree = "<group>"; };
 		84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAdapter.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		846442AF20E230C1006197AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84972C852102679300EC1E94 /* GradientView.swift */,
 				84A87FF520E3802C00D81B48 /* Forecast */,
 				84972C812101C19D00EC1E94 /* Store.swift */,
 			);
@@ -375,6 +378,7 @@
 				84F24E2320EE5CF1005AE351 /* CollectionViewCell.swift in Sources */,
 				84733D8220FA2CED001DE585 /* TemperatureUtils.swift in Sources */,
 				8479EE8320DC283B00F37C4E /* Forecast.swift in Sources */,
+				84972C862102679300EC1E94 /* GradientView.swift in Sources */,
 				84972C7E2101140B00EC1E94 /* FavoritesPointCell.swift in Sources */,
 				84F24E2D20F3931A005AE351 /* ForecastPoint.swift in Sources */,
 				841E8AA120E6B5E4008F4EA4 /* InfoCollectionViewCell.swift in Sources */,

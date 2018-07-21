@@ -11,6 +11,19 @@ class ForecastAdapter {
     private let forecastClient = ForecastClient()
     
     
+    func getForecastAndAddress(for location: CLLocation, completion: @escaping (ForecastPoint) -> Void,
+                               failure: @escaping (Error) -> Void) {
+        var favorPoint = ForecastPoint(with: location)
+        getForecast(for: favorPoint, completion: { (point) in
+            favorPoint = point
+            self.getAddress(for: favorPoint, completion: { (point) in
+                favorPoint = point
+            }, failure: {print($0)})
+            completion(favorPoint)
+        }, failure: {print($0)})
+        
+    }
+    
     func getForecastForCurrentPoint(completion: @escaping ForecastAdapterCompletion,
                                     failure: @escaping (Error) -> Void){
         getCurrentPoint(completion: { (point) in

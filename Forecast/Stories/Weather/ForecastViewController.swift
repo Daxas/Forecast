@@ -19,6 +19,7 @@ class ForecastViewController: UIViewController {
     var forecastAdapter = ForecastAdapter()
     var spinnerActivity = MBProgressHUD()
     var refresher: UIRefreshControl!
+   //let gradient = GradientView()
     
     private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
     private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
@@ -43,6 +44,7 @@ class ForecastViewController: UIViewController {
     }
     
     private func configure() {
+       // headerView.insertSubview(GradientView., belowSubview: headerView)
         tabBarItem.title = "Weather.title".localized()
         collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
         configureRefresher()

@@ -24,37 +24,56 @@ class FavoritesTablePresenter: NSObject {
     private let tableView: UITableView
     var favorites = [ForecastPoint]()
     var currentWeather: ForecastPoint?
-   private let temperatureUtils = TemperatureUtils()
+    private let temperatureUtils = TemperatureUtils()
     
     func update(with currentForecast: ForecastPoint) {
         currentWeather = currentForecast
         tableView.reloadData()
     }
     
-    private func configureCurrentLocationCell(_ cell: CurrentLocationCell) {
-        cell.addressLabel.text = currentWeather?.address?.city
-        cell.subAddressLabel.text = currentWeather?.address?.detail
-        cell.temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: (currentWeather?.forecast?.temperature)!)
-        cell.weatherIcon.image = UIImage(named: (currentWeather?.forecast?.icon)!)
-    }
-    
-    private func configureFavoritesCell(_ cell: FavoritesPointCell, indexPath: IndexPath) {
-        
-        let item = favorites[indexPath.row]
-        cell.addressLabel.text = item.address?.city
-        cell.subAddressLabel.text = item.address?.detail
-        cell.temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: (item.forecast?.temperature)!)
-        cell.weatherIcon.image = UIImage(named: (item.forecast?.icon)!)
-    }
-  
-    
-   /* func update(with dailyForecast: Forecast) {
-        forecast = dailyForecast
+    func update(favorites: [ForecastPoint]) {
+        self.favorites = favorites
         tableView.reloadData()
     }
     
-  
-    */
+    private func configureCurrentLocationCell(_ cell: CurrentLocationCell) {
+        guard let currentWeather = currentWeather else {
+            return
+        }
+        guard let address = currentWeather.address else {
+            cell.addressLabel.text = "-"
+            cell.subAddressLabel.text = "-.-"
+            return
+        }
+        cell.addressLabel.text = address.city
+        cell.subAddressLabel.text = address.detail
+        
+        guard let forecast = currentWeather.forecast else {
+            cell.temperatureLabel.text = "º"
+            return
+        }
+        cell.temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
+        cell.weatherIcon.image = UIImage(named: forecast.icon)
+    }
+    
+    private func configureFavoritesCell(_ cell: FavoritesPointCell, indexPath: IndexPath) {
+        let item = favorites[indexPath.row]
+        if let forecast = item.forecast {
+            cell.temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
+            cell.weatherIcon.image = UIImage(named: forecast.icon + "_")
+        } else {
+            cell.temperatureLabel.text = "º"
+        }
+        
+        if let address = item.address{
+            cell.addressLabel.text = address.city
+            cell.subAddressLabel.text = address.detail
+        } else {
+            cell.addressLabel.text = "-"
+            cell.subAddressLabel.text = "-.-"
+        }
+     }
+    
     init(with tableView: UITableView) {
         self.tableView = tableView
         super.init()
@@ -67,15 +86,15 @@ class FavoritesTablePresenter: NSObject {
 
 extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return FavoritesSections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return section == 0 ? 1 : favorites.count
+        return section == 0 ? 1 : favorites.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let section = FavoritesSections(rawValue: indexPath.section) else {
+        guard let section = FavoritesSections(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
         
@@ -84,7 +103,7 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         case let cell as CurrentLocationCell:
             configureCurrentLocationCell(cell)
         case let cell as FavoritesPointCell:
-          configureFavoritesCell(cell, indexPath: indexPath)
+            configureFavoritesCell(cell, indexPath: indexPath)
         default:
             break
         }
@@ -92,11 +111,16 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       if indexPath.section == 0 {
+        if indexPath.section == 0 {
             return CGFloat(100)
         } 
-        
         return CGFloat(60)
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section != 0 {
+            return "Favorites".localized()
+        }
+        return ""
+    }
 }
