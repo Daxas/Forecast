@@ -15,7 +15,7 @@ class ForecastPoint: NSObject/*, NSCoding*/ {
         }
     }
     
-  /*  required init?(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
         location = aDecoder.decodeObject(forKey: "Location") as! CLLocation
         address = aDecoder.decodeObject(forKey: "Address") as? ForecastAddress
         forecast = aDecoder.decodeObject(forKey: "Forecast") as? Forecast
@@ -26,7 +26,7 @@ class ForecastPoint: NSObject/*, NSCoding*/ {
         aCoder.encode(location, forKey: "Location")
         aCoder.encode(address, forKey: "Address")
         aCoder.encode(forecast, forKey: "Forecast")
-    }*/
+    }
 }
 
 

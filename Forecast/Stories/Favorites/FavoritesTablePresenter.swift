@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import CoreLocation
 
 enum FavoritesSections: Int {
     case current = 0
@@ -22,8 +23,10 @@ enum FavoritesSections: Int {
 class FavoritesTablePresenter: NSObject {
     
     private let tableView: UITableView
+    
     var favorites = [ForecastPoint]()
     var currentWeather: ForecastPoint?
+    
     private let temperatureUtils = TemperatureUtils()
     
     func update(with currentForecast: ForecastPoint) {
@@ -35,6 +38,8 @@ class FavoritesTablePresenter: NSObject {
         self.favorites = favorites
         tableView.reloadData()
     }
+    
+    // MARK: - Configure cells
     
     private func configureCurrentLocationCell(_ cell: CurrentLocationCell) {
         guard let currentWeather = currentWeather else {
@@ -49,7 +54,7 @@ class FavoritesTablePresenter: NSObject {
         cell.subAddressLabel.text = address.detail
         
         guard let forecast = currentWeather.forecast else {
-            cell.temperatureLabel.text = "º"
+            cell.temperatureLabel.text = "--"
             return
         }
         cell.temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
@@ -62,7 +67,7 @@ class FavoritesTablePresenter: NSObject {
             cell.temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
             cell.weatherIcon.image = UIImage(named: forecast.icon + "_")
         } else {
-            cell.temperatureLabel.text = "º"
+            cell.temperatureLabel.text = "--"
         }
         
         if let address = item.address{
@@ -72,7 +77,7 @@ class FavoritesTablePresenter: NSObject {
             cell.addressLabel.text = "-"
             cell.subAddressLabel.text = "-.-"
         }
-     }
+    }
     
     init(with tableView: UITableView) {
         self.tableView = tableView
@@ -82,9 +87,12 @@ class FavoritesTablePresenter: NSObject {
     }
 }
 
-// MARK: - TableView live cycle
+
 
 extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
+    
+    // MARK: - TableView live cycle
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return FavoritesSections.count
     }
@@ -122,5 +130,17 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
             return "Favorites".localized()
         }
         return ""
+    }
+    
+    // MARK: - Editing tableView
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        favorites.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let favorLocation = ["favorLocation": favorites[indexPath.row].location]
+        NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil, userInfo: favorLocation)
     }
 }

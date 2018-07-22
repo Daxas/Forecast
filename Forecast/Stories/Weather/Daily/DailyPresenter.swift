@@ -49,4 +49,5 @@ extension DailyPresenter: UITableViewDataSource {
         return cell
     }
     
+    
 }

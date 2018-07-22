@@ -15,10 +15,15 @@ class ForecastViewController: UIViewController {
     @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var iconImage: UIImageView!
     
+    
     var forecastPoint: ForecastPoint?
     var forecastAdapter = ForecastAdapter()
     var spinnerActivity = MBProgressHUD()
     var refresher: UIRefreshControl!
+    
+    var isCurrentLocation = true
+    var favorLocation: CLLocation?
+   
    //let gradient = GradientView()
     
     private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
@@ -31,15 +36,19 @@ class ForecastViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         startSpinner()
-        fetchCurrentForecast()
+        if isCurrentLocation {
+            fetchCurrentForecast()
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchForecast(notification:)), name: Notification.Name("NotificationIdentifier"), object: nil)
         configure()
         updateLabels(with: forecastPoint)
-        
         
     }
     
@@ -55,10 +64,9 @@ class ForecastViewController: UIViewController {
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh".localized())
         refresher.addTarget(self, action: #selector(ForecastViewController.refreshForecast), for: UIControlEvents.valueChanged)
         tableView.addSubview(refresher)
-        
     }
     
-    // MARK: - Data
+    
     
     
     private func startSpinner() {
@@ -72,22 +80,41 @@ class ForecastViewController: UIViewController {
         spinnerActivity.hide(animated: true)
     }
     
+    // MARK: - Data
+    
     private func fetchCurrentForecast() {
-        forecastAdapter.getForecastForCurrentPoint(completion: { [weak self] in
+       forecastAdapter.getForecastForCurrentPoint(completion: { [weak self] in
             self?.handleForecastPoint($0)
             }, failure: {print($0)})
     }
     
+    @objc private func fetchForecast(notification: NSNotification) {
+        guard let location = notification.userInfo?["favorLocation"]  as? CLLocation else {
+            return
+        }
+        isCurrentLocation = false
+        let forecastPoint = ForecastPoint(with: location)
+        forecastAdapter.getAddress(for: forecastPoint, completion: { (point) in
+            forecastPoint.address = point.address
+            self.forecastAdapter.getForecast(for: forecastPoint, completion: { (point) in
+                forecastPoint.forecast = point.forecast
+                self.handleForecastPoint(forecastPoint)
+            }, failure: {print($0)})
+        }, failure: {print($0)})
+    }
+    
     private func handleForecastPoint(_ forecastPoint: ForecastPoint) {
+       self.stopSpinner()
         self.forecastPoint = forecastPoint
-        self.stopSpinner()
         self.updateLabels(with: self.forecastPoint)
     }
     
     // MARK: - Private
     
     @objc private func refreshForecast() {
-        fetchCurrentForecast()
+        if isCurrentLocation {
+            fetchCurrentForecast()
+        } 
         refresher.endRefreshing()
     }
     

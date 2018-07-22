@@ -1,4 +1,5 @@
-/*import Foundation
+import Foundation
+
 
 let directory = "Forecast.plist"
 let key = "Favorites"
@@ -8,8 +9,7 @@ class Store {
     // MARK: - Saving and Loading data
     
     private func documentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory,
-                                             in: .userDomainMask)
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
     
@@ -17,13 +17,18 @@ class Store {
         return documentsDirectory().appendingPathComponent(directory)
     }
     
-    func save(favorites: [ForecastPoint]) {
+    func save(favorites: [ForecastPoint]/*, selectedLocation: Int?*/) {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWith: data)
-        archiver.encode(favorites, forKey: key)
+        archiver.encode(favorites, forKey: "Favorites")
+       /* if let index = selectedLocation {
+         archiver.encode(index, forKey: "Index")
+        }*/
         archiver.finishEncoding()
         data.write(to: dataFilePath(), atomically: true)
     }
+    
+
     
     func load() -> [ForecastPoint] {
         let path = dataFilePath()
@@ -37,4 +42,4 @@ class Store {
         }
     }
     
-}*/
+}
