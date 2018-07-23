@@ -140,7 +140,8 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let favorLocation = ["favorLocation": favorites[indexPath.row].location]
+        
+        let favorLocation =  indexPath.section == 0 ? nil : ["favorLocation": favorites[indexPath.row].location]
         NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil, userInfo: favorLocation)
     }
 }
