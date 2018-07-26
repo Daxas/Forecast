@@ -9,9 +9,9 @@ enum FavoritesSections: Int {
     var cellIdentifier: String {
         switch self {
         case .current:
-            return CurrentLocationCell.reuseIdentifier()
+            return "CurrentLocationCell"
         case .favorites:
-            return FavoritesPointCell.reuseIdentifier()
+            return "FavoritesPointCell"
         }
     }
     
@@ -23,54 +23,60 @@ enum FavoritesSections: Int {
 class FavoritesTablePresenter: NSObject {
     
     private let tableView: UITableView
+    private let store = Store()
+    private var forecastAdapter = ForecastAdapter()
     
-    var favorites = [ForecastPoint]()
-    var currentWeather: ForecastPoint?
+    private var firstTime = true
+    
+    private var favorites = [ForecastPoint]()
     
     private let temperatureUtils = TemperatureUtils()
     
-    func update(with currentForecast: ForecastPoint) {
-        currentWeather = currentForecast
-        tableView.reloadData()
-    }
     
-    func update(favorites: [ForecastPoint]) {
-        self.favorites = favorites
+    func makeFavorites(locations: [CLLocation]) {
+        if firstTime {
+            for location in locations {
+                let point = ForecastPoint(with: location)
+                favorites.append(point)
+            }
+            store.save(favorites: favorites)
+        } else {
+            favorites = store.load()
+        }
         tableView.reloadData()
+        firstTime = false
+        
     }
     
     // MARK: - Configure cells
     
-    private func configureCurrentLocationCell(_ cell: CurrentLocationCell) {
-        guard let currentWeather = currentWeather else {
-            return
-        }
-        guard let address = currentWeather.address else {
-            cell.addressLabel.text = "-"
-            cell.subAddressLabel.text = "-.-"
-            return
-        }
-        cell.addressLabel.text = address.city
-        cell.subAddressLabel.text = address.detail
-        
-        guard let forecast = currentWeather.forecast else {
-            cell.temperatureLabel.text = "--"
-            return
-        }
-        cell.temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
-        cell.weatherIcon.image = UIImage(named: forecast.icon)
+    private func configureCurrentLocationCell(_ cell: FavoritesPointCell) {
+        forecastAdapter.getForecastForCurrentPoint(completion: {[weak self] in
+            self?.updateCell(cell, with: $0)
+            } , failure: {print($0)} )
     }
     
     private func configureFavoritesCell(_ cell: FavoritesPointCell, indexPath: IndexPath) {
-        let item = favorites[indexPath.row]
-        if let forecast = item.forecast {
+        let point = favorites[indexPath.row]
+        forecastAdapter.getAddress(for: point, completion: { [weak self] in
+            point.address = $0.address
+            self?.updateCell(cell, with: point)
+            }, failure: {print($0)})
+        forecastAdapter.getForecast(for: point, completion: { [weak self] in
+            point.forecast = $0.forecast
+            self?.updateCell(cell, with: point)
+            }, failure: {print($0)})
+    }
+    
+    private func updateCell(_ cell: FavoritesPointCell, with forecastPoint: ForecastPoint) {
+        if let forecast = forecastPoint.forecast {
             cell.temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
             cell.weatherIcon.image = UIImage(named: forecast.icon + "_")
         } else {
             cell.temperatureLabel.text = "--"
         }
         
-        if let address = item.address{
+        if let address = forecastPoint.address{
             cell.addressLabel.text = address.city
             cell.subAddressLabel.text = address.detail
         } else {
@@ -105,17 +111,20 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         guard let section = FavoritesSections(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath)
-        switch cell {
-        case let cell as CurrentLocationCell:
-            configureCurrentLocationCell(cell)
-        case let cell as FavoritesPointCell:
-            configureFavoritesCell(cell, indexPath: indexPath)
-        default:
-            break
+        return tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let favorCell = cell as! FavoritesPointCell
+        if indexPath.section == 0 {
+            configureCurrentLocationCell(favorCell)
+        } else {
+            configureFavoritesCell(favorCell, indexPath: indexPath)
         }
-        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print("didEndDisplaying cell " + "\(indexPath.row)")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -137,11 +146,16 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         favorites.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
+        store.save(favorites: favorites)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let favorLocation =  indexPath.section == 0 ? nil : ["favorLocation": favorites[indexPath.row].location]
-        NotificationCenter.default.post(name: Notification.Name("NotificationIdentifier"), object: nil, userInfo: favorLocation)
+        store.save(favorites: favorites)
+        let selectedIndex = indexPath.section == 0 ? nil : indexPath.row
+        NotificationCenter.default.post(name: Notification.Name("SelectedLocation"), object: nil, userInfo: ["favorLocation": selectedIndex as Any])
+        UserDefaults.standard.set(selectedIndex, forKey: "SelectedLocationIndex")
     }
+    
+    
+    
 }

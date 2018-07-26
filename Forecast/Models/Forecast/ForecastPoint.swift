@@ -2,7 +2,21 @@
 import Foundation
 import CoreLocation
 
-class ForecastPoint: NSObject/*, NSCoding*/ {
+class ForecastPoint: NSObject, NSCoding {
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(location, forKey: "Location")
+      // aCoder.encode(address, forKey: "Address")
+        //aCoder.encode(forecast, forKey: "Forecast")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        location = aDecoder.decodeObject(forKey: "Location") as! CLLocation
+        //address = aDecoder.decodeObject(forKey: "Address") as! ForecastAddress
+        //forecast = aDecoder.decodeObject(forKey: "Forecast") as! Forecast
+        super.init()
+    }
+    
     
     let location: CLLocation
     var address: ForecastAddress?
@@ -14,23 +28,21 @@ class ForecastPoint: NSObject/*, NSCoding*/ {
             self.address = ForecastAddress(with: placemark)
         }
     }
-    
-  required init?(coder aDecoder: NSCoder) {
-        location = aDecoder.decodeObject(forKey: "Location") as! CLLocation
-        address = aDecoder.decodeObject(forKey: "Address") as? ForecastAddress
-        forecast = aDecoder.decodeObject(forKey: "Forecast") as? Forecast
-        super.init()
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(location, forKey: "Location")
-        aCoder.encode(address, forKey: "Address")
-        aCoder.encode(forecast, forKey: "Forecast")
-    }
 }
 
 
-class ForecastAddress {
+class ForecastAddress: NSObject, NSCoding {
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(city, forKey: "City")
+        aCoder.encode(detail, forKey: "Detail")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        city = aDecoder.decodeObject(forKey: "City") as! String
+        detail = aDecoder.decodeObject(forKey: "Detail") as! String
+        super.init()
+    }
+    
     
     let city: String
     let detail: String

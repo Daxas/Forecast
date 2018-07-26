@@ -1,12 +1,14 @@
 import Foundation
-
+import CoreLocation
 
 let directory = "Forecast.plist"
-let key = "Favorites"
+let key = "FavoriteLocations"
 
 class Store {
     
     // MARK: - Saving and Loading data
+    
+   
     
     private func documentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -17,13 +19,10 @@ class Store {
         return documentsDirectory().appendingPathComponent(directory)
     }
     
-    func save(favorites: [ForecastPoint]/*, selectedLocation: Int?*/) {
+    func save(favorites: [ForecastPoint]) {
         let data = NSMutableData()
         let archiver = NSKeyedArchiver(forWritingWith: data)
-        archiver.encode(favorites, forKey: "Favorites")
-       /* if let index = selectedLocation {
-         archiver.encode(index, forKey: "Index")
-        }*/
+        archiver.encode(favorites, forKey: key)
         archiver.finishEncoding()
         data.write(to: dataFilePath(), atomically: true)
     }
