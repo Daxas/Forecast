@@ -58,12 +58,16 @@ class FavoritesTablePresenter: NSObject {
     private func configureFavoritesCell(_ cell: FavoritesPointCell, indexPath: IndexPath) {
         let point = favorites[indexPath.row]
         forecastAdapter.getAddress(for: point, completion: { [weak self] in
-            point.address = $0.address
-            self?.updateCell(cell, with: point)
+            if point == self?.favorites[indexPath.row] {
+                point.address = $0.address
+                self?.updateCell(cell, with: point)
+            } 
             }, failure: {print($0)})
         forecastAdapter.getForecast(for: point, completion: { [weak self] in
-            point.forecast = $0.forecast
-            self?.updateCell(cell, with: point)
+            if point == self?.favorites[indexPath.row] {
+                point.forecast = $0.forecast
+                self?.updateCell(cell, with: point)
+            }
             }, failure: {print($0)})
     }
     
