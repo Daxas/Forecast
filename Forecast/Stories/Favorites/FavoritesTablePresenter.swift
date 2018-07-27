@@ -15,37 +15,36 @@ enum FavoritesSections: Int {
         }
     }
     
+    var cellHeight: CGFloat {
+        switch self {
+        case .current:
+            return CGFloat(100)
+        case .favorites:
+            return CGFloat(60)
+        }
+    }
+    
     static var count: Int {
         return 2
     }
+}
+protocol FavoritesTablePresenterDelegate: class {
+    func favoritesTablePresenterDelegate(_ sender: FavoritesTablePresenter, locationDidSelect point: ForecastPoint?)
+    func favoritesTablePresenterDelegate(_ sender: FavoritesTablePresenter, favoritesDidChange: [ForecastPoint])
 }
 
 class FavoritesTablePresenter: NSObject {
     
     private let tableView: UITableView
-    private let store = Store()
     private var forecastAdapter = ForecastAdapter()
-    
-    private var firstTime = true
-    
     private var favorites = [ForecastPoint]()
     
     private let temperatureUtils = TemperatureUtils()
+    weak var delegate: FavoritesTablePresenterDelegate?
     
-    
-    func makeFavorites(locations: [CLLocation]) {
-        if firstTime {
-            for location in locations {
-                let point = ForecastPoint(with: location)
-                favorites.append(point)
-            }
-            store.save(favorites: favorites)
-        } else {
-            favorites = store.load()
-        }
+    func update(with favorites: [ForecastPoint]) {
+        self.favorites = favorites
         tableView.reloadData()
-        firstTime = false
-        
     }
     
     // MARK: - Configure cells
@@ -115,6 +114,7 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // guard let
         let favorCell = cell as! FavoritesPointCell
         if indexPath.section == 0 {
             configureCurrentLocationCell(favorCell)
@@ -128,10 +128,10 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return CGFloat(100)
-        } 
-        return CGFloat(60)
+        guard let section = FavoritesSections(rawValue: indexPath.section) else {
+            return tableView.estimatedRowHeight
+        }
+        return section.cellHeight
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -145,15 +145,13 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         favorites.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        store.save(favorites: favorites)
+        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        delegate?.favoritesTablePresenterDelegate(self, favoritesDidChange: favorites)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        store.save(favorites: favorites)
-        let selectedIndex = indexPath.section == 0 ? nil : indexPath.row
-        NotificationCenter.default.post(name: Notification.Name("SelectedLocation"), object: nil, userInfo: ["favorLocation": selectedIndex as Any])
-        UserDefaults.standard.set(selectedIndex, forKey: "SelectedLocationIndex")
+        let selectedLocation = indexPath.section == 0 ? nil : favorites[indexPath.row]
+        delegate?.favoritesTablePresenterDelegate(self, locationDidSelect: selectedLocation)
     }
     
     

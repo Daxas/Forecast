@@ -14,12 +14,12 @@ class ForecastViewController: UIViewController {
     @IBOutlet var iconImage: UIImageView!
     
     var forecastPoint: ForecastPoint?
-    var store = Store()
+    // var store = Store()
     var forecastAdapter = ForecastAdapter()
     var spinnerActivity = MBProgressHUD()
     var refresher: UIRefreshControl!
     
-    var selectedLocationIndex: Int? = nil
+    // var selectedLocation: ForecastPoint?
     var wasOpen = false
     
     private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
@@ -32,12 +32,13 @@ class ForecastViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: Notification.Name("LocationDidChange"), object: nil)
         getForecast()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: Notification.Name("SelectedLocation"), object: nil)
+        
         configure()
         updateLabels(with: forecastPoint)
     }
@@ -63,24 +64,30 @@ class ForecastViewController: UIViewController {
         wasOpen = UserDefaults.standard.bool(forKey: "WasOpen")
         guard wasOpen else {
             fetchCurrentForecast()
+            wasOpen = true
+            UserDefaults.standard.set(wasOpen, forKey: "WasOpen")
             return
         }
-        selectedLocationIndex = UserDefaults.standard.object(forKey: "SelectedLocationIndex") as? Int ?? nil
-        if let index = selectedLocationIndex  {
-            forecastPoint = store.load()[index]
-            fetchForecast()
-        } else {
-            fetchCurrentForecast()
+        if let coordinates = UserDefaults.standard.array(forKey: "SelectedLocationCoordinates") as? [CLLocationDegrees] {
+            let location = CLLocation(latitude: coordinates[0] , longitude: coordinates[1])
+            forecastPoint = ForecastPoint(with: location)
         }
-        wasOpen = true
-        UserDefaults.standard.set(wasOpen, forKey: "WasOpen")
+        guard forecastPoint != nil else {
+            fetchCurrentForecast()
+            return
+        }
+        fetchForecast()
     }
     
     @objc private func forecastType(notification: NSNotification) {
-        if let selectedIndex = notification.userInfo?["favorLocation"]  as? Int {
-            selectedLocationIndex = selectedIndex
-            getForecast()
+        guard let userInfo = notification.userInfo else {
+            return
         }
+        guard let selectedLocation = userInfo["favorLocation"] as? ForecastPoint else {
+            forecastPoint = nil
+            return
+        }
+        forecastPoint = selectedLocation
     }
     
     private func fetchCurrentForecast() {
