@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 /* -- ACTIVITY SPINNER -- */
 "Loading" = "Загрузка";
 "Please Wait!" = "Пожалуйста подождите!";
 
 /* -- DAILY FORECAST -- */
+=======
+
+"Favorites" = "Избранное";
+
+"Loading" = "Загрузка";
+"Please Wait!" = "Пожалуйста подождите!";
+
+>>>>>>> Task-#36611_Favorites-view
 "Today" = "cегодня";
 "Tomorrow" = "завтра";
 

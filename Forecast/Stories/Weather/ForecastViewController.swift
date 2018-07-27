@@ -5,10 +5,15 @@ import MBProgressHUD
 
 class ForecastViewController: UIViewController {
     
+<<<<<<< HEAD
     @IBOutlet var dailyTableView: UITableView!
     @IBOutlet var hourlyCollectionView: UICollectionView!
     @IBOutlet var headerView: UIView!
     
+=======
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var collectionView: UICollectionView!
+>>>>>>> Task-#36611_Favorites-view
     @IBOutlet var streetLabel: UILabel!
     @IBOutlet var cityLabel: UILabel!
     @IBOutlet var tempLabel: UILabel!
@@ -16,12 +21,21 @@ class ForecastViewController: UIViewController {
     @IBOutlet var iconImage: UIImageView!
     
     var forecastPoint: ForecastPoint?
+    // var store = Store()
     var forecastAdapter = ForecastAdapter()
     var spinnerActivity = MBProgressHUD()
     var refresher: UIRefreshControl!
     
+<<<<<<< HEAD
     private lazy var dailyTablePresenter = DailyPresenter(with: self.dailyTableView)
     private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.hourlyCollectionView)
+=======
+    // var selectedLocation: ForecastPoint?
+    var wasOpen = false
+    
+    private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
+    private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
+>>>>>>> Task-#36611_Favorites-view
     
     private let dateFormatter = DateFormatter()
     private let temperatureUtils = TemperatureUtils()
@@ -30,16 +44,15 @@ class ForecastViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        startSpinner()
-        fetchCurrentForecast()
+        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: Notification.Name("LocationDidChange"), object: nil)
+        getForecast()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configure()
         updateLabels(with: forecastPoint)
-        
-        
     }
     
     private func configure() {
@@ -52,22 +65,46 @@ class ForecastViewController: UIViewController {
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh".localized())
         refresher.addTarget(self, action: #selector(ForecastViewController.refreshForecast), for: UIControlEvents.valueChanged)
+<<<<<<< HEAD
         dailyTableView.addSubview(refresher)
         
+=======
+        tableView.addSubview(refresher)
+>>>>>>> Task-#36611_Favorites-view
     }
+    
     
     // MARK: - Data
     
-    
-    private func startSpinner() {
-        spinnerActivity = MBProgressHUD.showAdded(to: self.view, animated: true)
-        spinnerActivity.label.text = "Loading".localized()
-        spinnerActivity.detailsLabel.text = "Please Wait!".localized()
-        spinnerActivity.isUserInteractionEnabled = false
+    private func getForecast() {
+        startSpinner()
+        wasOpen = UserDefaults.standard.bool(forKey: "WasOpen")
+        guard wasOpen else {
+            fetchCurrentForecast()
+            wasOpen = true
+            UserDefaults.standard.set(wasOpen, forKey: "WasOpen")
+            return
+        }
+        if let coordinates = UserDefaults.standard.array(forKey: "SelectedLocationCoordinates") as? [CLLocationDegrees] {
+            let location = CLLocation(latitude: coordinates[0] , longitude: coordinates[1])
+            forecastPoint = ForecastPoint(with: location)
+        }
+        guard forecastPoint != nil else {
+            fetchCurrentForecast()
+            return
+        }
+        fetchForecast()
     }
     
-    private func stopSpinner() {
-        spinnerActivity.hide(animated: true)
+    @objc private func forecastType(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {
+            return
+        }
+        guard let selectedLocation = userInfo["favorLocation"] as? ForecastPoint else {
+            forecastPoint = nil
+            return
+        }
+        forecastPoint = selectedLocation
     }
     
     private func fetchCurrentForecast() {
@@ -76,16 +113,29 @@ class ForecastViewController: UIViewController {
             }, failure: {print($0)})
     }
     
-    private func handleForecastPoint(_ forecastPoint: ForecastPoint) {
-        self.forecastPoint = forecastPoint
-        self.stopSpinner()
-        self.updateLabels(with: self.forecastPoint)
+    private func fetchForecast() {
+        guard let point = forecastPoint else {
+            return
+        }
+        forecastAdapter.getAddress(for: point, completion: { [weak self] in
+            point.address = $0.address
+            self?.forecastAdapter.getForecast(for: point, completion: { [weak self] in
+                point.forecast = $0.forecast
+                self?.handleForecastPoint(point)
+                }, failure: {print($0)})
+            }, failure: {print($0)})
+    }
+    
+    private func handleForecastPoint(_ point: ForecastPoint) {
+        forecastPoint = point
+        stopSpinner()
+        updateLabels(with: forecastPoint)
     }
     
     // MARK: - Private
     
     @objc private func refreshForecast() {
-        fetchCurrentForecast()
+        getForecast()
         refresher.endRefreshing()
     }
     
@@ -107,6 +157,19 @@ class ForecastViewController: UIViewController {
             cityLabel.text = "-.-"
             streetLabel.text = "-"
         }
+    }
+    
+    // MARK: - ActivitySpinner
+    
+    private func startSpinner() {
+        spinnerActivity = MBProgressHUD.showAdded(to: self.view, animated: true)
+        spinnerActivity.label.text = "Loading".localized()
+        spinnerActivity.detailsLabel.text = "Please Wait!".localized()
+        spinnerActivity.isUserInteractionEnabled = false
+    }
+    
+    private func stopSpinner() {
+        spinnerActivity.hide(animated: true)
     }
     
     // MARK: - Override

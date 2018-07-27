@@ -10,7 +10,6 @@ class ForecastAdapter {
     private let geoLocator = GeoLocator()
     private let forecastClient = ForecastClient()
     
-    
     func getForecastForCurrentPoint(completion: @escaping ForecastAdapterCompletion,
                                     failure: @escaping (Error) -> Void){
         getCurrentPoint(completion: { (point) in
@@ -39,7 +38,7 @@ class ForecastAdapter {
                 return
             }
             let point = ForecastPoint(with: location)
-            self.getAddress(for: point, completion: { (address) in
+            self.getAddress(for: point, completion: { (point) in
                 completion(point)
             }, failure: { (error) in
                 print("error getCurrentPoint")
