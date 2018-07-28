@@ -21,6 +21,8 @@
 		84733D7B20F69E5F001DE585 /* Weather.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84733D7D20F69E5F001DE585 /* Weather.storyboard */; };
 		84733D8020F8DC0E001DE585 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84733D7F20F8DC0E001DE585 /* DateUtils.swift */; };
 		84733D8220FA2CED001DE585 /* TemperatureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84733D8120FA2CED001DE585 /* TemperatureUtils.swift */; };
+		8477BED2210B1C600003DB74 /* FavoritesHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8477BED1210B1C600003DB74 /* FavoritesHeaderView.xib */; };
+		8477BED4210B4A610003DB74 /* FavoritesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477BED3210B4A610003DB74 /* FavoritesHeaderView.swift */; };
 		8479EE7120DC211600F37C4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479EE7020DC211600F37C4E /* AppDelegate.swift */; };
 		8479EE7320DC211600F37C4E /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479EE7220DC211600F37C4E /* ForecastViewController.swift */; };
 		8479EE7620DC211600F37C4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8479EE7420DC211600F37C4E /* Main.storyboard */; };
@@ -55,6 +57,8 @@
 		84733D7E20F78B95001DE585 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Weather.storyboard; sourceTree = "<group>"; };
 		84733D7F20F8DC0E001DE585 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		84733D8120FA2CED001DE585 /* TemperatureUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUtils.swift; sourceTree = "<group>"; };
+		8477BED1210B1C600003DB74 /* FavoritesHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoritesHeaderView.xib; sourceTree = "<group>"; };
+		8477BED3210B4A610003DB74 /* FavoritesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesHeaderView.swift; sourceTree = "<group>"; };
 		8479EE6D20DC211600F37C4E /* Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8479EE7020DC211600F37C4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8479EE7220DC211600F37C4E /* ForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +172,7 @@
 				84733D7D20F69E5F001DE585 /* Weather.storyboard */,
 				8479EE7420DC211600F37C4E /* Main.storyboard */,
 				846442B420E232CF006197AC /* Favorites.storyboard */,
+				8477BED1210B1C600003DB74 /* FavoritesHeaderView.xib */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				84972C792101132900EC1E94 /* FavoritesViewController.swift */,
+				8477BED3210B4A610003DB74 /* FavoritesHeaderView.swift */,
 				84972C7F2101167600EC1E94 /* FavoritesTablePresenter.swift */,
 				84972C7D2101140B00EC1E94 /* FavoritesPointCell.swift */,
 			);
@@ -311,6 +317,7 @@
 				8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */,
 				846442B520E232CF006197AC /* Favorites.storyboard in Resources */,
 				8479EE7620DC211600F37C4E /* Main.storyboard in Resources */,
+				8477BED2210B1C600003DB74 /* FavoritesHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +373,7 @@
 				841E8AA520E7810D008F4EA4 /* DailyTableViewCell.swift in Sources */,
 				8439F3A720EA2CFF005691FD /* HourlyPresenter.swift in Sources */,
 				84972C822101C19D00EC1E94 /* Store.swift in Sources */,
+				8477BED4210B4A610003DB74 /* FavoritesHeaderView.swift in Sources */,
 				84F24E2B20F2A251005AE351 /* ForecastAdapter.swift in Sources */,
 				84733D7820F69C46001DE585 /* String+Localizable.swift in Sources */,
 				8479EE7320DC211600F37C4E /* ForecastViewController.swift in Sources */,

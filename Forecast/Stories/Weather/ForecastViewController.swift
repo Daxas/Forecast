@@ -14,12 +14,10 @@ class ForecastViewController: UIViewController {
     @IBOutlet var iconImage: UIImageView!
     
     var forecastPoint: ForecastPoint?
-    // var store = Store()
     var forecastAdapter = ForecastAdapter()
     var spinnerActivity = MBProgressHUD()
     var refresher: UIRefreshControl!
     
-    // var selectedLocation: ForecastPoint?
     var wasOpen = false
     
     private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)

@@ -5,6 +5,7 @@ import CoreLocation
 enum FavoritesSections: Int {
     case current = 0
     case favorites
+    case info
     
     var cellIdentifier: String {
         switch self {
@@ -12,12 +13,14 @@ enum FavoritesSections: Int {
             return "CurrentLocationCell"
         case .favorites:
             return "FavoritesPointCell"
+        case .info:
+            return "InfoCell"
         }
     }
     
     var cellHeight: CGFloat {
         switch self {
-        case .current:
+        case .current, .info:
             return CGFloat(100)
         case .favorites:
             return CGFloat(60)
@@ -25,7 +28,7 @@ enum FavoritesSections: Int {
     }
     
     static var count: Int {
-        return 2
+        return 3
     }
 }
 protocol FavoritesTablePresenterDelegate: class {
@@ -107,7 +110,7 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : favorites.count
+        return section == 1 ? favorites.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,8 +121,9 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // guard let
-        let favorCell = cell as! FavoritesPointCell
+        guard let favorCell = cell as? FavoritesPointCell else {
+            return
+        }
         if indexPath.section == 0 {
             configureCurrentLocationCell(favorCell)
         } else {
@@ -138,12 +142,29 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         return section.cellHeight
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section != 0 {
-            return "Favorites".localized()
+    // MARK: - TableView header and footer
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FavoritesHeaderView") as! FavoritesHeaderView
+            headerView.favoritesLabel.text = "Favorites".localized()
+            return headerView
         }
-        return ""
+        return nil
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == FavoritesSections.favorites.rawValue {
+            return FavoritesSections.favorites.cellHeight
+        }
+        return CGFloat.leastNonzeroMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNonzeroMagnitude
+    }
+    
+    
     
     // MARK: - Editing tableView
     

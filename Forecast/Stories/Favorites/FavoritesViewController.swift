@@ -9,14 +9,16 @@ class FavoritesViewController: UIViewController {
     private let store = Store()
     private var firstTime = true
     
+    @IBAction func editBarButton(_ sender: Any) {
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoritesTablePresenter.delegate = self
         configure()
         configureDataForTest()
         favoritesTablePresenter.update(with: store.load())
-        
-        
     }
     
     private func configureDataForTest() {
@@ -26,21 +28,21 @@ class FavoritesViewController: UIViewController {
             favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
             favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
             favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
-            favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-            favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-            favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
-            favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-            favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-            favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
-            favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-            favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-            favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
-            favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-            favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-            favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
-            favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-            favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-            favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
+            /*favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
+             favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
+             favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
+             favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
+             favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
+             favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
+             favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
+             favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
+             favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
+             favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
+             favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
+             favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
+             favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
+             favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
+             favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))*/
             for location in favoriteLocations {
                 let point = ForecastPoint(with: location)
                 favorites.append(point)
@@ -53,6 +55,12 @@ class FavoritesViewController: UIViewController {
     private func configure() {
         favoritesTableView.backgroundColor = UIColor.white
         
+        let height: CGFloat = 400
+        let bounds = self.navigationController!.navigationBar.bounds
+        navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: height)
+        
+        let headerNib = UINib.init(nibName: "FavoritesHeaderView", bundle: Bundle.main)
+        favoritesTableView.register(headerNib, forHeaderFooterViewReuseIdentifier: "FavoritesHeaderView")
     }
     
 }
