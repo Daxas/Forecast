@@ -1,12 +1,15 @@
-"Favorites" = "Favorites";
-
+/* -- ACTIVITY SPINNER -- */
 "Loading" = "Loading";
 "Please Wait!" = "Please Wait!";
+
+/* -- DAILY FORECAST -- */
 "Today" = "Today";
 "Tomorrow" = "Tomorrow";
+
+/* -- INFO CELL -- */
 " m/c" = " m/c";
 " hPA" = " hPA";
 "en" = "en";
 
-/* --Weather-- */
+/* -- WEATHER -- */
 "Weather.title" = "Weather";

@@ -207,6 +207,7 @@
 				8479EE7720DC211B00F37C4E /* Assets.xcassets */,
 				84972C7020FE7C1400EC1E94 /* Localizable.strings */,
 				8479EE7C20DC211B00F37C4E /* Info.plist */,
+				84972C7620FF0B6F00EC1E94 /* Localizable.strings */,
 			);
 			path = Forecast;
 			sourceTree = "<group>";

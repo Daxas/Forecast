@@ -1,15 +1,16 @@
-
-"Favorites" = "Избранное";
-
+/* -- ACTIVITY SPINNER -- */
 "Loading" = "Загрузка";
 "Please Wait!" = "Пожалуйста подождите!";
 
+/* -- DAILY FORECAST -- */
 "Today" = "cегодня";
 "Tomorrow" = "завтра";
 
+/* -- INFO CELL -- */
 " m/c" = " м/с";
 " hPA" = " мPC";
 "en" = "ru";
 
-/* --Weather-- */
+/* -- WEATHER -- */
 "Weather.title" = "Погода";
+
