@@ -298,9 +298,8 @@
                     <tabBarItem key="tabBarItem" title="Weather" image="greyStar" id="9Tb-Bm-L1f"/>
                     <connections>
                         <outlet property="cityLabel" destination="HnC-Uo-MGQ" id="7Nm-oq-vZS"/>
+                        <outlet property="collectionView" destination="Gpk-Oy-TEa" id="cLb-ei-RLu"/>
                         <outlet property="dailyTableView" destination="8Fk-I4-v5b" id="VyJ-yc-Bxl"/>
-                        <outlet property="headerView" destination="T9a-NI-hea" id="50p-2u-l83"/>
-                        <outlet property="hourlyCollectionView" destination="Gpk-Oy-TEa" id="QWN-sY-qWA"/>
                         <outlet property="iconImage" destination="zYV-eL-DSk" id="Hje-bR-3g0"/>
                         <outlet property="streetLabel" destination="MZJ-rY-H3Q" id="IHX-7c-pc7"/>
                         <outlet property="summaryLabel" destination="Vwz-Oc-Cq1" id="qGm-nc-zLq"/>

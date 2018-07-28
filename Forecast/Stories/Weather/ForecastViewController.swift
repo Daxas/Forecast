@@ -5,7 +5,7 @@ import MBProgressHUD
 
 class ForecastViewController: UIViewController {
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var dailyTableView: UITableView!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var streetLabel: UILabel!
     @IBOutlet var cityLabel: UILabel!
@@ -20,7 +20,7 @@ class ForecastViewController: UIViewController {
     
     var wasOpen = false
     
-    private lazy var dailyTablePresenter = DailyPresenter(with: self.tableView)
+    private lazy var dailyTablePresenter = DailyPresenter(with: self.dailyTableView)
     private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
     
     private let dateFormatter = DateFormatter()
@@ -51,7 +51,7 @@ class ForecastViewController: UIViewController {
         refresher = UIRefreshControl()
         refresher.attributedTitle = NSAttributedString(string: "Pull to refresh".localized())
         refresher.addTarget(self, action: #selector(ForecastViewController.refreshForecast), for: UIControlEvents.valueChanged)
-        tableView.addSubview(refresher)
+        dailyTableView.addSubview(refresher)
     }
     
     
