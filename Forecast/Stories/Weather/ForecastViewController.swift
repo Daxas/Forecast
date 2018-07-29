@@ -13,12 +13,12 @@ class ForecastViewController: UIViewController {
     @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var iconImage: UIImageView!
     
-    var forecastPoint: ForecastPoint?
-    var forecastAdapter = ForecastAdapter()
-    var spinnerActivity = MBProgressHUD()
-    var refresher: UIRefreshControl!
+    private var forecastPoint: ForecastPoint?
+    private let forecastAdapter = ForecastAdapter()
+    private var spinnerActivity = MBProgressHUD()
+    private var refresher: UIRefreshControl!
     
-    var wasOpen = false
+    private var wasOpen = false
     
     private lazy var dailyTablePresenter = DailyPresenter(with: self.dailyTableView)
     private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
@@ -36,13 +36,15 @@ class ForecastViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configure()
         updateLabels(with: forecastPoint)
     }
     
+    // MARK: - Private
+    
     private func configure() {
         tabBarItem.title = "Weather.title".localized()
+        dailyTableView.allowsSelection = false
         collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
         configureRefresher()
     }
@@ -53,7 +55,6 @@ class ForecastViewController: UIViewController {
         refresher.addTarget(self, action: #selector(ForecastViewController.refreshForecast), for: UIControlEvents.valueChanged)
         dailyTableView.addSubview(refresher)
     }
-    
     
     // MARK: - Data
     
@@ -66,10 +67,7 @@ class ForecastViewController: UIViewController {
             UserDefaults.standard.set(wasOpen, forKey: "WasOpen")
             return
         }
-        if let coordinates = UserDefaults.standard.array(forKey: "SelectedLocationCoordinates") as? [CLLocationDegrees] {
-            let location = CLLocation(latitude: coordinates[0] , longitude: coordinates[1])
-            forecastPoint = ForecastPoint(with: location)
-        }
+       forecastPoint = AppSettings().getSelectedCoordinates()
         guard forecastPoint != nil else {
             fetchCurrentForecast()
             return

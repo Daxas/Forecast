@@ -14,3 +14,10 @@
 /* -- WEATHER -- */
 "Weather.title" = "Погода";
 
+/* -- FAVORITES -- */
+"Favorites.title" = "Избранное";
+"Favorites" = "Избранное";
+"Add a city to yourFavorites and you can quickly see what the wheather is like there.\nTo do this, search for the place." = "Добавьте город в Избранное и сможете быстро узнать какая погода там.\nЧтобы сделать, это воспользуйтесь поиском.";
+"Current location" = "Текущее место";
+"Edit" = "Изменить";
+"Done" = "Готово";

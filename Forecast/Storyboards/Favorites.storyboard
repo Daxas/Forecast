@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="57k-8x-isb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="57k-8x-isb">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -97,6 +97,7 @@
                                         <color key="backgroundColor" red="0.45138680930000002" green="0.99309605359999997" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="addressLabel" destination="9f1-QG-WX9" id="IC7-il-1XQ"/>
+                                            <outlet property="currentLocationLabel" destination="pLN-lf-XnH" id="E98-bm-lSY"/>
                                             <outlet property="subAddressLabel" destination="9XI-vq-8xV" id="HqM-Ql-ZMr"/>
                                             <outlet property="temperatureLabel" destination="K9e-Xb-79h" id="NoW-Jc-UOB"/>
                                             <outlet property="weatherIcon" destination="eK0-ED-ILF" id="KaN-gE-QeS"/>
@@ -155,37 +156,6 @@
                                             <outlet property="weatherIcon" destination="OVt-bz-X5K" id="Ibo-I7-IO6"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="InfoCell" id="vqB-7V-3UW">
-                                        <rect key="frame" x="0.0" y="215.5" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vqB-7V-3UW" id="4tH-vo-AK1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2VP-Zj-C8y">
-                                                    <rect key="frame" x="20" y="4" width="335" height="35.5"/>
-                                                    <attributedString key="attributedText">
-                                                        <fragment>
-                                                            <string key="content">Add a city to yourFavorites and you can quickly see what the wheather is like there.
- To do this, search for the place</string>
-                                                            <attributes>
-                                                                <color key="NSColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <font key="NSFont" size="12" name=".SFNSText"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="2VP-Zj-C8y" firstAttribute="top" secondItem="4tH-vo-AK1" secondAttribute="top" constant="4" id="C9X-Eq-sTi"/>
-                                                <constraint firstItem="2VP-Zj-C8y" firstAttribute="leading" secondItem="4tH-vo-AK1" secondAttribute="leading" constant="20" id="KhA-d5-XwV"/>
-                                                <constraint firstAttribute="bottom" secondItem="2VP-Zj-C8y" secondAttribute="bottom" constant="4" id="Rb7-af-9FT"/>
-                                                <constraint firstAttribute="trailing" secondItem="2VP-Zj-C8y" secondAttribute="trailing" constant="20" id="tDE-Iw-nwb"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -199,7 +169,7 @@
                         <viewLayoutGuide key="safeArea" id="JMT-8n-HOE"/>
                     </view>
                     <navigationItem key="navigationItem" title="Favorites" id="38O-az-mcv">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="snD-I0-5Yu">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="snD-I0-5Yu">
                             <connections>
                                 <action selector="editBarButton:" destination="Dir-aD-HLp" id="I3U-B4-2m3"/>
                             </connections>

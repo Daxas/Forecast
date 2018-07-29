@@ -7,9 +7,17 @@
 "Tomorrow" = "Tomorrow";
 
 /* -- INFO CELL -- */
-" m/c" = " m/c";
-" hPA" = " hPA";
+"m/c" = "m/c";
+"hPA" = "hPA";
 "en" = "en";
 
 /* -- WEATHER -- */
 "Weather.title" = "Weather";
+
+/* -- FAVORITES -- */
+"Favorites.title" = "Favorites";
+"Favorites" = "Favorites";
+"Add a city to yourFavorites and you can quickly see what the wheather is like there.\nTo do this, search for the place." = "Add a city to yourFavorites and you can quickly see what the wheather is like there.\nTo do this, search for the place.";
+"Current location" = "Current location";
+"Edit" = "Edit";
+"Done" = "Done";

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="aeL-7e-AiX" customClass="FavoritesFooterView" customModule="Forecast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="13H-bl-Qrr">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhP-kl-sjL">
+                            <rect key="frame" x="20" y="4" width="335" height="52"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Label">
+                                    <attributes>
+                                        <color key="NSColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <font key="NSFont" metaFont="cellTitle"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="KhP-kl-sjL" secondAttribute="bottom" constant="4" id="3I7-TD-1Ww"/>
+                        <constraint firstItem="KhP-kl-sjL" firstAttribute="top" secondItem="13H-bl-Qrr" secondAttribute="top" constant="4" id="Dx8-Ul-fDY"/>
+                        <constraint firstItem="KhP-kl-sjL" firstAttribute="leading" secondItem="13H-bl-Qrr" secondAttribute="leading" constant="20" id="ilN-Wa-hGU"/>
+                        <constraint firstAttribute="trailing" secondItem="KhP-kl-sjL" secondAttribute="trailing" constant="20" id="lSN-K4-6xe"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="13H-bl-Qrr" firstAttribute="bottom" secondItem="gcA-HZ-h4F" secondAttribute="bottom" id="4bT-PD-6Y5"/>
+                <constraint firstItem="13H-bl-Qrr" firstAttribute="leading" secondItem="gcA-HZ-h4F" secondAttribute="leading" id="MkZ-lc-jec"/>
+                <constraint firstItem="13H-bl-Qrr" firstAttribute="trailing" secondItem="gcA-HZ-h4F" secondAttribute="trailing" id="f7u-Mt-TdZ"/>
+                <constraint firstItem="13H-bl-Qrr" firstAttribute="top" secondItem="gcA-HZ-h4F" secondAttribute="top" id="fZJ-ha-Odv"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="gcA-HZ-h4F"/>
+            <connections>
+                <outlet property="infoLabel" destination="KhP-kl-sjL" id="Y66-6d-XzF"/>
+            </connections>
+            <point key="canvasLocation" x="-16.5" y="119"/>
+        </view>
+    </objects>
+</document>

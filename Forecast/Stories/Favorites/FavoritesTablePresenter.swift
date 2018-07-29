@@ -5,7 +5,6 @@ import CoreLocation
 enum FavoritesSections: Int {
     case current = 0
     case favorites
-    case info
     
     var cellIdentifier: String {
         switch self {
@@ -13,14 +12,12 @@ enum FavoritesSections: Int {
             return "CurrentLocationCell"
         case .favorites:
             return "FavoritesPointCell"
-        case .info:
-            return "InfoCell"
         }
     }
     
     var cellHeight: CGFloat {
         switch self {
-        case .current, .info:
+        case .current:
             return CGFloat(100)
         case .favorites:
             return CGFloat(60)
@@ -28,22 +25,23 @@ enum FavoritesSections: Int {
     }
     
     static var count: Int {
-        return 3
+        return 2
     }
 }
 protocol FavoritesTablePresenterDelegate: class {
-    func favoritesTablePresenterDelegate(_ sender: FavoritesTablePresenter, locationDidSelect point: ForecastPoint?)
-    func favoritesTablePresenterDelegate(_ sender: FavoritesTablePresenter, favoritesDidChange: [ForecastPoint])
+    func favoritesPresenterDelegate(didSelect point: ForecastPoint?)
+    func favoritesPresenterDelegate(favoritesDidChange favorites: [ForecastPoint])
 }
 
 class FavoritesTablePresenter: NSObject {
     
     private let tableView: UITableView
-    private var forecastAdapter = ForecastAdapter()
     private var favorites = [ForecastPoint]()
     
     private let temperatureUtils = TemperatureUtils()
     weak var delegate: FavoritesTablePresenterDelegate?
+    
+    // MARK: - Public
     
     func update(with favorites: [ForecastPoint]) {
         self.favorites = favorites
@@ -53,12 +51,14 @@ class FavoritesTablePresenter: NSObject {
     // MARK: - Configure cells
     
     private func configureCurrentLocationCell(_ cell: FavoritesPointCell) {
+        let forecastAdapter = ForecastAdapter()
         forecastAdapter.getForecastForCurrentPoint(completion: {[weak self] in
             self?.updateCell(cell, with: $0)
             } , failure: {print($0)} )
     }
     
     private func configureFavoritesCell(_ cell: FavoritesPointCell, indexPath: IndexPath) {
+        let forecastAdapter = ForecastAdapter()
         let point = favorites[indexPath.row]
         forecastAdapter.getAddress(for: point, completion: { [weak self] in
             if point == self?.favorites[indexPath.row] {
@@ -77,11 +77,14 @@ class FavoritesTablePresenter: NSObject {
     private func updateCell(_ cell: FavoritesPointCell, with forecastPoint: ForecastPoint) {
         if let forecast = forecastPoint.forecast {
             cell.temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
-            cell.weatherIcon.image = UIImage(named: forecast.icon + "_")
+            if cell.reuseIdentifier == FavoritesSections.current.cellIdentifier {
+                cell.weatherIcon.image = UIImage(named: forecast.icon)
+            } else {
+                cell.weatherIcon.image = UIImage(named: forecast.icon + "_")
+            }
         } else {
             cell.temperatureLabel.text = "--"
         }
-        
         if let address = forecastPoint.address{
             cell.addressLabel.text = address.city
             cell.subAddressLabel.text = address.detail
@@ -97,9 +100,8 @@ class FavoritesTablePresenter: NSObject {
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
 }
-
-
 
 extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     
@@ -110,7 +112,7 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 1 ? favorites.count : 1
+        return section == FavoritesSections.favorites.rawValue ? favorites.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,15 +126,12 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         guard let favorCell = cell as? FavoritesPointCell else {
             return
         }
-        if indexPath.section == 0 {
+        if  indexPath.section == FavoritesSections.current.rawValue {
+            favorCell.currentLocationLabel.text = "Current location".localized()
             configureCurrentLocationCell(favorCell)
         } else {
             configureFavoritesCell(favorCell, indexPath: indexPath)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print("didEndDisplaying cell " + "\(indexPath.row)")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -142,15 +141,35 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         return section.cellHeight
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == FavoritesSections.current.rawValue {
+            return false
+        }
+        return true
+    }
+    
     // MARK: - TableView header and footer
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 {
-            let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FavoritesHeaderView") as! FavoritesHeaderView
-            headerView.favoritesLabel.text = "Favorites".localized()
-            return headerView
+        let headerNib = UINib.init(nibName: "FavoritesHeaderView", bundle: Bundle.main)
+        tableView.register(headerNib, forHeaderFooterViewReuseIdentifier: "FavoritesHeaderView")
+        guard section == FavoritesSections.favorites.rawValue else {
+            return nil
         }
-        return nil
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FavoritesHeaderView") as! FavoritesHeaderView
+        headerView.favoritesLabel.text = "Favorites".localized()
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerNib = UINib.init(nibName: "FavoritesFooterView", bundle: Bundle.main)
+        tableView.register(footerNib, forHeaderFooterViewReuseIdentifier: "FavoritesFooterView")
+        guard section == FavoritesSections.favorites.rawValue else {
+            return nil
+        }
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "FavoritesFooterView") as! FavoritesFooterView
+        footerView.infoLabel.text = "Add a city to yourFavorites and you can quickly see what the wheather is like there.\nTo do this, search for the place.".localized()
+        return footerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -161,24 +180,23 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == FavoritesSections.favorites.rawValue {
+            return FavoritesSections.current.cellHeight
+        }
         return CGFloat.leastNonzeroMagnitude
     }
-    
-    
     
     // MARK: - Editing tableView
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         favorites.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-        delegate?.favoritesTablePresenterDelegate(self, favoritesDidChange: favorites)
+        delegate?.favoritesPresenterDelegate(favoritesDidChange: favorites)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedLocation = indexPath.section == 0 ? nil : favorites[indexPath.row]
-        delegate?.favoritesTablePresenterDelegate(self, locationDidSelect: selectedLocation)
+        delegate?.favoritesPresenterDelegate(didSelect: selectedLocation)
     }
-    
-    
     
 }
