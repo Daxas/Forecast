@@ -118,9 +118,29 @@
 				84733D8120FA2CED001DE585 /* TemperatureUtils.swift */,
 				84F24E2420EFAF3F005AE351 /* GeoLocator.swift */,
 				846442A920E0DA5E006197AC /* ForecastClient.swift */,
-				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		842D43D4210ED360005D6BE0 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				84972C7D2101140B00EC1E94 /* FavoritesPointCell.swift */,
+				8477BED1210B1C600003DB74 /* FavoritesHeaderView.xib */,
+				8477BEE1210CF4760003DB74 /* FavoritesFooterView.xib */,
+				8477BEDF210CF41F0003DB74 /* FavoritesFooterView.swift */,
+				8477BED3210B4A610003DB74 /* FavoritesHeaderView.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		842D43D5210ED3D6005D6BE0 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
+				84972C812101C19D00EC1E94 /* FavoritesStore.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		8439F3AC20EBFD88005691FD /* Daily */ = {
@@ -145,8 +165,8 @@
 		846442AF20E230C1006197AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				842D43D5210ED3D6005D6BE0 /* Store */,
 				84A87FF520E3802C00D81B48 /* Forecast */,
-				84972C812101C19D00EC1E94 /* FavoritesStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -211,9 +231,9 @@
 		8479EE6F20DC211600F37C4E /* Forecast */ = {
 			isa = PBXGroup;
 			children = (
+				8479EE7020DC211600F37C4E /* AppDelegate.swift */,
 				8429B54820E5683900456D3A /* Managers */,
 				8429B54520E55EEE00456D3A /* Extensions */,
-				8479EE7020DC211600F37C4E /* AppDelegate.swift */,
 				8477BEDC210C4A040003DB74 /* View */,
 				846442B020E23119006197AC /* Stories */,
 				846442AF20E230C1006197AC /* Models */,
@@ -228,13 +248,9 @@
 		84972C78210112F700EC1E94 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				842D43D4210ED360005D6BE0 /* TableView */,
 				84972C792101132900EC1E94 /* FavoritesViewController.swift */,
 				84972C7F2101167600EC1E94 /* FavoritesTablePresenter.swift */,
-				8477BED3210B4A610003DB74 /* FavoritesHeaderView.swift */,
-				8477BEDF210CF41F0003DB74 /* FavoritesFooterView.swift */,
-				8477BEE1210CF4760003DB74 /* FavoritesFooterView.xib */,
-				8477BED1210B1C600003DB74 /* FavoritesHeaderView.xib */,
-				84972C7D2101140B00EC1E94 /* FavoritesPointCell.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
