@@ -30,13 +30,13 @@ class ForecastViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: Notification.Name("LocationDidChange"), object: nil)
         getForecast()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: Notification.Name("LocationDidChange"), object: nil)
         updateLabels(with: forecastPoint)
     }
     

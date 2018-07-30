@@ -19,8 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     private func prepareFakeData() {
+        let store = FavoritesStore()
+        var favorites = store.loadForecastPoints()
+        guard favorites.isEmpty else {
+            return
+        }
         var favoriteLocations = [CLLocation]()
-        var favorites = [ForecastPoint]()
         favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
         favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
         favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
@@ -28,10 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let point = ForecastPoint(with: location)
             favorites.append(point)
         }
-        let store = FavoritesStore()
         store.save(favorites: favorites)
     }
-    
     
 }
 
