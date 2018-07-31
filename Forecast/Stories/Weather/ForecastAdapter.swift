@@ -10,6 +10,16 @@ class ForecastAdapter {
     private let geoLocator = GeoLocator()
     private let forecastClient = ForecastClient()
     
+    func getForecastAndAddress(for forecastPoint: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
+                               failure: @escaping (Error) -> Void) {
+        getAddress(for: forecastPoint, completion: { (point) in
+            forecastPoint.address = point.address
+            self.getForecast(for: point, completion: { (point) in
+                forecastPoint.forecast = point.forecast
+                completion(forecastPoint)
+            }, failure: { print($0)})
+        }, failure: { print($0)})
+    }
     
     func getForecastForCurrentPoint(completion: @escaping ForecastAdapterCompletion,
                                     failure: @escaping (Error) -> Void){
@@ -70,6 +80,5 @@ class ForecastAdapter {
             print("NO forecast for current point")
         }
     }
-    
     
 }

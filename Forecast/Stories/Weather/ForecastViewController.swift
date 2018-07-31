@@ -30,19 +30,24 @@ class ForecastViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: Notification.Name("LocationDidChange"), object: nil)
         getForecast()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("LocationDidChange"), object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: Notification.Name("LocationDidChange"), object: nil)
         updateLabels(with: forecastPoint)
     }
     
     // MARK: - Private
     
     private func configure() {
+        startSpinner()
         tabBarItem.title = "Weather.title".localized()
         dailyTableView.allowsSelection = false
         collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
@@ -59,7 +64,6 @@ class ForecastViewController: UIViewController {
     // MARK: - Data
     
     private func getForecast() {
-        startSpinner()
         wasOpen = UserDefaults.standard.bool(forKey: "WasOpen")
         guard wasOpen else {
             fetchCurrentForecast()
@@ -67,11 +71,11 @@ class ForecastViewController: UIViewController {
             UserDefaults.standard.set(wasOpen, forKey: "WasOpen")
             return
         }
-       forecastPoint = AppSettings().getSelectedCoordinates()
-        guard forecastPoint != nil else {
+       guard let coordinates = AppSettings().getSelectedCoordinates() else {
             fetchCurrentForecast()
             return
         }
+        forecastPoint = ForecastPoint(with: coordinates)
         fetchForecast()
     }
     

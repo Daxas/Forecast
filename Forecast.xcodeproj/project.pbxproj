@@ -10,6 +10,7 @@
 		841E8AA120E6B5E4008F4EA4 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA020E6B5E4008F4EA4 /* InfoCollectionViewCell.swift */; };
 		841E8AA320E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */; };
 		841E8AA520E7810D008F4EA4 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */; };
+		842D43D8210F67D5005D6BE0 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D7210F67D5005D6BE0 /* TabBar.swift */; };
 		8439F3A520EA2B00005691FD /* DailyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A420EA2B00005691FD /* DailyPresenter.swift */; };
 		8439F3A720EA2CFF005691FD /* HourlyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A620EA2CFF005691FD /* HourlyPresenter.swift */; };
 		8439F3AF20EC06B7005691FD /* GeoCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3AE20EC06B7005691FD /* GeoCoder.swift */; };
@@ -49,6 +50,7 @@
 		841E8AA020E6B5E4008F4EA4 /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
 		841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
+		842D43D7210F67D5005D6BE0 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		8439F3A420EA2B00005691FD /* DailyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPresenter.swift; sourceTree = "<group>"; };
 		8439F3A620EA2CFF005691FD /* HourlyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPresenter.swift; sourceTree = "<group>"; };
 		8439F3AE20EC06B7005691FD /* GeoCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCoder.swift; sourceTree = "<group>"; };
@@ -122,16 +124,13 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		842D43D4210ED360005D6BE0 /* TableView */ = {
+		842D43D4210ED360005D6BE0 /* TablePresenter */ = {
 			isa = PBXGroup;
 			children = (
-				84972C7D2101140B00EC1E94 /* FavoritesPointCell.swift */,
-				8477BED1210B1C600003DB74 /* FavoritesHeaderView.xib */,
-				8477BEE1210CF4760003DB74 /* FavoritesFooterView.xib */,
-				8477BEDF210CF41F0003DB74 /* FavoritesFooterView.swift */,
-				8477BED3210B4A610003DB74 /* FavoritesHeaderView.swift */,
+				84972C7F2101167600EC1E94 /* FavoritesTablePresenter.swift */,
+				842D43D6210EF31D005D6BE0 /* TableVIew */,
 			);
-			path = TableView;
+			path = TablePresenter;
 			sourceTree = "<group>";
 		};
 		842D43D5210ED3D6005D6BE0 /* Store */ = {
@@ -141,6 +140,18 @@
 				84972C812101C19D00EC1E94 /* FavoritesStore.swift */,
 			);
 			path = Store;
+			sourceTree = "<group>";
+		};
+		842D43D6210EF31D005D6BE0 /* TableVIew */ = {
+			isa = PBXGroup;
+			children = (
+				8477BED3210B4A610003DB74 /* FavoritesHeaderView.swift */,
+				8477BEDF210CF41F0003DB74 /* FavoritesFooterView.swift */,
+				8477BEE1210CF4760003DB74 /* FavoritesFooterView.xib */,
+				8477BED1210B1C600003DB74 /* FavoritesHeaderView.xib */,
+				84972C7D2101140B00EC1E94 /* FavoritesPointCell.swift */,
+			);
+			path = TableVIew;
 			sourceTree = "<group>";
 		};
 		8439F3AC20EBFD88005691FD /* Daily */ = {
@@ -183,6 +194,7 @@
 		846442B120E23190006197AC /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				842D43D7210F67D5005D6BE0 /* TabBar.swift */,
 				84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */,
 				8479EE7220DC211600F37C4E /* ForecastViewController.swift */,
 				8439F3AD20EBFDA0005691FD /* Hourly */,
@@ -248,9 +260,8 @@
 		84972C78210112F700EC1E94 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
-				842D43D4210ED360005D6BE0 /* TableView */,
+				842D43D4210ED360005D6BE0 /* TablePresenter */,
 				84972C792101132900EC1E94 /* FavoritesViewController.swift */,
-				84972C7F2101167600EC1E94 /* FavoritesTablePresenter.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -430,6 +441,7 @@
 				8477BEDE210C4A040003DB74 /* GradientView.swift in Sources */,
 				84972C7A2101132900EC1E94 /* FavoritesViewController.swift in Sources */,
 				846442AE20E21EE8006197AC /* ForecastDailyData.swift in Sources */,
+				842D43D8210F67D5005D6BE0 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

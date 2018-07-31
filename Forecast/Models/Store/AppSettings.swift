@@ -15,12 +15,11 @@ class AppSettings {
             UserDefaults.standard.set(coordinates, forKey: "SelectedLocationCoordinates")
     }
     
-    func getSelectedCoordinates() -> ForecastPoint? {
+    func getSelectedCoordinates() -> CLLocation? {
         guard let coordinates = UserDefaults.standard.array(forKey: "SelectedLocationCoordinates") as? [CLLocationDegrees] else {
             return nil
         }
-            let location = CLLocation(latitude: coordinates[0] , longitude: coordinates[1])
-            return ForecastPoint(with: location)
+            return CLLocation(latitude: coordinates[0] , longitude: coordinates[1])
     }
     
 }
