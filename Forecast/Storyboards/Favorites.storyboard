@@ -177,9 +177,18 @@
                     </navigationItem>
                     <connections>
                         <outlet property="favoritesTableView" destination="57k-8x-isb" id="5UN-b0-eHT"/>
+                        <outlet property="searchDisplayController" destination="BdH-xG-TeZ" id="vQZ-Kd-6qu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTf-B2-rDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="BdH-xG-TeZ">
+                    <connections>
+                        <outlet property="delegate" destination="Dir-aD-HLp" id="Wvk-g7-kPm"/>
+                        <outlet property="searchContentsController" destination="Dir-aD-HLp" id="yH4-yG-cF8"/>
+                        <outlet property="searchResultsDataSource" destination="Dir-aD-HLp" id="RbP-N3-Vkw"/>
+                        <outlet property="searchResultsDelegate" destination="Dir-aD-HLp" id="7hi-gJ-Gnz"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1119.2" y="216.34182908545728"/>
         </scene>

@@ -14,7 +14,6 @@ class GeoCoder {
                 failure(error)
                 return
             }
-            
             guard let placemarks = placemarks else {
                 return 
             }
@@ -23,4 +22,24 @@ class GeoCoder {
         return
     }
     
+    func geoSearching(for text: String, completion: @escaping ([CLPlacemark]) -> Void,
+                      failure: @escaping (Error) -> Void){
+        CLGeocoder().geocodeAddressString(text, completionHandler: {(placemarks, error) in
+            if let error = error {
+                failure(error)
+                return
+            }
+            guard let placemarks = placemarks else {
+                return
+            }
+            completion(placemarks)
+        })
+        return
+    }
+    
 }
+
+
+
+
+

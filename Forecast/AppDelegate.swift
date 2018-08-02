@@ -31,15 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
         favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
         favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
-        favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-        favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-        favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
-        favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-        favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-        favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
-        favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-        favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-        favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
+        
         for location in favoriteLocations {
             let point = ForecastPoint(with: location)
             favorites.append(point)

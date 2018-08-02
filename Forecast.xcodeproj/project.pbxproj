@@ -11,6 +11,9 @@
 		841E8AA320E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */; };
 		841E8AA520E7810D008F4EA4 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */; };
 		842D43D8210F67D5005D6BE0 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D7210F67D5005D6BE0 /* TabBar.swift */; };
+		842D43DA2111B940005D6BE0 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D92111B93F005D6BE0 /* SearchResultController.swift */; };
+		842D43DC2111F052005D6BE0 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842D43DB2111F052005D6BE0 /* SearchResultCell.xib */; };
+		842D43DE2111F0BD005D6BE0 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */; };
 		8439F3A520EA2B00005691FD /* DailyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A420EA2B00005691FD /* DailyPresenter.swift */; };
 		8439F3A720EA2CFF005691FD /* HourlyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A620EA2CFF005691FD /* HourlyPresenter.swift */; };
 		8439F3AF20EC06B7005691FD /* GeoCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3AE20EC06B7005691FD /* GeoCoder.swift */; };
@@ -51,6 +54,9 @@
 		841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
 		841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
 		842D43D7210F67D5005D6BE0 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		842D43D92111B93F005D6BE0 /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
+		842D43DB2111F052005D6BE0 /* SearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
+		842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		8439F3A420EA2B00005691FD /* DailyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPresenter.swift; sourceTree = "<group>"; };
 		8439F3A620EA2CFF005691FD /* HourlyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPresenter.swift; sourceTree = "<group>"; };
 		8439F3AE20EC06B7005691FD /* GeoCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCoder.swift; sourceTree = "<group>"; };
@@ -260,6 +266,7 @@
 		84972C78210112F700EC1E94 /* Favorites */ = {
 			isa = PBXGroup;
 			children = (
+				84AC7B4F21123801007DDF78 /* SearchResultController */,
 				842D43D4210ED360005D6BE0 /* TablePresenter */,
 				84972C792101132900EC1E94 /* FavoritesViewController.swift */,
 			);
@@ -275,6 +282,16 @@
 				846442AD20E21EE8006197AC /* ForecastDailyData.swift */,
 			);
 			path = Forecast;
+			sourceTree = "<group>";
+		};
+		84AC7B4F21123801007DDF78 /* SearchResultController */ = {
+			isa = PBXGroup;
+			children = (
+				842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */,
+				842D43DB2111F052005D6BE0 /* SearchResultCell.xib */,
+				842D43D92111B93F005D6BE0 /* SearchResultController.swift */,
+			);
+			path = SearchResultController;
 			sourceTree = "<group>";
 		};
 		A94DCC58705E00DA7C5D9B9A /* Pods */ = {
@@ -361,6 +378,7 @@
 				8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */,
 				846442B520E232CF006197AC /* Favorites.storyboard in Resources */,
 				8477BEE2210CF4760003DB74 /* FavoritesFooterView.xib in Resources */,
+				842D43DC2111F052005D6BE0 /* SearchResultCell.xib in Resources */,
 				8479EE7620DC211600F37C4E /* Main.storyboard in Resources */,
 				8477BED2210B1C600003DB74 /* FavoritesHeaderView.xib in Resources */,
 			);
@@ -430,11 +448,13 @@
 				84F24E2D20F3931A005AE351 /* ForecastPoint.swift in Sources */,
 				841E8AA120E6B5E4008F4EA4 /* InfoCollectionViewCell.swift in Sources */,
 				8439F3A520EA2B00005691FD /* DailyPresenter.swift in Sources */,
+				842D43DA2111B940005D6BE0 /* SearchResultController.swift in Sources */,
 				841E8AA320E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift in Sources */,
 				84F24E2520EFAF3F005AE351 /* GeoLocator.swift in Sources */,
 				8479EE7120DC211600F37C4E /* AppDelegate.swift in Sources */,
 				846442AC20E21EB8006197AC /* ForecastHourlyData.swift in Sources */,
 				8439F3AF20EC06B7005691FD /* GeoCoder.swift in Sources */,
+				842D43DE2111F0BD005D6BE0 /* SearchResultCell.swift in Sources */,
 				84733D8020F8DC0E001DE585 /* DateUtils.swift in Sources */,
 				846442AA20E0DA5E006197AC /* ForecastClient.swift in Sources */,
 				8477BEE4210DA0FE0003DB74 /* AppSettings.swift in Sources */,
