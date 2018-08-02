@@ -1,9 +1,24 @@
-//
-//  TabBar.swift
-//  Forecast
-//
-//  Created by Admin on 30.07.2018.
-//  Copyright © 2018 Admin. All rights reserved.
-//
 
+import UIKit
 import Foundation
+
+enum TabItem: Int {
+    case weather = 0
+    case favorites
+    
+    var title: String {
+        switch self {
+        case .weather:
+            return "Weather".localized()
+        case .favorites:
+            return "Favorites".localized()
+        }
+    }
+}
+
+class TabBar: UITabBarController {
+    
+
+    
+    
+}

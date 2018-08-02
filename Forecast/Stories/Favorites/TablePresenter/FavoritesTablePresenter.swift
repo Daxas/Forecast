@@ -28,6 +28,7 @@ enum FavoritesSections: Int {
         return 2
     }
 }
+
 protocol FavoritesTablePresenterDelegate: class {
     func favoritesPresenterDelegate(didSelect point: ForecastPoint?)
     func favoritesPresenterDelegate(favoritesDidChange favorites: [ForecastPoint])
@@ -65,14 +66,14 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == FavoritesSections.favorites.rawValue ? favorites.count : 1
+            return section == FavoritesSections.favorites.rawValue ? favorites.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = FavoritesSections(rawValue: indexPath.section) else {
-            return UITableViewCell()
-        }
-        return tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath)
+            guard let section = FavoritesSections(rawValue: indexPath.section) else {
+                return UITableViewCell()
+            }
+            return tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
