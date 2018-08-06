@@ -10,9 +10,10 @@
 		841E8AA120E6B5E4008F4EA4 /* InfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA020E6B5E4008F4EA4 /* InfoCollectionViewCell.swift */; };
 		841E8AA320E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */; };
 		841E8AA520E7810D008F4EA4 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */; };
+		8425A15621182952009939BD /* SearchResultErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A15521182952009939BD /* SearchResultErrorCell.swift */; };
+		8425A158211832FF009939BD /* NSNotification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A157211832FF009939BD /* NSNotification.Name.swift */; };
 		842D43D8210F67D5005D6BE0 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D7210F67D5005D6BE0 /* TabBar.swift */; };
 		842D43DA2111B940005D6BE0 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D92111B93F005D6BE0 /* SearchResultController.swift */; };
-		842D43DC2111F052005D6BE0 /* SearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842D43DB2111F052005D6BE0 /* SearchResultCell.xib */; };
 		842D43DE2111F0BD005D6BE0 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */; };
 		8439F3A520EA2B00005691FD /* DailyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A420EA2B00005691FD /* DailyPresenter.swift */; };
 		8439F3A720EA2CFF005691FD /* HourlyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A620EA2CFF005691FD /* HourlyPresenter.swift */; };
@@ -53,9 +54,10 @@
 		841E8AA020E6B5E4008F4EA4 /* InfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
 		841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
+		8425A15521182952009939BD /* SearchResultErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultErrorCell.swift; sourceTree = "<group>"; };
+		8425A157211832FF009939BD /* NSNotification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.Name.swift; sourceTree = "<group>"; };
 		842D43D7210F67D5005D6BE0 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		842D43D92111B93F005D6BE0 /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
-		842D43DB2111F052005D6BE0 /* SearchResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCell.xib; sourceTree = "<group>"; };
 		842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		8439F3A420EA2B00005691FD /* DailyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPresenter.swift; sourceTree = "<group>"; };
 		8439F3A620EA2CFF005691FD /* HourlyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPresenter.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */,
 				84733D7720F69C46001DE585 /* String+Localizable.swift */,
+				8425A157211832FF009939BD /* NSNotification.Name.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -121,11 +124,7 @@
 		8429B54820E5683900456D3A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				8439F3AE20EC06B7005691FD /* GeoCoder.swift */,
-				84733D7F20F8DC0E001DE585 /* DateUtils.swift */,
-				84733D8120FA2CED001DE585 /* TemperatureUtils.swift */,
-				84F24E2420EFAF3F005AE351 /* GeoLocator.swift */,
-				846442A920E0DA5E006197AC /* ForecastClient.swift */,
+				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -139,13 +138,12 @@
 			path = TablePresenter;
 			sourceTree = "<group>";
 		};
-		842D43D5210ED3D6005D6BE0 /* Store */ = {
+		842D43D5210ED3D6005D6BE0 /* FavoritesStore */ = {
 			isa = PBXGroup;
 			children = (
-				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
 				84972C812101C19D00EC1E94 /* FavoritesStore.swift */,
 			);
-			path = Store;
+			path = FavoritesStore;
 			sourceTree = "<group>";
 		};
 		842D43D6210EF31D005D6BE0 /* TableVIew */ = {
@@ -182,7 +180,6 @@
 		846442AF20E230C1006197AC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				842D43D5210ED3D6005D6BE0 /* Store */,
 				84A87FF520E3802C00D81B48 /* Forecast */,
 			);
 			path = Models;
@@ -192,12 +189,12 @@
 			isa = PBXGroup;
 			children = (
 				84972C78210112F700EC1E94 /* Favorites */,
-				846442B120E23190006197AC /* Weather */,
+				846442B120E23190006197AC /* Forecast */,
 			);
 			path = Stories;
 			sourceTree = "<group>";
 		};
-		846442B120E23190006197AC /* Weather */ = {
+		846442B120E23190006197AC /* Forecast */ = {
 			isa = PBXGroup;
 			children = (
 				842D43D7210F67D5005D6BE0 /* TabBar.swift */,
@@ -206,7 +203,7 @@
 				8439F3AD20EBFDA0005691FD /* Hourly */,
 				8439F3AC20EBFD88005691FD /* Daily */,
 			);
-			path = Weather;
+			path = Forecast;
 			sourceTree = "<group>";
 		};
 		846442B320E23213006197AC /* Storyboards */ = {
@@ -250,10 +247,14 @@
 			isa = PBXGroup;
 			children = (
 				8479EE7020DC211600F37C4E /* AppDelegate.swift */,
-				8429B54820E5683900456D3A /* Managers */,
 				8429B54520E55EEE00456D3A /* Extensions */,
+				84AC7B5021138E05007DDF78 /* Utils */,
+				84AC7B522114335D007DDF78 /* Network */,
+				8429B54820E5683900456D3A /* Managers */,
+				84AC7B5121138E9B007DDF78 /* Location */,
 				8477BEDC210C4A040003DB74 /* View */,
 				846442B020E23119006197AC /* Stories */,
+				842D43D5210ED3D6005D6BE0 /* FavoritesStore */,
 				846442AF20E230C1006197AC /* Models */,
 				846442B320E23213006197AC /* Storyboards */,
 				8479EE7720DC211B00F37C4E /* Assets.xcassets */,
@@ -288,10 +289,36 @@
 			isa = PBXGroup;
 			children = (
 				842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */,
-				842D43DB2111F052005D6BE0 /* SearchResultCell.xib */,
 				842D43D92111B93F005D6BE0 /* SearchResultController.swift */,
+				8425A15521182952009939BD /* SearchResultErrorCell.swift */,
 			);
 			path = SearchResultController;
+			sourceTree = "<group>";
+		};
+		84AC7B5021138E05007DDF78 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				84733D8120FA2CED001DE585 /* TemperatureUtils.swift */,
+				84733D7F20F8DC0E001DE585 /* DateUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		84AC7B5121138E9B007DDF78 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				84F24E2420EFAF3F005AE351 /* GeoLocator.swift */,
+				8439F3AE20EC06B7005691FD /* GeoCoder.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		84AC7B522114335D007DDF78 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				846442A920E0DA5E006197AC /* ForecastClient.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		A94DCC58705E00DA7C5D9B9A /* Pods */ = {
@@ -378,7 +405,6 @@
 				8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */,
 				846442B520E232CF006197AC /* Favorites.storyboard in Resources */,
 				8477BEE2210CF4760003DB74 /* FavoritesFooterView.xib in Resources */,
-				842D43DC2111F052005D6BE0 /* SearchResultCell.xib in Resources */,
 				8479EE7620DC211600F37C4E /* Main.storyboard in Resources */,
 				8477BED2210B1C600003DB74 /* FavoritesHeaderView.xib in Resources */,
 			);
@@ -443,11 +469,13 @@
 				8479EE7320DC211600F37C4E /* ForecastViewController.swift in Sources */,
 				84F24E2320EE5CF1005AE351 /* CollectionViewCell.swift in Sources */,
 				84733D8220FA2CED001DE585 /* TemperatureUtils.swift in Sources */,
+				8425A158211832FF009939BD /* NSNotification.Name.swift in Sources */,
 				8479EE8320DC283B00F37C4E /* Forecast.swift in Sources */,
 				84972C7E2101140B00EC1E94 /* FavoritesPointCell.swift in Sources */,
 				84F24E2D20F3931A005AE351 /* ForecastPoint.swift in Sources */,
 				841E8AA120E6B5E4008F4EA4 /* InfoCollectionViewCell.swift in Sources */,
 				8439F3A520EA2B00005691FD /* DailyPresenter.swift in Sources */,
+				8425A15621182952009939BD /* SearchResultErrorCell.swift in Sources */,
 				842D43DA2111B940005D6BE0 /* SearchResultController.swift in Sources */,
 				841E8AA320E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift in Sources */,
 				84F24E2520EFAF3F005AE351 /* GeoLocator.swift in Sources */,
@@ -556,7 +584,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -611,7 +639,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

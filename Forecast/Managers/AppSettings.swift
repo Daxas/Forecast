@@ -9,10 +9,11 @@ class AppSettings {
             UserDefaults.standard.set(nil, forKey: "SelectedLocationCoordinates")
             return
         }
-            var coordinates = [Double]()
+           var coordinates = [Double]()
             coordinates.append(point.location.coordinate.latitude)
             coordinates.append(point.location.coordinate.longitude)
             UserDefaults.standard.set(coordinates, forKey: "SelectedLocationCoordinates")
+        
     }
     
     func getSelectedCoordinates() -> CLLocation? {

@@ -18,7 +18,10 @@ enum TabItem: Int {
 
 class TabBar: UITabBarController {
     
-
+    func configure() {
+        
+        
+    }
     
     
 }

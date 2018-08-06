@@ -14,11 +14,11 @@ class ForecastViewController: UIViewController {
     @IBOutlet var iconImage: UIImageView!
     
     private var forecastPoint: ForecastPoint?
+    //private let store = FavoritesStore()
+    
     private let forecastAdapter = ForecastAdapter()
     private var spinnerActivity = MBProgressHUD()
     private var refresher: UIRefreshControl!
-    
-    private var wasOpen = false
     
     private lazy var dailyTablePresenter = DailyPresenter(with: self.dailyTableView)
     private lazy var hourlyCollectionPresenter = HourlyPresenter(with: self.collectionView)
@@ -30,18 +30,15 @@ class ForecastViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: Notification.Name("LocationDidChange"), object: nil)
+        updateAddressLabels(with: forecastPoint)
+        cleanWeatherLabels()
         getForecast()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("LocationDidChange"), object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: .locationDidChange , object: nil)
         configure()
-        updateLabels(with: forecastPoint)
     }
     
     // MARK: - Private
@@ -52,6 +49,18 @@ class ForecastViewController: UIViewController {
         dailyTableView.allowsSelection = false
         collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
         configureRefresher()
+        
+        guard let coordinates = AppSettings().getSelectedCoordinates() else {
+            forecastPoint = nil
+            return
+        }
+        forecastPoint = ForecastPoint(with: coordinates)
+        
+        forecastAdapter.getAddress(for: forecastPoint!, completion: { [weak self] in
+            self?.forecastPoint?.address = $0.address
+            self?.updateAddressLabels(with: self?.forecastPoint)
+            }, failure: {print($0)})
+        
     }
     
     private func configureRefresher() {
@@ -64,19 +73,11 @@ class ForecastViewController: UIViewController {
     // MARK: - Data
     
     private func getForecast() {
-        wasOpen = UserDefaults.standard.bool(forKey: "WasOpen")
-        guard wasOpen else {
-            fetchCurrentForecast()
-            wasOpen = true
-            UserDefaults.standard.set(wasOpen, forKey: "WasOpen")
+        guard forecastPoint == nil else {
+            fetchForecast()
             return
         }
-       guard let coordinates = AppSettings().getSelectedCoordinates() else {
-            fetchCurrentForecast()
-            return
-        }
-        forecastPoint = ForecastPoint(with: coordinates)
-        fetchForecast()
+        fetchCurrentForecast()
     }
     
     @objc private func forecastType(notification: NSNotification) {
@@ -93,6 +94,7 @@ class ForecastViewController: UIViewController {
     private func fetchCurrentForecast() {
         forecastAdapter.getForecastForCurrentPoint(completion: { [weak self] in
             self?.handleForecastPoint($0)
+            self?.updateAddressLabels(with: $0)
             }, failure: {print($0)})
     }
     
@@ -100,19 +102,15 @@ class ForecastViewController: UIViewController {
         guard let point = forecastPoint else {
             return
         }
-        forecastAdapter.getAddress(for: point, completion: { [weak self] in
-            point.address = $0.address
-            self?.forecastAdapter.getForecast(for: point, completion: { [weak self] in
-                point.forecast = $0.forecast
-                self?.handleForecastPoint(point)
-                }, failure: {print($0)})
+        forecastAdapter.getForecast(for: point, completion: { [weak self] in
+            point.forecast = $0.forecast
+            self?.handleForecastPoint(point)
             }, failure: {print($0)})
     }
     
     private func handleForecastPoint(_ point: ForecastPoint) {
-        forecastPoint = point
         stopSpinner()
-        updateLabels(with: forecastPoint)
+        updateWeatherLabels(with: point)
     }
     
     // MARK: - Private
@@ -122,7 +120,17 @@ class ForecastViewController: UIViewController {
         refresher.endRefreshing()
     }
     
-    private func updateLabels(with forecastPoint: ForecastPoint?) {
+    private func updateAddressLabels(with forecastPoint: ForecastPoint?) {
+        if let address = forecastPoint?.address {
+            cityLabel.text = address.city
+            streetLabel.text = address.detail
+        } else {
+            cityLabel.text = "-.-"
+            streetLabel.text = "-"
+        }
+    }
+    
+    private func updateWeatherLabels(with forecastPoint: ForecastPoint?) {
         if let forecast = forecastPoint?.forecast {
             tempLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature) 
             summaryLabel.text = forecast.summary.localized()
@@ -133,15 +141,15 @@ class ForecastViewController: UIViewController {
             tempLabel.text = ""
             summaryLabel.text = ""
         }
-        if let address = forecastPoint?.address {
-            cityLabel.text = address.city
-            streetLabel.text = address.detail
-        } else {
-            cityLabel.text = "-.-"
-            streetLabel.text = "-"
-        }
     }
     
+    private func cleanWeatherLabels() {
+        tempLabel.text = ""
+        summaryLabel.text = "-"
+        iconImage.image = nil
+        dailyTablePresenter.update(with: nil)
+        hourlyCollectionPresenter.update(with: nil)
+    }
     // MARK: - ActivitySpinner
     
     private func startSpinner() {

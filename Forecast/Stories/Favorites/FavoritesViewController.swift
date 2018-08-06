@@ -10,19 +10,10 @@ class FavoritesViewController: UIViewController {
     
     // MARK: - Life cycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        favoritesTablePresenter.update(with: store.loadForecastPoints())
-        NotificationCenter.default.addObserver(self, selector: #selector(addPointToFavorites(notification:)), name: Notification.Name("SelectedSearchResult"), object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("SelectedSearchResult"), object: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         favoritesTablePresenter.delegate = self
+        favoritesTablePresenter.update(with: store.loadForecastPoints())
         configure()
     }
     
@@ -37,26 +28,20 @@ class FavoritesViewController: UIViewController {
     }
     
     private func configureSearchController() {
-        let searchResultController = SearchResultController()
-        navigationItem.searchController = UISearchController(searchResultsController: searchResultController)
-        navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.searchController?.searchResultsUpdater = searchResultController
-        navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
-        navigationItem.searchController?.searchBar.placeholder = "City or area".localized()
-        definesPresentationContext = true
-    }
-    
-    @objc private func addPointToFavorites(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else {
-            return
+        guard let searchResultController = storyboard?.instantiateViewController(withIdentifier: "SearchResultController") as? SearchResultController else {
+            fatalError("Unable to instatiate a SearchResultController from the storyboard.")
         }
-        guard let newLocation = userInfo["SelectedSearchResult"] as? ForecastPoint else {
-            return
+        searchResultController.delegate = self
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = UISearchController(searchResultsController: searchResultController)
+            navigationItem.searchController?.searchResultsUpdater = searchResultController
+            navigationItem.searchController?.searchBar.placeholder = "City or area".localized()
+            navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
+            definesPresentationContext = true
+        
+        } else {
+            // Fallback on earlier versions
         }
-        var favorites = store.loadForecastPoints()
-        favorites.append(newLocation)
-        store.save(favorites: favorites)
-        favoritesTablePresenter.update(with: favorites)
     }
     
     // MARK: - IBActions
@@ -78,7 +63,7 @@ class FavoritesViewController: UIViewController {
 extension FavoritesViewController: FavoritesTablePresenterDelegate {
     
     func favoritesPresenterDelegate(didSelect point: ForecastPoint?) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LocationDidChange"), object: nil, userInfo: ["favorLocation": point as Any])
+        NotificationCenter.default.post(name: .locationDidChange, object: nil, userInfo: ["favorLocation": point as Any])
         AppSettings().setSelectedCoordinates(forecastPoint: point)
     }
     
@@ -88,3 +73,23 @@ extension FavoritesViewController: FavoritesTablePresenterDelegate {
     
 }
 
+// MARK: - SearchResultControllerDelegate
+
+extension FavoritesViewController: SearchResultControllerDelegate {
+    
+    func searchResultControllerDelegate(didSelect point: ForecastPoint) {
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController?.searchBar.text = ""
+        } else {
+            // Fallback on earlier versions
+        }
+        var favorites = store.loadForecastPoints()
+       guard !favorites.contains(point) else {
+        return
+        }
+            favorites.append(point)
+            store.save(favorites: favorites)
+        favoritesTablePresenter.update(with: favorites)
+    }
+    
+}

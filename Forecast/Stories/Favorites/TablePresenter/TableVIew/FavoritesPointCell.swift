@@ -15,22 +15,24 @@ class FavoritesPointCell: UITableViewCell {
     // MARK: - Public
     
     func configureFavoritesCell(with point: ForecastPoint) {
-        updateCell(with: point)
-        forecastAdapter.getForecastAndAddress(for: point, completion: { [weak self] in
-            self?.updateCell(with: $0)
+        updateCellWeatherLabels(with: nil)
+        updateCellAddressLabels(with: point)
+        forecastAdapter.getForecast(for: point, completion: { [weak self] in
+            self?.updateCellWeatherLabels(with: $0)
             }, failure: {print($0)})
     }
     
     func configureCurrentLocationCell() {
+        updateCellAllLabels(with: nil)
         forecastAdapter.getForecastForCurrentPoint(completion: {[weak self] in
-            self?.updateCell(with: $0)
+            self?.updateCellAllLabels(with: $0)
             } , failure: {print($0)} )
     }
     
     // MARK: - Private
     
-    private func updateCell(with forecastPoint: ForecastPoint) {
-        if let forecast = forecastPoint.forecast {
+    private func updateCellWeatherLabels(with forecastPoint: ForecastPoint?) {
+        if let forecastPoint = forecastPoint, let forecast = forecastPoint.forecast {
             temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
             if reuseIdentifier == FavoritesSections.current.cellIdentifier {
                 weatherIcon.image = UIImage(named: forecast.icon)
@@ -38,9 +40,14 @@ class FavoritesPointCell: UITableViewCell {
                 weatherIcon.image = UIImage(named: forecast.icon + "_")
             }
         } else {
-            temperatureLabel.text = "--"
+            temperatureLabel.text = ""
+            weatherIcon.image = nil
         }
-        if let address = forecastPoint.address{
+        
+    }
+    
+    private func updateCellAddressLabels(with forecastPoint: ForecastPoint?) {
+        if let forecastPoint = forecastPoint, let address = forecastPoint.address {
             addressLabel.text = address.city
             subAddressLabel.text = address.detail
         } else {
@@ -49,5 +56,8 @@ class FavoritesPointCell: UITableViewCell {
         }
     }
     
+    private func updateCellAllLabels(with forecastPoint: ForecastPoint?) {
+        updateCellAddressLabels(with: forecastPoint)
+        updateCellWeatherLabels(with: forecastPoint)
+    }
 }
-

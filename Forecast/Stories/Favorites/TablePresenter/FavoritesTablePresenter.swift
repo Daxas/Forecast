@@ -38,6 +38,7 @@ class FavoritesTablePresenter: NSObject {
     
     private let tableView: UITableView
     private var favorites = [ForecastPoint]()
+    private var selectedIndex: IndexPath?
     
     weak var delegate: FavoritesTablePresenterDelegate?
     
@@ -66,20 +67,21 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return section == FavoritesSections.favorites.rawValue ? favorites.count : 1
+        return section == FavoritesSections.favorites.rawValue ? favorites.count : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let section = FavoritesSections(rawValue: indexPath.section) else {
-                return UITableViewCell()
-            }
-            return tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath)
+        guard let section = FavoritesSections(rawValue: indexPath.section) else {
+            return UITableViewCell()
+        }
+        return tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let favorCell = cell as? FavoritesPointCell else {
             return
         }
+        
         if  indexPath.section == FavoritesSections.current.rawValue {
             favorCell.currentLocationLabel.text = "Current location".localized()
             favorCell.configureCurrentLocationCell()
@@ -143,12 +145,17 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     // MARK: - Editing tableView
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if selectedIndex == indexPath {
+            delegate?.favoritesPresenterDelegate(didSelect: nil)
+        }
         favorites.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         delegate?.favoritesPresenterDelegate(favoritesDidChange: favorites)
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath
         let selectedLocation = indexPath.section == 0 ? nil : favorites[indexPath.row]
         delegate?.favoritesPresenterDelegate(didSelect: selectedLocation)
     }

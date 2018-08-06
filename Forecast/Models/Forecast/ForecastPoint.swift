@@ -4,18 +4,6 @@ import CoreLocation
 
 class ForecastPoint: NSObject, NSCoding {
     
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(location, forKey: "Location")
-      // aCoder.encode(address, forKey: "Address")
-        //aCoder.encode(forecast, forKey: "Forecast")
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        location = aDecoder.decodeObject(forKey: "Location") as! CLLocation
-        //address = aDecoder.decodeObject(forKey: "Address") as! ForecastAddress
-        //forecast = aDecoder.decodeObject(forKey: "Forecast") as! Forecast
-        super.init()
-    }
     
     
     let location: CLLocation
@@ -28,10 +16,38 @@ class ForecastPoint: NSObject, NSCoding {
             self.address = ForecastAddress(with: placemark)
         }
     }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(location, forKey: "Location")
+        aCoder.encode(address, forKey: "Address")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        location = aDecoder.decodeObject(forKey: "Location") as! CLLocation
+        address = aDecoder.decodeObject(forKey: "Address") as? ForecastAddress
+        super.init()
+    }
+    
 }
 
 
 class ForecastAddress: NSObject, NSCoding {
+   
+    let city: String
+    let detail: String
+    
+    init?(with placemark: CLPlacemark) {
+        guard let city = placemark.locality else {
+            return nil
+        }
+        self.city = city
+        guard let detail = placemark.thoroughfare else {
+            self.detail = "Somewhere"
+            return
+        }
+        self.detail = detail
+    }
+    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(city, forKey: "City")
         aCoder.encode(detail, forKey: "Detail")
@@ -42,19 +58,6 @@ class ForecastAddress: NSObject, NSCoding {
         detail = aDecoder.decodeObject(forKey: "Detail") as! String
         super.init()
     }
-    
-    
-    let city: String
-    let detail: String
-    
-    init?(with placemark: CLPlacemark) {
-        guard let city = placemark.locality, let detail = placemark.thoroughfare else {
-            return nil
-        }
-        self.city = city
-        self.detail = detail
-    }
-    
 }
 
 

@@ -11,6 +11,7 @@ class GeoCoder {
                  failure: @escaping (Error) -> Void){
         CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) in
             if let error = error {
+                print("geoCode error")
                 failure(error)
                 return
             }
@@ -26,6 +27,7 @@ class GeoCoder {
                       failure: @escaping (Error) -> Void){
         CLGeocoder().geocodeAddressString(text, completionHandler: {(placemarks, error) in
             if let error = error {
+                print("geoSearching error")
                 failure(error)
                 return
             }

@@ -8,13 +8,18 @@ class DailyPresenter: NSObject {
     private let dateUtils = DateUtils()
     private let temperatureUtils = TemperatureUtils()
     
-    func update(with dailyForecast: Forecast) {
+    func update(with dailyForecast: Forecast?) {
         forecast = dailyForecast
         tableView.reloadData()
     }
     
     private func configureDailyTableCell (_ cell: DailyTableViewCell, indexPath: IndexPath) {
         guard let forecast = forecast else {
+            cell.dateLabel.text =  ""
+            cell.weekDayLabel.text = ""
+            cell.minTempLabel.text = ""
+            cell.maxTempLabel.text = ""
+            cell.iconDaily.image = nil
             return
         }
         let item = forecast.dailyData[indexPath.row]
