@@ -3,7 +3,7 @@ import CoreLocation
 
 enum GeoLocatorError: String, Error {
     case disableLocator = "Location service disabled"
-    case locationError = "Did fail location"
+    case locationError  = "Did fail location"
 }
 
 class GeoLocator: NSObject, CLLocationManagerDelegate {

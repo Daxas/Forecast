@@ -2,6 +2,24 @@ import UIKit
 import Foundation
 import CoreLocation
 
+enum ResultCells: Int {
+    case searchResult = 0
+    case error
+    
+    var cellIdentifier: String {
+        switch self {
+        case .searchResult:
+            return "SearchResultCell"
+        case .error:
+            return "ErrorCell"
+        }
+    }
+    
+    static var cellHeight: CGFloat {
+        return CGFloat(60)
+    }
+}
+
 protocol SearchResultControllerDelegate: class {
     func searchResultControllerDelegate(didSelect point: ForecastPoint)
 }
@@ -33,22 +51,22 @@ class SearchResultController: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard searchingResults.count != 0 else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ErrorCell", for: indexPath) as! SearchResultErrorCell
-            cell.errorLabel.text = "NO location for current text"
-            return cell
+            let errorCell = tableView.dequeueReusableCell(withIdentifier: ResultCells.error.cellIdentifier, for: indexPath) as! SearchResultErrorCell
+            errorCell.configure()
+            return errorCell
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ResultCells.searchResult.cellIdentifier, for: indexPath)
         guard let searchCell = cell as? SearchResultCell else {
             return UITableViewCell()
         }
-        searchCell.cityLabel.text = searchingResults[indexPath.row].locality
-        searchCell.detailLabel.text = searchingResults[indexPath.row].thoroughfare
+        let searchedPoint = searchingResults[indexPath.row]
+        searchCell.cityLabel.text = searchedPoint.locality
+        searchCell.detailLabel.text = searchedPoint.thoroughfare
         return searchCell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //
-        return FavoritesSections.favorites.cellHeight
+        return ResultCells.cellHeight
     }
     
     // MARK: - Editing TableView

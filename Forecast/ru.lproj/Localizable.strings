@@ -7,8 +7,8 @@
 "Tomorrow" = "завтра";
 
 /* -- INFO CELL -- */
-" m/c" = " м/с";
-" hPA" = " мPC";
+"m/c" = "м/с";
+"hPA" = "мPC";
 "en" = "ru";
 
 /* -- WEATHER -- */
@@ -22,3 +22,5 @@
 "Edit" = "Изменить";
 "Done" = "Готово";
 "City or area" = "Город или район";
+"NO location for current text" = "Локация не найдена";
+"Somewhere" = "Не определено";

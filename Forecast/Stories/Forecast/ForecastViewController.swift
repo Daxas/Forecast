@@ -14,7 +14,6 @@ class ForecastViewController: UIViewController {
     @IBOutlet var iconImage: UIImageView!
     
     private var forecastPoint: ForecastPoint?
-    //private let store = FavoritesStore()
     
     private let forecastAdapter = ForecastAdapter()
     private var spinnerActivity = MBProgressHUD()
@@ -60,7 +59,6 @@ class ForecastViewController: UIViewController {
             self?.forecastPoint?.address = $0.address
             self?.updateAddressLabels(with: self?.forecastPoint)
             }, failure: {print($0)})
-        
     }
     
     private func configureRefresher() {

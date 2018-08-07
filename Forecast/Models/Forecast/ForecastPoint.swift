@@ -42,7 +42,7 @@ class ForecastAddress: NSObject, NSCoding {
         }
         self.city = city
         guard let detail = placemark.thoroughfare else {
-            self.detail = "Somewhere"
+            self.detail = "Somewhere".localized()
             return
         }
         self.detail = detail

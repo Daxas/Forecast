@@ -5,7 +5,7 @@ class FavoritesViewController: UIViewController {
     
     @IBOutlet var favoritesTableView: UITableView!
     
-    lazy var favoritesTablePresenter = FavoritesTablePresenter(with: self.favoritesTableView)
+    private lazy var favoritesTablePresenter = FavoritesTablePresenter(with: self.favoritesTableView)
     private let store = FavoritesStore()
     
     // MARK: - Life cycle
@@ -37,11 +37,15 @@ class FavoritesViewController: UIViewController {
             navigationItem.searchController?.searchResultsUpdater = searchResultController
             navigationItem.searchController?.searchBar.placeholder = "City or area".localized()
             navigationItem.searchController?.obscuresBackgroundDuringPresentation = false
-            definesPresentationContext = true
-        
         } else {
             // Fallback on earlier versions
+            let searchController = UISearchController(searchResultsController: searchResultController)
+            searchController.searchBar.placeholder = "City or area".localized()
+            searchController.searchResultsUpdater = searchResultController
+            searchController.obscuresBackgroundDuringPresentation = false
+            favoritesTableView.tableHeaderView = searchController.searchBar
         }
+        definesPresentationContext = true
     }
     
     // MARK: - IBActions
@@ -82,13 +86,14 @@ extension FavoritesViewController: SearchResultControllerDelegate {
             navigationItem.searchController?.searchBar.text = ""
         } else {
             // Fallback on earlier versions
+            
         }
         var favorites = store.loadForecastPoints()
-       guard !favorites.contains(point) else {
-        return
+        guard !favorites.contains(point) else {
+            return
         }
-            favorites.append(point)
-            store.save(favorites: favorites)
+        favorites.append(point)
+        store.save(favorites: favorites)
         favoritesTablePresenter.update(with: favorites)
     }
     
