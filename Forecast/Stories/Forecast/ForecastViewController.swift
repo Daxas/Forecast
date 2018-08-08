@@ -44,6 +44,10 @@ class ForecastViewController: UIViewController {
     
     private func configure() {
         startSpinner()
+        
+        /*let items = [UITabBarItem(title: "Favorites.title".localized(), image: nil, selectedImage: nil), UITabBarItem(title: "Favorites.title".localized(), image: nil, selectedImage: nil)]
+        tabBarController?.tabBar.setItems(items, animated: true)*/
+        
         tabBarItem.title = "Weather.title".localized()
         dailyTableView.allowsSelection = false
         collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)

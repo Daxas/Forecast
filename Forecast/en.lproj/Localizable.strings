@@ -13,6 +13,7 @@
 
 /* -- WEATHER -- */
 "Weather.title" = "Weather";
+"Pull to refresh" = "Pull to refresh";
 
 /* -- FAVORITES -- */
 "Favorites.title" = "Favorites";

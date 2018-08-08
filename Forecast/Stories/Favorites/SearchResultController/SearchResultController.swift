@@ -35,12 +35,7 @@ class SearchResultController: UITableViewController, UISearchResultsUpdating {
         guard let textForSearch = searchController.searchBar.text else {
             return
         }
-        geoCoder.geoSearching(for: textForSearch, completion: { (placemarks) in
-            self.searchingResults = placemarks
-            self.tableView.reloadData()
-        }, failure: {print($0)
-            print("geoCoder.geoSearching: NO location for current text")
-        })
+        searchingLocation(textForSearch)
     }
     
     // MARK: - TableView live cycle
@@ -80,5 +75,22 @@ class SearchResultController: UITableViewController, UISearchResultsUpdating {
         }
     }
     
+    // MARK: - Private
+    
+    private func searchingLocation(_ textForSearch: String) {
+        geoCoder.geoSearching(for: textForSearch, completion: { (placemarks) in
+            self.searchingResults = placemarks
+            self.tableView.reloadData()
+        }, failure: {print($0)
+            print("geoCoder.geoSearching: NO location for current text")
+        })
+    }
+    
+}
+
+extension SearchResultController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchingLocation(searchText)
+    }
 }
 

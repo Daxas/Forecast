@@ -7,6 +7,7 @@ class FavoritesViewController: UIViewController {
     
     private lazy var favoritesTablePresenter = FavoritesTablePresenter(with: self.favoritesTableView)
     private let store = FavoritesStore()
+    private let adapter = ForecastAdapter()
     
     // MARK: - Life cycle
     
@@ -21,7 +22,7 @@ class FavoritesViewController: UIViewController {
     
     private func configure() {
         favoritesTableView.backgroundColor = UIColor.white
-        navigationItem.title = "Favorites.title".localized()
+       navigationItem.title = "Favorites.title".localized()
         navigationController?.tabBarItem.title = "Favorites.title".localized()
         navigationItem.rightBarButtonItem?.title = "Edit".localized()
         configureSearchController()
@@ -43,6 +44,7 @@ class FavoritesViewController: UIViewController {
             searchController.searchBar.placeholder = "City or area".localized()
             searchController.searchResultsUpdater = searchResultController
             searchController.obscuresBackgroundDuringPresentation = false
+            searchController.searchBar.delegate = searchResultController as! UISearchBarDelegate
             favoritesTableView.tableHeaderView = searchController.searchBar
         }
         definesPresentationContext = true
@@ -89,12 +91,23 @@ extension FavoritesViewController: SearchResultControllerDelegate {
             
         }
         var favorites = store.loadForecastPoints()
-        guard !favorites.contains(point) else {
+        var pointInFavorites = false
+        for favorPoint in favorites {
+            if favorPoint.address?.city == point.address?.city {
+                pointInFavorites = true
+                break
+            }
+        }
+        guard !pointInFavorites else {
             return
         }
         favorites.append(point)
-        store.save(favorites: favorites)
         favoritesTablePresenter.update(with: favorites)
+        adapter.getAddress(for: point, completion: { [weak self] in
+            point.address = $0.address
+            self?.favoritesTablePresenter.update(with: favorites)
+            self?.store.save(favorites: favorites)
+            }, failure: {print($0)})
     }
     
 }

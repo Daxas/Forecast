@@ -13,6 +13,7 @@
 
 /* -- WEATHER -- */
 "Weather.title" = "Погода";
+"Pull to refresh" = "Потяните для обновления";
 
 /* -- FAVORITES -- */
 "Favorites.title" = "Избранное";
