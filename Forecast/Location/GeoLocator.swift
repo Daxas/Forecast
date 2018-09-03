@@ -13,16 +13,19 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
     lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
         manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        manager.desiredAccuracy = kCLLocationAccuracyKilometer
         return manager
     }()
     
     private var completion: GeoLocatorCompletion?
     
     func requestLocation(completion: @escaping GeoLocatorCompletion){
-        //TODO: handle authorization
-        locationManager.requestWhenInUseAuthorization()
-        guard CLLocationManager.locationServicesEnabled() else {
+        let authStatus = CLLocationManager.authorizationStatus()
+        if authStatus == .notDetermined {
+            locationManager.requestWhenInUseAuthorization()
+            return
+        }
+        if authStatus == .denied || authStatus == .restricted {
             print(GeoLocatorError.disableLocator.rawValue)
             return
         }
@@ -33,16 +36,25 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
     // MARK: - CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+       print(GeoLocatorError.locationError.rawValue)
+        if (error as NSError).code == CLError.locationUnknown.rawValue {
+            return
+        }
+        locationManager.stopUpdatingLocation()
         completion?(nil, error)
-        print(GeoLocatorError.locationError.rawValue)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let currentLocation = locations.last {
-            locationManager.stopUpdatingLocation()
-            completion?(currentLocation, nil)
-            print("user longitude = \(currentLocation.coordinate.longitude)")
+        let newLocation = locations.last!
+        print("user longitude = \(newLocation.coordinate.longitude)")
+        if newLocation.timestamp.timeIntervalSinceNow < -10 {
+            return
         }
+       // if let currentLocation = locations.last {
+            locationManager.stopUpdatingLocation()
+            completion?(newLocation, nil)
+         //   print("user longitude = \(currentLocation.coordinate.longitude)")
+       // }
     }
     
 }
