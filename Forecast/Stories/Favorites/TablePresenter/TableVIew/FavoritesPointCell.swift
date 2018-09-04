@@ -9,19 +9,19 @@ class FavoritesPointCell: UITableViewCell {
     @IBOutlet var temperatureLabel: UILabel!
     @IBOutlet var weatherIcon: UIImageView!
     
-    
-    var forecastAdapter: ForecastAdapter!
+    private let forecastAdapter = ForecastAdapter(geoCoder: GeoCoder(), geoLocator: GeoLocator(), forecastClient: ForecastClient())
+    //var forecastAdapter: ForecastAdapter!
     private let temperatureUtils = TemperatureUtils()
     
-    init(forecastAdapter: ForecastAdapter) {
+    /*init(forecastAdapter: ForecastAdapter) {
         self.forecastAdapter = forecastAdapter
         super.init(style: .default, reuseIdentifier: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder) 
+        super.init(coder: aDecoder)
     }
-    
+    */
     // MARK: - Public
     
     func configureFavoritesCell(with point: ForecastPoint) {

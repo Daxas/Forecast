@@ -54,7 +54,7 @@ class FavoritesViewController: UIViewController {
             searchController.searchBar.placeholder = "City or area".localized()
             searchController.searchResultsUpdater = searchResultController
             searchController.obscuresBackgroundDuringPresentation = false
-            searchController.searchBar.delegate = searchResultController as! UISearchBarDelegate
+            searchController.searchBar.delegate = searchResultController as UISearchBarDelegate
             favoritesTableView.tableHeaderView = searchController.searchBar
         }
         definesPresentationContext = true
