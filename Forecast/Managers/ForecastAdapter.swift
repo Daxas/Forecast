@@ -2,13 +2,28 @@
 import Foundation
 import CoreLocation
 
-class ForecastAdapter {
+typealias ForecastAdapterCompletion = (ForecastPoint) -> Void
+
+protocol ForecastAdapterProtocol {
+    func getCurrentPoint(completion: @escaping ForecastAdapterCompletion,
+                         failure: @escaping (Error) -> Void)
+    func getAddress(for point: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
+                    failure: @escaping (Error) -> Void)
+    func getForecast(for point: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
+                     failure: @escaping (Error) -> Void)
+}
+
+class ForecastAdapter: ForecastAdapterProtocol {
     
-    typealias ForecastAdapterCompletion = (ForecastPoint) -> Void
+    var geoCoder: GeoCoder
+    var geoLocator: GeoLocator
+    var forecastClient: ForecastClient
     
-    private let geoCoder = GeoCoder()
-    private let geoLocator = GeoLocator()
-    private let forecastClient = ForecastClient()
+    init(geoCoder: GeoCoder, geoLocator: GeoLocator, forecastClient: ForecastClient) {
+        self.geoCoder = geoCoder
+        self.geoLocator = geoLocator
+        self.forecastClient = forecastClient
+    }
     
     func getForecastAndAddress(for forecastPoint: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
                                failure: @escaping (Error) -> Void) {

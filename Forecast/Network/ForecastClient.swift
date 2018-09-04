@@ -88,10 +88,7 @@ class ForecastClient {
             
         }
         dataTask?.resume()
-        
     }
-    
-    
     
 }
 

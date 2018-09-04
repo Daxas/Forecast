@@ -125,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
+				84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -198,7 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				842D43D7210F67D5005D6BE0 /* TabBar.swift */,
-				84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */,
 				8479EE7220DC211600F37C4E /* ForecastViewController.swift */,
 				8439F3AD20EBFDA0005691FD /* Hourly */,
 				8439F3AC20EBFD88005691FD /* Daily */,

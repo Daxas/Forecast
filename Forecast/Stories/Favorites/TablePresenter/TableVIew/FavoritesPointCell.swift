@@ -1,4 +1,4 @@
-
+ 
 import UIKit
 
 class FavoritesPointCell: UITableViewCell {
@@ -9,8 +9,18 @@ class FavoritesPointCell: UITableViewCell {
     @IBOutlet var temperatureLabel: UILabel!
     @IBOutlet var weatherIcon: UIImageView!
     
-    private let forecastAdapter = ForecastAdapter()
+    
+    var forecastAdapter: ForecastAdapter!
     private let temperatureUtils = TemperatureUtils()
+    
+    init(forecastAdapter: ForecastAdapter) {
+        self.forecastAdapter = forecastAdapter
+        super.init(style: .default, reuseIdentifier: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder) 
+    }
     
     // MARK: - Public
     

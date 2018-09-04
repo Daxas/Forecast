@@ -50,11 +50,8 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
         if newLocation.timestamp.timeIntervalSinceNow < -10 {
             return
         }
-       // if let currentLocation = locations.last {
             locationManager.stopUpdatingLocation()
             completion?(newLocation, nil)
-         //   print("user longitude = \(currentLocation.coordinate.longitude)")
-       // }
     }
     
 }

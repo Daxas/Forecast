@@ -15,7 +15,7 @@ class ForecastViewController: UIViewController {
     
     private var forecastPoint: ForecastPoint?
     
-    private let forecastAdapter = ForecastAdapter()
+    var forecastAdapter: ForecastAdapter!
     private var spinnerActivity = MBProgressHUD()
     private var refresher: UIRefreshControl!
     
@@ -24,6 +24,18 @@ class ForecastViewController: UIViewController {
     
     private let dateFormatter = DateFormatter()
     private let temperatureUtils = TemperatureUtils()
+    
+    init(forecastAdapter: ForecastAdapter) {
+        self.forecastAdapter = forecastAdapter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        
+        super.init(coder: aDecoder)
+       // fatalError("init(coder:) has not been implemented")
+    }
+ 
     
     // MARK: - Life cycle
     

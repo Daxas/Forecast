@@ -13,30 +13,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         ForecastClient.Configuration.apiKey = ForecastApiKey
-        //prepareFakeData()
-        return true
-    }
-    
-    
-    private func prepareFakeData() {
-        let store = FavoritesStore()
-        var favorites = store.loadForecastPoints()
-        guard favorites.isEmpty else {
-            return
-        }
-        var favoriteLocations = [CLLocation]()
-        favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-        favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-        favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
-        favoriteLocations.append(CLLocation(latitude: 55.751244, longitude: 37.618423))
-        favoriteLocations.append(CLLocation(latitude: 40.730610, longitude: -73.935242))
-        favoriteLocations.append(CLLocation(latitude: 51.509865, longitude: -0.118092))
         
-        for location in favoriteLocations {
-            let point = ForecastPoint(with: location)
-            favorites.append(point)
+        let forecastAdapter = ForecastAdapter(geoCoder: GeoCoder(), geoLocator: GeoLocator(), forecastClient: ForecastClient())
+        let store = FavoritesStore()
+        guard let rootViewController = window?.rootViewController as? UITabBarController else {
+            return true
         }
-        store.save(favorites: favorites)
+            for vc in rootViewController.viewControllers! {
+                if let vc = vc as? ForecastViewController {
+                    vc.forecastAdapter = forecastAdapter
+                }
+                if let vc = vc as? UINavigationController,
+                    let favoritesVC = vc.viewControllers.first as? FavoritesViewController {
+                        favoritesVC.forecastAdapter = forecastAdapter
+                        favoritesVC.store = store
+                    }
+                } 
+        return true
     }
     
 }

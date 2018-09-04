@@ -6,8 +6,18 @@ class FavoritesViewController: UIViewController {
     @IBOutlet var favoritesTableView: UITableView!
     
     private lazy var favoritesTablePresenter = FavoritesTablePresenter(with: self.favoritesTableView)
-    private let store = FavoritesStore()
-    private let adapter = ForecastAdapter()
+    var store: FavoritesStore!
+    var forecastAdapter: ForecastAdapter!
+    
+    init(forecastAdapter: ForecastAdapter, store: FavoritesStore) {
+        self.forecastAdapter = forecastAdapter
+        self.store = store
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     // MARK: - Life cycle
     
@@ -103,7 +113,7 @@ extension FavoritesViewController: SearchResultControllerDelegate {
         }
         favorites.append(point)
         favoritesTablePresenter.update(with: favorites)
-        adapter.getAddress(for: point, completion: { [weak self] in
+        forecastAdapter.getAddress(for: point, completion: { [weak self] in
             point.address = $0.address
             self?.favoritesTablePresenter.update(with: favorites)
             self?.store.save(favorites: favorites)
