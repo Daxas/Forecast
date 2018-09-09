@@ -12,7 +12,10 @@
 		841E8AA520E7810D008F4EA4 /* DailyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */; };
 		8425A15621182952009939BD /* SearchResultErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A15521182952009939BD /* SearchResultErrorCell.swift */; };
 		8425A158211832FF009939BD /* NSNotification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8425A157211832FF009939BD /* NSNotification.Name.swift */; };
-		842D43D8210F67D5005D6BE0 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D7210F67D5005D6BE0 /* TabBar.swift */; };
+		8427D1A62144589A003CA788 /* DailyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427D1A52144589A003CA788 /* DailyTableViewCell.xib */; };
+		8427D1A82144632A003CA788 /* HourlyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427D1A72144632A003CA788 /* HourlyCollectionViewCell.xib */; };
+		8427D1AA21446C8E003CA788 /* InfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427D1A921446C8E003CA788 /* InfoCollectionViewCell.xib */; };
+		842841F92141BB33000CCE60 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842841F82141BB33000CCE60 /* ForecastModel.swift */; };
 		842D43DA2111B940005D6BE0 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D92111B93F005D6BE0 /* SearchResultController.swift */; };
 		842D43DE2111F0BD005D6BE0 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */; };
 		8439F3A520EA2B00005691FD /* DailyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8439F3A420EA2B00005691FD /* DailyPresenter.swift */; };
@@ -56,7 +59,10 @@
 		841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTableViewCell.swift; sourceTree = "<group>"; };
 		8425A15521182952009939BD /* SearchResultErrorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultErrorCell.swift; sourceTree = "<group>"; };
 		8425A157211832FF009939BD /* NSNotification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotification.Name.swift; sourceTree = "<group>"; };
-		842D43D7210F67D5005D6BE0 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		8427D1A52144589A003CA788 /* DailyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyTableViewCell.xib; sourceTree = "<group>"; };
+		8427D1A72144632A003CA788 /* HourlyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyCollectionViewCell.xib; sourceTree = "<group>"; };
+		8427D1A921446C8E003CA788 /* InfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoCollectionViewCell.xib; sourceTree = "<group>"; };
+		842841F82141BB33000CCE60 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
 		842D43D92111B93F005D6BE0 /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		8439F3A420EA2B00005691FD /* DailyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPresenter.swift; sourceTree = "<group>"; };
@@ -111,6 +117,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8427D1A321445643003CA788 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				84972C812101C19D00EC1E94 /* FavoritesStore.swift */,
+				84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		8427D1A421445655003CA788 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				84F24E2420EFAF3F005AE351 /* GeoLocator.swift */,
+				8439F3AE20EC06B7005691FD /* GeoCoder.swift */,
+				846442A920E0DA5E006197AC /* ForecastClient.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		8429B54520E55EEE00456D3A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
-				84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -137,14 +161,6 @@
 				842D43D6210EF31D005D6BE0 /* TableVIew */,
 			);
 			path = TablePresenter;
-			sourceTree = "<group>";
-		};
-		842D43D5210ED3D6005D6BE0 /* FavoritesStore */ = {
-			isa = PBXGroup;
-			children = (
-				84972C812101C19D00EC1E94 /* FavoritesStore.swift */,
-			);
-			path = FavoritesStore;
 			sourceTree = "<group>";
 		};
 		842D43D6210EF31D005D6BE0 /* TableVIew */ = {
@@ -163,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				841E8AA420E7810D008F4EA4 /* DailyTableViewCell.swift */,
+				8427D1A52144589A003CA788 /* DailyTableViewCell.xib */,
 				8439F3A420EA2B00005691FD /* DailyPresenter.swift */,
 			);
 			path = Daily;
@@ -172,33 +189,35 @@
 			isa = PBXGroup;
 			children = (
 				841E8AA220E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift */,
+				8427D1A72144632A003CA788 /* HourlyCollectionViewCell.xib */,
 				841E8AA020E6B5E4008F4EA4 /* InfoCollectionViewCell.swift */,
+				8427D1A921446C8E003CA788 /* InfoCollectionViewCell.xib */,
 				8439F3A620EA2CFF005691FD /* HourlyPresenter.swift */,
 			);
 			path = Hourly;
 			sourceTree = "<group>";
 		};
-		846442AF20E230C1006197AC /* Models */ = {
+		846442AF20E230C1006197AC /* DataModels */ = {
 			isa = PBXGroup;
 			children = (
 				84A87FF520E3802C00D81B48 /* Forecast */,
 			);
-			path = Models;
+			path = DataModels;
 			sourceTree = "<group>";
 		};
-		846442B020E23119006197AC /* Stories */ = {
+		846442B020E23119006197AC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
 				84972C78210112F700EC1E94 /* Favorites */,
 				846442B120E23190006197AC /* Forecast */,
 			);
-			path = Stories;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		846442B120E23190006197AC /* Forecast */ = {
 			isa = PBXGroup;
 			children = (
-				842D43D7210F67D5005D6BE0 /* TabBar.swift */,
+				842841F82141BB33000CCE60 /* ForecastModel.swift */,
 				8479EE7220DC211600F37C4E /* ForecastViewController.swift */,
 				8439F3AD20EBFDA0005691FD /* Hourly */,
 				8439F3AC20EBFD88005691FD /* Daily */,
@@ -247,15 +266,14 @@
 			isa = PBXGroup;
 			children = (
 				8479EE7020DC211600F37C4E /* AppDelegate.swift */,
+				8427D1A321445643003CA788 /* Service */,
+				8427D1A421445655003CA788 /* Core */,
+				846442B020E23119006197AC /* Presentation */,
 				8429B54520E55EEE00456D3A /* Extensions */,
 				84AC7B5021138E05007DDF78 /* Utils */,
-				84AC7B522114335D007DDF78 /* Network */,
 				8429B54820E5683900456D3A /* Managers */,
-				84AC7B5121138E9B007DDF78 /* Location */,
 				8477BEDC210C4A040003DB74 /* View */,
-				846442B020E23119006197AC /* Stories */,
-				842D43D5210ED3D6005D6BE0 /* FavoritesStore */,
-				846442AF20E230C1006197AC /* Models */,
+				846442AF20E230C1006197AC /* DataModels */,
 				846442B320E23213006197AC /* Storyboards */,
 				8479EE7720DC211B00F37C4E /* Assets.xcassets */,
 				84972C7020FE7C1400EC1E94 /* Localizable.strings */,
@@ -302,23 +320,6 @@
 				84733D7F20F8DC0E001DE585 /* DateUtils.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		84AC7B5121138E9B007DDF78 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				84F24E2420EFAF3F005AE351 /* GeoLocator.swift */,
-				8439F3AE20EC06B7005691FD /* GeoCoder.swift */,
-			);
-			path = Location;
-			sourceTree = "<group>";
-		};
-		84AC7B522114335D007DDF78 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				846442A920E0DA5E006197AC /* ForecastClient.swift */,
-			);
-			path = Network;
 			sourceTree = "<group>";
 		};
 		A94DCC58705E00DA7C5D9B9A /* Pods */ = {
@@ -402,10 +403,13 @@
 				8479EE7B20DC211B00F37C4E /* LaunchScreen.storyboard in Resources */,
 				84972C6E20FE7C1400EC1E94 /* Localizable.strings in Resources */,
 				84733D7B20F69E5F001DE585 /* Weather.storyboard in Resources */,
+				8427D1AA21446C8E003CA788 /* InfoCollectionViewCell.xib in Resources */,
 				8479EE7820DC211B00F37C4E /* Assets.xcassets in Resources */,
+				8427D1A82144632A003CA788 /* HourlyCollectionViewCell.xib in Resources */,
 				846442B520E232CF006197AC /* Favorites.storyboard in Resources */,
 				8477BEE2210CF4760003DB74 /* FavoritesFooterView.xib in Resources */,
 				8479EE7620DC211600F37C4E /* Main.storyboard in Resources */,
+				8427D1A62144589A003CA788 /* DailyTableViewCell.xib in Resources */,
 				8477BED2210B1C600003DB74 /* FavoritesHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,6 +481,7 @@
 				8439F3A520EA2B00005691FD /* DailyPresenter.swift in Sources */,
 				8425A15621182952009939BD /* SearchResultErrorCell.swift in Sources */,
 				842D43DA2111B940005D6BE0 /* SearchResultController.swift in Sources */,
+				842841F92141BB33000CCE60 /* ForecastModel.swift in Sources */,
 				841E8AA320E6B5FE008F4EA4 /* HourlyCollectionViewCell.swift in Sources */,
 				84F24E2520EFAF3F005AE351 /* GeoLocator.swift in Sources */,
 				8479EE7120DC211600F37C4E /* AppDelegate.swift in Sources */,
@@ -489,7 +494,6 @@
 				8477BEDE210C4A040003DB74 /* GradientView.swift in Sources */,
 				84972C7A2101132900EC1E94 /* FavoritesViewController.swift in Sources */,
 				846442AE20E21EE8006197AC /* ForecastDailyData.swift in Sources */,
-				842D43D8210F67D5005D6BE0 /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

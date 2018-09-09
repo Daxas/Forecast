@@ -39,6 +39,9 @@ class DailyPresenter: NSObject {
 
 // MARK: - TableView live cycle
 
+
+
+
 extension DailyPresenter: UITableViewDataSource {
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

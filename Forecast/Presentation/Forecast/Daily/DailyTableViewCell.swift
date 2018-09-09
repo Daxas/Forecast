@@ -12,4 +12,6 @@ class DailyTableViewCell: UITableViewCell {
     @IBOutlet var weekDayLabel: UILabel!
     @IBOutlet var iconDaily: UIImageView!
     
+    
+    
 }

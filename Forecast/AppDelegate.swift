@@ -16,12 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let forecastAdapter = ForecastAdapter(geoCoder: GeoCoder(), geoLocator: GeoLocator(), forecastClient: ForecastClient())
         let store = FavoritesStore()
+        
         guard let rootViewController = window?.rootViewController as? UITabBarController else {
             return true
         }
             for vc in rootViewController.viewControllers! {
                 if let vc = vc as? ForecastViewController {
-                    vc.forecastAdapter = forecastAdapter
+                    let forecastModel = ForecastModel(forecastAdapter: forecastAdapter)
+                    forecastModel.delegate = vc
+                    vc.forecastModel = forecastModel
+                    //vc.forecastAdapter = forecastAdapter
                 }
                 if let vc = vc as? UINavigationController,
                     let favoritesVC = vc.viewControllers.first as? FavoritesViewController {

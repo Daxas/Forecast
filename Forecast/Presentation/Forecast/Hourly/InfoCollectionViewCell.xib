@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="InfoCollectionViewCell" id="ClK-x3-Y1D" customClass="InfoCollectionViewCell" customModule="Forecast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="74"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="74"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNb-OB-Apw">
+                        <rect key="frame" x="28" y="4" width="68" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUB-lo-S5S">
+                        <rect key="frame" x="28" y="29.5" width="68" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zf4-nK-mFk">
+                        <rect key="frame" x="28" y="55" width="68" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="windIcon" translatesAutoresizingMaskIntoConstraints="NO" id="zsI-Um-ACJ">
+                        <rect key="frame" x="4" y="4" width="16" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="MIu-4N-Wey"/>
+                            <constraint firstAttribute="width" constant="16" id="d6j-yh-dDo"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="humidityIcon" translatesAutoresizingMaskIntoConstraints="NO" id="F0e-u2-ccq">
+                        <rect key="frame" x="4" y="58" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="Th4-sJ-fRK"/>
+                            <constraint firstAttribute="width" constant="12" id="Vvx-1V-bdO"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pressureIcon" translatesAutoresizingMaskIntoConstraints="NO" id="yUS-Xz-v5N">
+                        <rect key="frame" x="4" y="31" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="3Q9-5i-DhJ"/>
+                            <constraint firstAttribute="height" constant="12" id="tfX-ks-cwN"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="NUB-lo-S5S" firstAttribute="centerY" secondItem="BgA-bw-Qie" secondAttribute="centerY" id="4B6-3O-SUz"/>
+                <constraint firstItem="BgA-bw-Qie" firstAttribute="trailing" secondItem="NUB-lo-S5S" secondAttribute="trailing" constant="4" id="7Tc-tb-4iK"/>
+                <constraint firstItem="zsI-Um-ACJ" firstAttribute="leading" secondItem="ClK-x3-Y1D" secondAttribute="leading" constant="4" id="9pR-rA-r2b"/>
+                <constraint firstItem="NUB-lo-S5S" firstAttribute="leading" secondItem="cNb-OB-Apw" secondAttribute="leading" id="AhU-Sh-b8R"/>
+                <constraint firstItem="cNb-OB-Apw" firstAttribute="top" secondItem="ClK-x3-Y1D" secondAttribute="top" constant="4" id="CGT-Ho-hlJ"/>
+                <constraint firstItem="cNb-OB-Apw" firstAttribute="leading" secondItem="zsI-Um-ACJ" secondAttribute="trailing" constant="8" id="CzR-Zs-BXV"/>
+                <constraint firstItem="BgA-bw-Qie" firstAttribute="bottom" secondItem="Zf4-nK-mFk" secondAttribute="bottom" constant="4" id="OpA-UT-aMP"/>
+                <constraint firstItem="Zf4-nK-mFk" firstAttribute="bottom" secondItem="F0e-u2-ccq" secondAttribute="bottom" id="Pre-S7-i3F"/>
+                <constraint firstItem="BgA-bw-Qie" firstAttribute="trailing" secondItem="cNb-OB-Apw" secondAttribute="trailing" constant="4" id="WQO-82-l7Y"/>
+                <constraint firstItem="BgA-bw-Qie" firstAttribute="trailing" secondItem="Zf4-nK-mFk" secondAttribute="trailing" constant="4" id="agc-YD-Nxz"/>
+                <constraint firstItem="Zf4-nK-mFk" firstAttribute="leading" secondItem="cNb-OB-Apw" secondAttribute="leading" id="bo4-28-QWu"/>
+                <constraint firstItem="yUS-Xz-v5N" firstAttribute="leading" secondItem="zsI-Um-ACJ" secondAttribute="leading" id="l7W-4U-jXO"/>
+                <constraint firstItem="yUS-Xz-v5N" firstAttribute="centerY" secondItem="ClK-x3-Y1D" secondAttribute="centerY" id="n1m-gc-qyg"/>
+                <constraint firstItem="F0e-u2-ccq" firstAttribute="leading" secondItem="zsI-Um-ACJ" secondAttribute="leading" id="zEK-Wd-6MM"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="BgA-bw-Qie"/>
+            <connections>
+                <outlet property="humidityLabel" destination="Zf4-nK-mFk" id="bGx-ok-RGj"/>
+                <outlet property="pressureLabel" destination="NUB-lo-S5S" id="SXm-rD-8kc"/>
+                <outlet property="windSpeedLabel" destination="cNb-OB-Apw" id="tPC-f8-F0G"/>
+            </connections>
+            <point key="canvasLocation" x="3" y="78"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="humidityIcon" width="21" height="23"/>
+        <image name="pressureIcon" width="20" height="20"/>
+        <image name="windIcon" width="21" height="16"/>
+    </resources>
+</document>
