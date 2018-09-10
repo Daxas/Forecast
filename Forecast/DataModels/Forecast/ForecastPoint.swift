@@ -1,10 +1,7 @@
 
-import Foundation
 import CoreLocation
 
 class ForecastPoint: NSObject, NSCoding {
-    
-    
     
     let location: CLLocation
     var address: ForecastAddress?

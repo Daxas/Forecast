@@ -37,17 +37,14 @@ class ForecastViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //updateAddressLabels(with: forecastPoint)
         cleanWeatherLabels()
         forecastModel.viewWillAppear()
-        //getForecast()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        forecastModel.viewDidLoad()
-        // NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: .locationDidChange , object: nil)
         configure()
+        forecastModel.viewDidLoad()
     }
     
     // MARK: - Private
@@ -76,19 +73,6 @@ class ForecastViewController: UIViewController {
         refresher.addTarget(self, action: #selector(ForecastViewController.refreshForecast), for: UIControlEvents.valueChanged)
         dailyTableView.addSubview(refresher)
     }
-    
-    // MARK: - Data
-    
-    /* @objc private func forecastType(notification: NSNotification) {
-     guard let userInfo = notification.userInfo else {
-     return
-     }
-     guard let selectedLocation = userInfo["favorLocation"] as? ForecastPoint else {
-     forecastPoint = nil
-     return
-     }
-     forecastPoint = selectedLocation
-     }*/
     
     // MARK: - Private
     

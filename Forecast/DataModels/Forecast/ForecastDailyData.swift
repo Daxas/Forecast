@@ -1,5 +1,4 @@
 
-import Foundation
 import Mapper
 
 struct ForecastDailyData: Mappable {

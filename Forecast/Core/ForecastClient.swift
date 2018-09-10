@@ -1,5 +1,4 @@
 
-import Foundation
 import Mapper
 import MapKit
 
@@ -10,7 +9,13 @@ enum ForecastClientError: Error {
     case dataError
 }
 
-class ForecastClient {
+protocol ForecastClientProtocol: class {
+    func getForecast(for location: CLLocation,
+                     completion: @escaping (Forecast) -> Void,
+                     failure: @escaping (Error) -> Void)
+}
+
+class ForecastClient: ForecastClientProtocol {
     
     struct Configuration {
         static var apiKey   = "cfb098593c0899de76d374e96d68c8e3"
@@ -20,16 +25,8 @@ class ForecastClient {
     
     private let urlSession = URLSession.shared
     private var dataTask: URLSessionDataTask?
-    
     private var baseURL: String {
         return Configuration.baseURL + Configuration.apiKey
-    }
-    
-    private func forecastURL(for location: CLLocation) -> URL? {
-        let lat = String(format: "%.3f", location.coordinate.latitude)
-        let long = String(format: "%.3f", location.coordinate.longitude)
-        let path = baseURL + "/" + lat + "," + long + "?units=si" + "&lang=" + Configuration.language
-        return URL(string: path)
     }
     
     func getForecast(for location: CLLocation,
@@ -88,6 +85,15 @@ class ForecastClient {
             
         }
         dataTask?.resume()
+    }
+    
+    // MARK: - Private
+    
+    private func forecastURL(for location: CLLocation) -> URL? {
+        let lat = String(format: "%.3f", location.coordinate.latitude)
+        let long = String(format: "%.3f", location.coordinate.longitude)
+        let path = baseURL + "/" + lat + "," + long + "?units=si" + "&lang=" + Configuration.language
+        return URL(string: path)
     }
     
 }

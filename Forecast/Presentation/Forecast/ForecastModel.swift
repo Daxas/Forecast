@@ -9,11 +9,11 @@ protocol ForecastModelDelegate: class {
 protocol ForecastModelProtocol: class {
     func viewWillAppear()
     func viewDidLoad()
+    func favoritesWasSelected(point: ForecastPoint)
 }
 
 class ForecastModel: ForecastModelProtocol {
-   
-   
+    
     var forecastAdapter: ForecastAdapterProtocol!
     
     private var forecastPoint: ForecastPoint?
@@ -22,15 +22,15 @@ class ForecastModel: ForecastModelProtocol {
     
     init(forecastAdapter: ForecastAdapter) {
         self.forecastAdapter = forecastAdapter
+        
     }
     
     func viewWillAppear() {
+        delegate?.updateAddressLabels(with: forecastPoint)
         getForecast()
     }
     
     func viewDidLoad() {
-        NotificationCenter.default.addObserver(self, selector: #selector(forecastType(notification:)), name: .locationDidChange , object: nil)
-        
         guard let coordinates = AppSettings().getSelectedCoordinates() else {
             forecastPoint = nil
             return
@@ -41,6 +41,11 @@ class ForecastModel: ForecastModelProtocol {
             self?.forecastPoint?.address = $0.address
             self?.delegate?.updateAddressLabels(with: self?.forecastPoint)
             }, failure: {print($0)})
+    }
+    
+   func favoritesWasSelected(point: ForecastPoint) {
+        forecastPoint = point
+        fetchForecast()
     }
     
     // MARK: - Private
@@ -68,18 +73,6 @@ class ForecastModel: ForecastModelProtocol {
             point.forecast = $0.forecast
             self?.delegate?.updateWeatherLabels(with: point)
             }, failure: {print($0)})
-    }
-    
-    @objc private func forecastType(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else {
-            return
-        }
-        guard let selectedLocation = userInfo["favorLocation"] as? ForecastPoint else {
-            forecastPoint = nil
-            return
-        }
-        forecastPoint = selectedLocation
-        fetchForecast()
     }
     
 }

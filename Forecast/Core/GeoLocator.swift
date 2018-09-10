@@ -1,14 +1,18 @@
-import Foundation
+
 import CoreLocation
+
+typealias GeoLocatorCompletion = (CLLocation?, Error?) -> Void
 
 enum GeoLocatorError: String, Error {
     case disableLocator = "Location service disabled"
     case locationError  = "Did fail location"
 }
 
-class GeoLocator: NSObject, CLLocationManagerDelegate {
-    
-  typealias GeoLocatorCompletion = (CLLocation?, Error?) -> Void
+protocol GeoLocatorProtocol: class {
+    func requestLocation(completion: @escaping GeoLocatorCompletion)
+}
+
+class GeoLocator: NSObject, GeoLocatorProtocol {
     
     lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -32,11 +36,14 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
         self.completion = completion
         locationManager.startUpdatingLocation()
     }
-    
-    // MARK: - CLLocationManagerDelegate
+}
+
+// MARK: - CLLocationManagerDelegate
+
+extension GeoLocator: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-       print(GeoLocatorError.locationError.rawValue)
+        print(GeoLocatorError.locationError.rawValue)
         if (error as NSError).code == CLError.locationUnknown.rawValue {
             return
         }
@@ -50,8 +57,8 @@ class GeoLocator: NSObject, CLLocationManagerDelegate {
         if newLocation.timestamp.timeIntervalSinceNow < -10 {
             return
         }
-            locationManager.stopUpdatingLocation()
-            completion?(newLocation, nil)
+        locationManager.stopUpdatingLocation()
+        completion?(newLocation, nil)
     }
     
 }

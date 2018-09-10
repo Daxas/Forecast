@@ -5,13 +5,11 @@ class FavoritesViewController: UIViewController {
     
     @IBOutlet var favoritesTableView: UITableView!
     
+    var favoritesModel: FavoritesModel!
     private lazy var favoritesTablePresenter = FavoritesTablePresenter(with: self.favoritesTableView)
-    var store: FavoritesStore!
-    var forecastAdapter: ForecastAdapter!
     
-    init(forecastAdapter: ForecastAdapter, store: FavoritesStore) {
-        self.forecastAdapter = forecastAdapter
-        self.store = store
+    init(favoritesModel: FavoritesModel) {
+        self.favoritesModel = favoritesModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -23,9 +21,10 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        favoritesTablePresenter.delegate = self
-        favoritesTablePresenter.update(with: store.loadForecastPoints())
         configure()
+        favoritesTablePresenter.delegate = favoritesModel
+        favoritesModel.delegate = self
+        favoritesModel.load()
     }
     
     // MARK: - Private
@@ -42,7 +41,7 @@ class FavoritesViewController: UIViewController {
         guard let searchResultController = storyboard?.instantiateViewController(withIdentifier: "SearchResultController") as? SearchResultController else {
             fatalError("Unable to instatiate a SearchResultController from the storyboard.")
         }
-        searchResultController.delegate = self
+        searchResultController.delegate = favoritesModel//self as? SearchResultControllerDelegate
         if #available(iOS 11.0, *) {
             navigationItem.searchController = UISearchController(searchResultsController: searchResultController)
             navigationItem.searchController?.searchResultsUpdater = searchResultController
@@ -74,50 +73,13 @@ class FavoritesViewController: UIViewController {
     
 }
 
-// MARK: - FavoritesTablePresenterDelegate
+// MARK: - FavoritesModelDelegate
 
-extension FavoritesViewController: FavoritesTablePresenterDelegate {
+extension FavoritesViewController: FavoritesModelDelegate {
     
-    func favoritesPresenterDelegate(didSelect point: ForecastPoint?) {
-        NotificationCenter.default.post(name: .locationDidChange, object: nil, userInfo: ["favorLocation": point as Any])
-        AppSettings().setSelectedCoordinates(forecastPoint: point)
-    }
-    
-    func favoritesPresenterDelegate(favoritesDidChange favorites: [ForecastPoint]) {
-        store.save(favorites: favorites)
-    }
-    
-}
-
-// MARK: - SearchResultControllerDelegate
-
-extension FavoritesViewController: SearchResultControllerDelegate {
-    
-    func searchResultControllerDelegate(didSelect point: ForecastPoint) {
-        if #available(iOS 11.0, *) {
-            navigationItem.searchController?.searchBar.text = ""
-        } else {
-            // Fallback on earlier versions
-            
-        }
-        var favorites = store.loadForecastPoints()
-        var pointInFavorites = false
-        for favorPoint in favorites {
-            if favorPoint.address?.city == point.address?.city {
-                pointInFavorites = true
-                break
-            }
-        }
-        guard !pointInFavorites else {
-            return
-        }
-        favorites.append(point)
+    func update(with favorites: [ForecastPoint]) {
         favoritesTablePresenter.update(with: favorites)
-        forecastAdapter.getAddress(for: point, completion: { [weak self] in
-            point.address = $0.address
-            self?.favoritesTablePresenter.update(with: favorites)
-            self?.store.save(favorites: favorites)
-            }, failure: {print($0)})
     }
     
 }
+

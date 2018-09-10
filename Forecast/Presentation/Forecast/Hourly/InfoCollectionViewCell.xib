@@ -37,7 +37,7 @@
                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="windIcon" translatesAutoresizingMaskIntoConstraints="NO" id="zsI-Um-ACJ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="windIcon" translatesAutoresizingMaskIntoConstraints="NO" id="zsI-Um-ACJ">
                         <rect key="frame" x="4" y="4" width="16" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="MIu-4N-Wey"/>
@@ -61,6 +61,7 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="zsI-Um-ACJ" firstAttribute="top" secondItem="BgA-bw-Qie" secondAttribute="top" constant="4" id="29g-xE-zVt"/>
                 <constraint firstItem="NUB-lo-S5S" firstAttribute="centerY" secondItem="BgA-bw-Qie" secondAttribute="centerY" id="4B6-3O-SUz"/>
                 <constraint firstItem="BgA-bw-Qie" firstAttribute="trailing" secondItem="NUB-lo-S5S" secondAttribute="trailing" constant="4" id="7Tc-tb-4iK"/>
                 <constraint firstItem="zsI-Um-ACJ" firstAttribute="leading" secondItem="ClK-x3-Y1D" secondAttribute="leading" constant="4" id="9pR-rA-r2b"/>

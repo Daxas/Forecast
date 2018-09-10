@@ -1,17 +1,11 @@
 
-import Foundation
 import CoreLocation
 
 typealias ForecastAdapterCompletion = (ForecastPoint) -> Void
 
 protocol ForecastAdapterProtocol: class {
-   // func getForecastAndAddress(for forecastPoint: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
-    //                           failure: @escaping (Error) -> Void)
     func getForecastForCurrentPoint(completion: @escaping ForecastAdapterCompletion,
                                     failure: @escaping (Error) -> Void)
-    
-   // func getCurrentPoint(completion: @escaping ForecastAdapterCompletion,
-    //                     failure: @escaping (Error) -> Void)
     func getAddress(for point: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
                     failure: @escaping (Error) -> Void)
     func getForecast(for point: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
@@ -21,24 +15,13 @@ protocol ForecastAdapterProtocol: class {
 class ForecastAdapter: ForecastAdapterProtocol {
     
     var geoCoder: GeoCoder
-    var geoLocator: GeoLocator
-    var forecastClient: ForecastClient
+    var geoLocator: GeoLocatorProtocol
+    var forecastClient: ForecastClientProtocol
     
-    init(geoCoder: GeoCoder, geoLocator: GeoLocator, forecastClient: ForecastClient) {
+    init(geoCoder: GeoCoder, geoLocator: GeoLocatorProtocol, forecastClient: ForecastClientProtocol) {
         self.geoCoder = geoCoder
         self.geoLocator = geoLocator
         self.forecastClient = forecastClient
-    }
-    
-    private func getForecastAndAddress(for forecastPoint: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
-                               failure: @escaping (Error) -> Void) {
-        getAddress(for: forecastPoint, completion: { (point) in
-            forecastPoint.address = point.address
-            self.getForecast(for: point, completion: { (point) in
-                forecastPoint.forecast = point.forecast
-                completion(forecastPoint)
-            }, failure: { print($0)})
-        }, failure: { print($0)})
     }
     
     func getForecastForCurrentPoint(completion: @escaping ForecastAdapterCompletion,
@@ -54,27 +37,6 @@ class ForecastAdapter: ForecastAdapterProtocol {
         }, failure: { print($0)
             print("getCurrentPoint error: NO getForecastForCurrentPoint")
         })
-    }
-    
-    
-    private func getCurrentPoint(completion: @escaping ForecastAdapterCompletion,
-                         failure: @escaping (Error) -> Void){
-        geoLocator.requestLocation { (location, error) in
-            if let error = error  {
-                print(error)
-                print("geoLocator.requestLocation error")
-                return
-            }
-            guard let location = location else {
-                return
-            }
-            let point = ForecastPoint(with: location)
-            self.getAddress(for: point, completion: { (address) in
-                completion(point)
-            }, failure: { (error) in
-                print("get address error: getCurrentPoint")
-            })
-        }
     }
     
     func getAddress(for point: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
@@ -98,6 +60,28 @@ class ForecastAdapter: ForecastAdapterProtocol {
             completion(point)
         }) { (error) in
             print("getForecast: NO forecast for current point")
+        }
+    }
+    
+    // MARK: - Private
+    
+    private func getCurrentPoint(completion: @escaping ForecastAdapterCompletion,
+                                 failure: @escaping (Error) -> Void){
+        geoLocator.requestLocation { (location, error) in
+            if let error = error  {
+                print(error)
+                print("geoLocator.requestLocation error")
+                return
+            }
+            guard let location = location else {
+                return
+            }
+            let point = ForecastPoint(with: location)
+            self.getAddress(for: point, completion: { (address) in
+                completion(point)
+            }, failure: { (error) in
+                print("get address error: getCurrentPoint")
+            })
         }
     }
     

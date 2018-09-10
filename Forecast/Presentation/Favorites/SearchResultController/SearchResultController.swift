@@ -1,5 +1,4 @@
 import UIKit
-import Foundation
 import CoreLocation
 
 enum ResultCells: Int {
@@ -89,6 +88,7 @@ class SearchResultController: UITableViewController, UISearchResultsUpdating {
 }
 
 extension SearchResultController: UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchingLocation(searchText)
     }

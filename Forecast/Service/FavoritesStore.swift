@@ -1,10 +1,15 @@
-import Foundation
+
 import CoreLocation
 
 private let directory = "Forecast.plist"
 private let key = "FavoriteLocations"
 
-class FavoritesStore {
+protocol FavoritesStoreProtocol: class {
+    func save(favorites: [ForecastPoint])
+    func loadForecastPoints() -> [ForecastPoint]
+}
+
+class FavoritesStore: FavoritesStoreProtocol {
     
     // MARK: - Public
     

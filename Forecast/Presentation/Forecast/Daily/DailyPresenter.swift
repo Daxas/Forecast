@@ -1,5 +1,4 @@
 import UIKit
-import Foundation
 
 class DailyPresenter: NSObject {
     
@@ -38,9 +37,6 @@ class DailyPresenter: NSObject {
 }
 
 // MARK: - TableView live cycle
-
-
-
 
 extension DailyPresenter: UITableViewDataSource {
    

@@ -1,8 +1,12 @@
 
 import CoreLocation
-import Foundation
 
-class AppSettings {
+protocol AppSettingsProtocol: class {
+    func setSelectedCoordinates(forecastPoint: ForecastPoint?)
+    func getSelectedCoordinates() -> CLLocation?
+}
+
+class AppSettings: AppSettingsProtocol {
     
     func setSelectedCoordinates(forecastPoint: ForecastPoint?) {
         guard let point = forecastPoint else {

@@ -15,6 +15,7 @@
 		8427D1A62144589A003CA788 /* DailyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427D1A52144589A003CA788 /* DailyTableViewCell.xib */; };
 		8427D1A82144632A003CA788 /* HourlyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427D1A72144632A003CA788 /* HourlyCollectionViewCell.xib */; };
 		8427D1AA21446C8E003CA788 /* InfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427D1A921446C8E003CA788 /* InfoCollectionViewCell.xib */; };
+		8427D1AC2146F3DB003CA788 /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D1AB2146F3DB003CA788 /* FavoritesModel.swift */; };
 		842841F92141BB33000CCE60 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842841F82141BB33000CCE60 /* ForecastModel.swift */; };
 		842D43DA2111B940005D6BE0 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D92111B93F005D6BE0 /* SearchResultController.swift */; };
 		842D43DE2111F0BD005D6BE0 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */; };
@@ -62,6 +63,7 @@
 		8427D1A52144589A003CA788 /* DailyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyTableViewCell.xib; sourceTree = "<group>"; };
 		8427D1A72144632A003CA788 /* HourlyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyCollectionViewCell.xib; sourceTree = "<group>"; };
 		8427D1A921446C8E003CA788 /* InfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InfoCollectionViewCell.xib; sourceTree = "<group>"; };
+		8427D1AB2146F3DB003CA788 /* FavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
 		842841F82141BB33000CCE60 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
 		842D43D92111B93F005D6BE0 /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				84972C812101C19D00EC1E94 /* FavoritesStore.swift */,
 				84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */,
+				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -144,14 +147,6 @@
 				8425A157211832FF009939BD /* NSNotification.Name.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		8429B54820E5683900456D3A /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		842D43D4210ED360005D6BE0 /* TablePresenter */ = {
@@ -271,7 +266,6 @@
 				846442B020E23119006197AC /* Presentation */,
 				8429B54520E55EEE00456D3A /* Extensions */,
 				84AC7B5021138E05007DDF78 /* Utils */,
-				8429B54820E5683900456D3A /* Managers */,
 				8477BEDC210C4A040003DB74 /* View */,
 				846442AF20E230C1006197AC /* DataModels */,
 				846442B320E23213006197AC /* Storyboards */,
@@ -288,6 +282,7 @@
 				84AC7B4F21123801007DDF78 /* SearchResultController */,
 				842D43D4210ED360005D6BE0 /* TablePresenter */,
 				84972C792101132900EC1E94 /* FavoritesViewController.swift */,
+				8427D1AB2146F3DB003CA788 /* FavoritesModel.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -467,6 +462,7 @@
 				841E8AA520E7810D008F4EA4 /* DailyTableViewCell.swift in Sources */,
 				8439F3A720EA2CFF005691FD /* HourlyPresenter.swift in Sources */,
 				84972C822101C19D00EC1E94 /* FavoritesStore.swift in Sources */,
+				8427D1AC2146F3DB003CA788 /* FavoritesModel.swift in Sources */,
 				8477BED4210B4A610003DB74 /* FavoritesHeaderView.swift in Sources */,
 				84F24E2B20F2A251005AE351 /* ForecastAdapter.swift in Sources */,
 				84733D7820F69C46001DE585 /* String+Localizable.swift in Sources */,
