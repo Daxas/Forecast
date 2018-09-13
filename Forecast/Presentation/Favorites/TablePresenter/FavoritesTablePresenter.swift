@@ -39,6 +39,8 @@ class FavoritesTablePresenter: NSObject {
     private var favorites = [ForecastPoint]()
     private var selectedIndex: IndexPath?
     
+    private let favoritesModel: FavoritesModel
+    
     weak var delegate: FavoritesTablePresenterDelegate?
     
     // MARK: - Public
@@ -48,8 +50,9 @@ class FavoritesTablePresenter: NSObject {
         tableView.reloadData()
     }
     
-    init(with tableView: UITableView) {
+    init(with tableView: UITableView, favoritesModel: FavoritesModel) {
         self.tableView = tableView
+        self.favoritesModel = favoritesModel
         super.init()
         tableView.dataSource = self
         tableView.delegate = self
@@ -73,6 +76,8 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         guard let section = FavoritesSections(rawValue: indexPath.section) else {
             return UITableViewCell()
         }
+        let cellNib = UINib.init(nibName: section.cellIdentifier, bundle: Bundle.main)
+        tableView.register(cellNib, forCellReuseIdentifier: section.cellIdentifier)
         return tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath)
     }
     
@@ -80,12 +85,13 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         guard let favorCell = cell as? FavoritesPointCell else {
             return
         }
-        
+        favoritesModel.cellOutput = favorCell
+        favorCell.updateWeatherLabels(with: nil)
         if  indexPath.section == FavoritesSections.current.rawValue {
             favorCell.currentLocationLabel.text = "Current location".localized()
-            favorCell.configureCurrentLocationCell()
+            configure(currentLocationCell: favorCell)
         } else {
-            favorCell.configureFavoritesCell(with: favorites[indexPath.row])
+            configure(favoritesCell: favorCell, with: favorites[indexPath.row])
         }
     }
     
@@ -101,6 +107,18 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
             return false
         }
         return true
+    }
+    
+    // MARK: - Private
+    
+    private func configure(favoritesCell: FavoritesPointCell, with point: ForecastPoint) {
+        favoritesCell.updateAddressLabels(with: point)
+        favoritesModel.fetchForecast(for: point) 
+    }
+    
+    private func configure(currentLocationCell: FavoritesPointCell) {
+        currentLocationCell.updateAddressLabels(with: nil)
+        favoritesModel.fetchCurrentForecast()
     }
     
     // MARK: - TableView header and footer

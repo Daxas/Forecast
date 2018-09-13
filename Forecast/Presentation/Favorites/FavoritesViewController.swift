@@ -6,7 +6,7 @@ class FavoritesViewController: UIViewController {
     @IBOutlet var favoritesTableView: UITableView!
     
     var favoritesModel: FavoritesModel!
-    private lazy var favoritesTablePresenter = FavoritesTablePresenter(with: self.favoritesTableView)
+    private lazy var favoritesTablePresenter = FavoritesTablePresenter(with: self.favoritesTableView, favoritesModel: self.favoritesModel)
     
     init(favoritesModel: FavoritesModel) {
         self.favoritesModel = favoritesModel

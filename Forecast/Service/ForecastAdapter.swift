@@ -14,9 +14,9 @@ protocol ForecastAdapterProtocol: class {
 
 class ForecastAdapter: ForecastAdapterProtocol {
     
-    var geoCoder: GeoCoder
-    var geoLocator: GeoLocatorProtocol
-    var forecastClient: ForecastClientProtocol
+   private var geoCoder: GeoCoder
+   private var geoLocator: GeoLocatorProtocol
+   private var forecastClient: ForecastClientProtocol
     
     init(geoCoder: GeoCoder, geoLocator: GeoLocatorProtocol, forecastClient: ForecastClientProtocol) {
         self.geoCoder = geoCoder

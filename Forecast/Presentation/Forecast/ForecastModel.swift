@@ -14,15 +14,13 @@ protocol ForecastModelProtocol: class {
 
 class ForecastModel: ForecastModelProtocol {
     
-    var forecastAdapter: ForecastAdapterProtocol!
-    
+    private var forecastAdapter: ForecastAdapterProtocol
     private var forecastPoint: ForecastPoint?
     
     weak var delegate: ForecastModelDelegate?
     
     init(forecastAdapter: ForecastAdapter) {
         self.forecastAdapter = forecastAdapter
-        
     }
     
     func viewWillAppear() {
