@@ -85,8 +85,8 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         guard let favorCell = cell as? FavoritesPointCell else {
             return
         }
-        favoritesModel.cellOutput = favorCell
-        favorCell.updateWeatherLabels(with: nil)
+        favoritesModel.cellInput = favorCell
+        favorCell.configure(with: nil)
         if  indexPath.section == FavoritesSections.current.rawValue {
             favorCell.currentLocationLabel.text = "Current location".localized()
             configure(currentLocationCell: favorCell)
@@ -112,12 +112,12 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     // MARK: - Private
     
     private func configure(favoritesCell: FavoritesPointCell, with point: ForecastPoint) {
-        favoritesCell.updateAddressLabels(with: point)
+        favoritesCell.configure(with: point)
         favoritesModel.fetchForecast(for: point) 
     }
     
     private func configure(currentLocationCell: FavoritesPointCell) {
-        currentLocationCell.updateAddressLabels(with: nil)
+        currentLocationCell.configure(with: nil)
         favoritesModel.fetchCurrentForecast()
     }
     

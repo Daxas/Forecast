@@ -20,6 +20,7 @@
 		8427D1B0214A7CC9003CA788 /* CurrentLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8427D1AF214A7CC9003CA788 /* CurrentLocationCell.xib */; };
 		8427D1B2214AFF2E003CA788 /* CoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D1B1214AFF2E003CA788 /* CoreFactory.swift */; };
 		8427D1B4214B00C9003CA788 /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D1B3214B00C9003CA788 /* ServiceFactory.swift */; };
+		8427D1B6214D57C5003CA788 /* PresentationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D1B5214D57C5003CA788 /* PresentationFactory.swift */; };
 		842841F92141BB33000CCE60 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842841F82141BB33000CCE60 /* ForecastModel.swift */; };
 		842D43DA2111B940005D6BE0 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D92111B93F005D6BE0 /* SearchResultController.swift */; };
 		842D43DE2111F0BD005D6BE0 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */; };
@@ -53,7 +54,7 @@
 		84972C822101C19D00EC1E94 /* FavoritesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C812101C19D00EC1E94 /* FavoritesStore.swift */; };
 		84F24E2320EE5CF1005AE351 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */; };
 		84F24E2520EFAF3F005AE351 /* GeoLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2420EFAF3F005AE351 /* GeoLocator.swift */; };
-		84F24E2B20F2A251005AE351 /* ForecastAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */; };
+		84F24E2B20F2A251005AE351 /* ForecastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2A20F2A251005AE351 /* ForecastService.swift */; };
 		84F24E2D20F3931A005AE351 /* ForecastPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F24E2C20F3931A005AE351 /* ForecastPoint.swift */; };
 		EBDEDC327241E83525ADCF71 /* Pods_Forecast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C58725260B86ED2BBF0E3C /* Pods_Forecast.framework */; };
 /* End PBXBuildFile section */
@@ -72,6 +73,7 @@
 		8427D1AF214A7CC9003CA788 /* CurrentLocationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentLocationCell.xib; sourceTree = "<group>"; };
 		8427D1B1214AFF2E003CA788 /* CoreFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreFactory.swift; sourceTree = "<group>"; };
 		8427D1B3214B00C9003CA788 /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
+		8427D1B5214D57C5003CA788 /* PresentationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationFactory.swift; sourceTree = "<group>"; };
 		842841F82141BB33000CCE60 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
 		842D43D92111B93F005D6BE0 /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
@@ -108,7 +110,7 @@
 		84972C812101C19D00EC1E94 /* FavoritesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesStore.swift; sourceTree = "<group>"; };
 		84F24E2220EE5CF1005AE351 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		84F24E2420EFAF3F005AE351 /* GeoLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocator.swift; sourceTree = "<group>"; };
-		84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAdapter.swift; sourceTree = "<group>"; };
+		84F24E2A20F2A251005AE351 /* ForecastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastService.swift; sourceTree = "<group>"; };
 		84F24E2C20F3931A005AE351 /* ForecastPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastPoint.swift; sourceTree = "<group>"; };
 		A8C58725260B86ED2BBF0E3C /* Pods_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC4F9E482985CE5C0948F1C4 /* Pods-Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Forecast.release.xcconfig"; path = "Pods/Target Support Files/Pods-Forecast/Pods-Forecast.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,9 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				8427D1B3214B00C9003CA788 /* ServiceFactory.swift */,
-				84F24E2A20F2A251005AE351 /* ForecastAdapter.swift */,
-				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
+				84F24E2A20F2A251005AE351 /* ForecastService.swift */,
 				84972C812101C19D00EC1E94 /* FavoritesStore.swift */,
+				8477BEE3210DA0FE0003DB74 /* AppSettings.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -215,6 +217,7 @@
 		846442B020E23119006197AC /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				8427D1B5214D57C5003CA788 /* PresentationFactory.swift */,
 				84972C78210112F700EC1E94 /* Favorites */,
 				846442B120E23190006197AC /* Forecast */,
 			);
@@ -471,6 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8427D1B6214D57C5003CA788 /* PresentationFactory.swift in Sources */,
 				84972C802101167600EC1E94 /* FavoritesTablePresenter.swift in Sources */,
 				8477BEE0210CF41F0003DB74 /* FavoritesFooterView.swift in Sources */,
 				841E8AA520E7810D008F4EA4 /* DailyTableViewCell.swift in Sources */,
@@ -478,7 +482,7 @@
 				84972C822101C19D00EC1E94 /* FavoritesStore.swift in Sources */,
 				8427D1AC2146F3DB003CA788 /* FavoritesModel.swift in Sources */,
 				8477BED4210B4A610003DB74 /* FavoritesHeaderView.swift in Sources */,
-				84F24E2B20F2A251005AE351 /* ForecastAdapter.swift in Sources */,
+				84F24E2B20F2A251005AE351 /* ForecastService.swift in Sources */,
 				84733D7820F69C46001DE585 /* String+Localizable.swift in Sources */,
 				8479EE7320DC211600F37C4E /* ForecastViewController.swift in Sources */,
 				84F24E2320EE5CF1005AE351 /* CollectionViewCell.swift in Sources */,

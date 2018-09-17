@@ -1,7 +1,7 @@
 protocol ServiceFactoryProtocol {
-   // func createFavoritesStore() -> FavoritesStoreProtocol
-    func createForecastAdapter() -> ForecastAdapterProtocol
-  //  func createAppSettings() -> AppSettingsProtocol
+    func createFavoritesStore() -> FavoritesStoreProtocol
+    func createForecastService() -> ForecastServiceProtocol
+    func createAppSettings() -> AppSettingsProtocol
 }
 
 class ServiceFactory: ServiceFactoryProtocol {
@@ -12,17 +12,16 @@ class ServiceFactory: ServiceFactoryProtocol {
         self.coreFactory = coreFactory
     }
     
-    func createForecastAdapter() -> ForecastAdapterProtocol {
-        let forecastAdapter = ForecastAdapter(geoCoder: coreFactory.createGeoCoder(), geoLocator: coreFactory.createGeoLocator(), forecastClient: coreFactory.createForecastClient())
+    func createForecastService() -> ForecastServiceProtocol {
+        let forecastAdapter = ForecastService(geoCoder: coreFactory.createGeoCoder(), geoLocator: coreFactory.createGeoLocator(), forecastClient: coreFactory.createForecastClient())
         return forecastAdapter
     }
     
-    /*func createAppSettings() -> AppSettingsProtocol {
-        <#code#>
+    func createFavoritesStore() -> FavoritesStoreProtocol {
+        return FavoritesStore()
     }
     
-    func createFavoritesStore() -> FavoritesStoreProtocol {
-        <#code#>
-    }*/
-    
+    func createAppSettings() -> AppSettingsProtocol {
+        return AppSettings()
+    }
 }

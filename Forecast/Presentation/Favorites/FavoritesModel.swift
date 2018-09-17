@@ -2,23 +2,22 @@ protocol FavoritesModelDelegate: class {
     func update(with favorites: [ForecastPoint])
 }
 
-protocol FavoritesModelCellOutput: class {
-    func updateWeatherLabels(with: ForecastPoint?)
-    func updateAddressLabels(with: ForecastPoint?)
+protocol FavoritesCellInput: class {
+    func configure(with: ForecastPoint?)
 }
 
 class FavoritesModel {
     
-    private var forecastAdapter: ForecastAdapterProtocol
+    private var forecastService: ForecastServiceProtocol
     private var store: FavoritesStoreProtocol
     private var appSettings: AppSettingsProtocol
     private var forecastModel: ForecastModelProtocol
     
     weak var delegate: FavoritesModelDelegate?
-    weak var cellOutput: FavoritesModelCellOutput?
+    weak var cellInput: FavoritesCellInput?
     
-    init(forecastAdapter: ForecastAdapterProtocol, store: FavoritesStoreProtocol, appSettings: AppSettingsProtocol, forecastModel: ForecastModelProtocol) {
-        self.forecastAdapter = forecastAdapter
+    init(forecastAdapter: ForecastServiceProtocol, store: FavoritesStoreProtocol, appSettings: AppSettingsProtocol, forecastModel: ForecastModelProtocol) {
+        self.forecastService = forecastAdapter
         self.store = store
         self.appSettings = appSettings
         self.forecastModel = forecastModel
@@ -30,16 +29,15 @@ class FavoritesModel {
     }
     
     func fetchForecast(for point: ForecastPoint) {
-        forecastAdapter.getForecast(for: point, completion: { [weak self] in
-            self?.cellOutput?.updateWeatherLabels(with: $0)
-            
+        forecastService.getForecast(for: point, completion: { [weak self] in
+            self?.cellInput?.configure(with: $0)
+            //self?.delegate?.update(with: <#T##[ForecastPoint]#>)
             }, failure: {print($0)})
     }
     
     func fetchCurrentForecast() {
-        forecastAdapter.getForecastForCurrentPoint(completion: {[weak self] in
-            self?.cellOutput?.updateAddressLabels(with: $0)
-            self?.cellOutput?.updateWeatherLabels(with: $0)
+        forecastService.getForecastForCurrentPoint(completion: {[weak self] in
+            self?.cellInput?.configure(with: $0)
             
             } , failure: {print($0)} )
     }
@@ -63,7 +61,7 @@ extension FavoritesModel: SearchResultControllerDelegate {
         }
         favorites.append(point)
         delegate?.update(with: favorites)
-        forecastAdapter.getAddress(for: point, completion: { [weak self] in
+        forecastService.getAddress(for: point, completion: { [weak self] in
             point.address = $0.address
             self?.delegate?.update(with: favorites)
             self?.store.save(favorites: favorites)

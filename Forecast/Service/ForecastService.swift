@@ -3,7 +3,7 @@ import CoreLocation
 
 typealias ForecastAdapterCompletion = (ForecastPoint) -> Void
 
-protocol ForecastAdapterProtocol: class {
+protocol ForecastServiceProtocol: class {
     func getForecastForCurrentPoint(completion: @escaping ForecastAdapterCompletion,
                                     failure: @escaping (Error) -> Void)
     func getAddress(for point: ForecastPoint, completion: @escaping ForecastAdapterCompletion,
@@ -12,7 +12,7 @@ protocol ForecastAdapterProtocol: class {
                      failure: @escaping (Error) -> Void)
 }
 
-class ForecastAdapter: ForecastAdapterProtocol {
+class ForecastService: ForecastServiceProtocol {
     
    private var geoCoder: GeoCoder
    private var geoLocator: GeoLocatorProtocol

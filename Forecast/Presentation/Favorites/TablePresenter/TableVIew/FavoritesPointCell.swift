@@ -13,9 +13,9 @@ class FavoritesPointCell: UITableViewCell {
     
 }
  
- extension FavoritesPointCell: FavoritesModelCellOutput {
+ extension FavoritesPointCell: FavoritesCellInput {
    
-    func updateWeatherLabels(with forecastPoint: ForecastPoint?) {
+    func configure(with forecastPoint: ForecastPoint?) {
         if let forecastPoint = forecastPoint, let forecast = forecastPoint.forecast {
             temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
             if reuseIdentifier == FavoritesSections.current.cellIdentifier {
@@ -27,10 +27,6 @@ class FavoritesPointCell: UITableViewCell {
             temperatureLabel.text = ""
             weatherIcon.image = nil
         }
-        
-    }
-    
-    func updateAddressLabels(with forecastPoint: ForecastPoint?) {
         if let forecastPoint = forecastPoint, let address = forecastPoint.address {
             addressLabel.text = address.city
             subAddressLabel.text = address.detail

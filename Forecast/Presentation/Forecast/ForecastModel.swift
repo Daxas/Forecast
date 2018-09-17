@@ -14,13 +14,13 @@ protocol ForecastModelProtocol: class {
 
 class ForecastModel: ForecastModelProtocol {
     
-    private var forecastAdapter: ForecastAdapterProtocol
+    private var forecastService: ForecastServiceProtocol
     private var forecastPoint: ForecastPoint?
     
     weak var delegate: ForecastModelDelegate?
     
-    init(forecastAdapter: ForecastAdapter) {
-        self.forecastAdapter = forecastAdapter
+    init(forecastService: ForecastServiceProtocol) {
+        self.forecastService = forecastService
     }
     
     func viewWillAppear() {
@@ -35,7 +35,7 @@ class ForecastModel: ForecastModelProtocol {
         }
         forecastPoint = ForecastPoint(with: coordinates)
         
-        forecastAdapter.getAddress(for: forecastPoint!, completion: { [weak self] in
+        forecastService.getAddress(for: forecastPoint!, completion: { [weak self] in
             self?.forecastPoint?.address = $0.address
             self?.delegate?.updateAddressLabels(with: self?.forecastPoint)
             }, failure: {print($0)})
@@ -57,7 +57,7 @@ class ForecastModel: ForecastModelProtocol {
     }
     
     private func fetchCurrentForecast() {
-        forecastAdapter.getForecastForCurrentPoint(completion: { [weak self] in
+        forecastService.getForecastForCurrentPoint(completion: { [weak self] in
             self?.delegate?.updateWeatherLabels(with: $0)
             self?.delegate?.updateAddressLabels(with: $0)
             }, failure: {print($0)})
@@ -67,7 +67,7 @@ class ForecastModel: ForecastModelProtocol {
         guard let point = forecastPoint else {
             return
         }
-        forecastAdapter.getForecast(for: point, completion: { [weak self] in
+        forecastService.getForecast(for: point, completion: { [weak self] in
             point.forecast = $0.forecast
             self?.delegate?.updateWeatherLabels(with: point)
             }, failure: {print($0)})
