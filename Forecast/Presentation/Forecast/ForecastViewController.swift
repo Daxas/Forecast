@@ -54,7 +54,7 @@ class ForecastViewController: UIViewController {
         if let forecastModel = forecastModel as? ForecastModel {
            forecastModel.delegate = self
         }
-        tabBarItem.title = "Weather.title".localized()
+       // tabBarItem.title = "Weather.title".localized()
         dailyTableView.allowsSelection = false
         collectionView.contentInset = UIEdgeInsetsMake(0, 16, 0, 16)
         configureRefresher()

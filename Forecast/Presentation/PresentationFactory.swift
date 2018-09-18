@@ -1,3 +1,4 @@
+import UIKit
 
 protocol PresentationFactoryProtocol {
     func createForecastModel() -> ForecastModelProtocol
@@ -21,5 +22,14 @@ class PresentationFactory: PresentationFactoryProtocol {
         let forecastModel = createForecastModel()
         return FavoritesModel(forecastAdapter: serviceFactory.createForecastService(), store: serviceFactory.createFavoritesStore(), appSettings: serviceFactory.createAppSettings(), forecastModel: forecastModel)
     }
+    
+    func createForecastModule() {
+        let forecastModel = ForecastModel(forecastService: serviceFactory.createForecastService())
+        let forecastVC = ForecastViewController(forecastModel: forecastModel)
+        forecastVC.tabBarItem = UITabBarItem(title: "Weather.title".localized(), image: UIImage(named: "greyStar"), selectedImage: UIImage(named: "blueStar"))
+       
+        
+    }
+    
     
 }

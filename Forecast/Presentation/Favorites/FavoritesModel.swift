@@ -1,9 +1,6 @@
 protocol FavoritesModelDelegate: class {
     func update(with favorites: [ForecastPoint])
-}
-
-protocol FavoritesCellInput: class {
-    func configure(with: ForecastPoint?)
+    func updateCell(with point: ForecastPoint)
 }
 
 class FavoritesModel {
@@ -14,8 +11,7 @@ class FavoritesModel {
     private var forecastModel: ForecastModelProtocol
     
     weak var delegate: FavoritesModelDelegate?
-    weak var cellInput: FavoritesCellInput?
-    
+   
     init(forecastAdapter: ForecastServiceProtocol, store: FavoritesStoreProtocol, appSettings: AppSettingsProtocol, forecastModel: ForecastModelProtocol) {
         self.forecastService = forecastAdapter
         self.store = store
@@ -30,15 +26,13 @@ class FavoritesModel {
     
     func fetchForecast(for point: ForecastPoint) {
         forecastService.getForecast(for: point, completion: { [weak self] in
-            self?.cellInput?.configure(with: $0)
-            //self?.delegate?.update(with: <#T##[ForecastPoint]#>)
+            self?.delegate?.updateCell(with: $0)
             }, failure: {print($0)})
     }
     
     func fetchCurrentForecast() {
         forecastService.getForecastForCurrentPoint(completion: {[weak self] in
-            self?.cellInput?.configure(with: $0)
-            
+            self?.delegate?.updateCell(with: $0)
             } , failure: {print($0)} )
     }
 }

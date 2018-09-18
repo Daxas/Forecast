@@ -43,13 +43,6 @@ class FavoritesTablePresenter: NSObject {
     
     weak var delegate: FavoritesTablePresenterDelegate?
     
-    // MARK: - Public
-    
-    func update(with favorites: [ForecastPoint]) {
-        self.favorites = favorites
-        tableView.reloadData()
-    }
-    
     init(with tableView: UITableView, favoritesModel: FavoritesModel) {
         self.tableView = tableView
         self.favoritesModel = favoritesModel
@@ -58,7 +51,27 @@ class FavoritesTablePresenter: NSObject {
         tableView.delegate = self
     }
     
+    // MARK: - Public
+    
+    func update(with favorites: [ForecastPoint]) {
+        self.favorites = favorites
+        tableView.reloadData()
+    }
+    
+    func updateCell(with point: ForecastPoint) {
+        let index = favorites.index(of: point)
+        var indexPath: IndexPath
+        if let row = index {
+            indexPath = IndexPath(item: row, section: 1)
+        } else {
+           indexPath = IndexPath(item: 0, section: 0)
+        }
+        tableView.reloadRows(at: [indexPath], with: .fade)
+    }
+   
+    
 }
+
 
 extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     
@@ -85,7 +98,6 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         guard let favorCell = cell as? FavoritesPointCell else {
             return
         }
-        favoritesModel.cellInput = favorCell
         favorCell.configure(with: nil)
         if  indexPath.section == FavoritesSections.current.rawValue {
             favorCell.currentLocationLabel.text = "Current location".localized()

@@ -43,7 +43,6 @@ class ForecastModel: ForecastModelProtocol {
     
    func favoritesWasSelected(point: ForecastPoint) {
         forecastPoint = point
-        fetchForecast()
     }
     
     // MARK: - Private

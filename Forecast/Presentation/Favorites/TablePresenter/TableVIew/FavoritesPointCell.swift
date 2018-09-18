@@ -11,10 +11,6 @@ class FavoritesPointCell: UITableViewCell {
     
     private let temperatureUtils = TemperatureUtils()
     
-}
- 
- extension FavoritesPointCell: FavoritesCellInput {
-   
     func configure(with forecastPoint: ForecastPoint?) {
         if let forecastPoint = forecastPoint, let forecast = forecastPoint.forecast {
             temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)

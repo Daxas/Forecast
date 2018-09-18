@@ -23,7 +23,8 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         configure()
         favoritesTablePresenter.delegate = favoritesModel
-        favoritesModel.delegate = self
+        //favoritesModel.delegate = favoritesTablePresenter as? FavoritesModelDelegate
+       favoritesModel.delegate = self
         favoritesModel.load()
     }
     
@@ -79,6 +80,10 @@ extension FavoritesViewController: FavoritesModelDelegate {
     
     func update(with favorites: [ForecastPoint]) {
         favoritesTablePresenter.update(with: favorites)
+    }
+    
+    func updateCell(with point: ForecastPoint) {
+        favoritesTablePresenter.updateCell(with: point)
     }
     
 }
