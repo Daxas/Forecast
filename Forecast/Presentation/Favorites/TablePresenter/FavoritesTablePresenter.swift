@@ -100,7 +100,6 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         }
         favorCell.configure(with: nil)
         if  indexPath.section == FavoritesSections.current.rawValue {
-            favorCell.currentLocationLabel.text = "Current location".localized()
             configure(currentLocationCell: favorCell)
         } else {
             configure(favoritesCell: favorCell, with: favorites[indexPath.row])

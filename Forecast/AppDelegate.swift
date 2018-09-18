@@ -14,8 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ForecastClient.Configuration.apiKey = ForecastApiKey
         
-        //let coreFactory = CoreFactory()
         let serviceFactory = ServiceFactory(coreFactory: CoreFactory())
+        let presentationFactory = PresentationFactory(serviceFactory: serviceFactory)
+        
+        //window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = presentationFactory.createTabBar()
+        window?.makeKeyAndVisible()
+        /*
         let factory = PresentationFactory(serviceFactory: serviceFactory)
         
         guard let rootViewController = window?.rootViewController as? UITabBarController else {
@@ -23,13 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         for vc in rootViewController.viewControllers! {
             if let vc = vc as? ForecastViewController {
-                vc.forecastModel = factory.createForecastModel()
+                //vc.forecastModel = factory.createForecastModel()
             }
             if let vc = vc as? UINavigationController,
                 let favoritesVC = vc.viewControllers.first as? FavoritesViewController {
-                favoritesVC.favoritesModel = factory.createFavoritesModel()
+              //  favoritesVC.favoritesModel = factory.createFavoritesModel()
             }
-        }
+        }*/
         return true
     }
     

@@ -30,6 +30,19 @@ class FavoritesModel {
             }, failure: {print($0)})
     }
     
+    func fetchForecast(for favorites: [ForecastPoint]) -> [ForecastPoint] {
+        var favoritesWithWeather = favorites
+        for point in favorites {
+            guard let index = favorites.index(of: point) else  {
+                return favorites
+            }
+            forecastService.getForecast(for: point, completion: { [weak self] in
+                favoritesWithWeather[index] = $0
+                }, failure: {print($0)})
+        }
+        return favoritesWithWeather
+    }
+    
     func fetchCurrentForecast() {
         forecastService.getForecastForCurrentPoint(completion: {[weak self] in
             self?.delegate?.updateCell(with: $0)

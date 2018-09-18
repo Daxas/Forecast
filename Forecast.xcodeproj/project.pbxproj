@@ -21,7 +21,6 @@
 		8427D1B2214AFF2E003CA788 /* CoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D1B1214AFF2E003CA788 /* CoreFactory.swift */; };
 		8427D1B4214B00C9003CA788 /* ServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D1B3214B00C9003CA788 /* ServiceFactory.swift */; };
 		8427D1B6214D57C5003CA788 /* PresentationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D1B5214D57C5003CA788 /* PresentationFactory.swift */; };
-		8427D1B82150374A003CA788 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8427D1B721503749003CA788 /* TabBar.swift */; };
 		842841F92141BB33000CCE60 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842841F82141BB33000CCE60 /* ForecastModel.swift */; };
 		842D43DA2111B940005D6BE0 /* SearchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43D92111B93F005D6BE0 /* SearchResultController.swift */; };
 		842D43DE2111F0BD005D6BE0 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */; };
@@ -75,7 +74,6 @@
 		8427D1B1214AFF2E003CA788 /* CoreFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreFactory.swift; sourceTree = "<group>"; };
 		8427D1B3214B00C9003CA788 /* ServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceFactory.swift; sourceTree = "<group>"; };
 		8427D1B5214D57C5003CA788 /* PresentationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationFactory.swift; sourceTree = "<group>"; };
-		8427D1B721503749003CA788 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		842841F82141BB33000CCE60 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
 		842D43D92111B93F005D6BE0 /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		842D43DD2111F0BD005D6BE0 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 			isa = PBXGroup;
 			children = (
 				8427D1B5214D57C5003CA788 /* PresentationFactory.swift */,
-				8427D1B721503749003CA788 /* TabBar.swift */,
 				84972C78210112F700EC1E94 /* Favorites */,
 				846442B120E23190006197AC /* Forecast */,
 			);
@@ -491,7 +488,6 @@
 				84F24E2320EE5CF1005AE351 /* CollectionViewCell.swift in Sources */,
 				84733D8220FA2CED001DE585 /* TemperatureUtils.swift in Sources */,
 				8425A158211832FF009939BD /* NSNotification.Name.swift in Sources */,
-				8427D1B82150374A003CA788 /* TabBar.swift in Sources */,
 				8427D1B4214B00C9003CA788 /* ServiceFactory.swift in Sources */,
 				8479EE8320DC283B00F37C4E /* Forecast.swift in Sources */,
 				84972C7E2101140B00EC1E94 /* FavoritesPointCell.swift in Sources */,
