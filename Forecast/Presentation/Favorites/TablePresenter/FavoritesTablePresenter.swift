@@ -37,6 +37,7 @@ class FavoritesTablePresenter: NSObject {
     
     private let tableView: UITableView
     private var favorites = [ForecastPoint]()
+    private var currentPoint: ForecastPoint?
     private var selectedIndex: IndexPath?
     
     private let favoritesModel: FavoritesModel
@@ -55,10 +56,11 @@ class FavoritesTablePresenter: NSObject {
     
     func update(with favorites: [ForecastPoint]) {
         self.favorites = favorites
+        //favorites = favoritesModel.fetchForecast(for: favorites)
         tableView.reloadData()
     }
     
-    func updateCell(with point: ForecastPoint) {
+   private func updateCell(with point: ForecastPoint) {
         let index = favorites.index(of: point)
         var indexPath: IndexPath
         if let row = index {
@@ -66,10 +68,14 @@ class FavoritesTablePresenter: NSObject {
         } else {
            indexPath = IndexPath(item: 0, section: 0)
         }
-        tableView.reloadRows(at: [indexPath], with: .fade)
+        let cell = tableView.cellForRow(at: indexPath) as? FavoritesPointCell
+        cell?.configure(with: point)
     }
    
-    
+    func updateCurrentPointCell(with point: ForecastPoint) {
+        currentPoint = point
+        updateCell(with: point)
+    }
 }
 
 
@@ -98,7 +104,7 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
         guard let favorCell = cell as? FavoritesPointCell else {
             return
         }
-        favorCell.configure(with: nil)
+        //favorCell.configure(with: nil)
         if  indexPath.section == FavoritesSections.current.rawValue {
             configure(currentLocationCell: favorCell)
         } else {
@@ -124,11 +130,10 @@ extension FavoritesTablePresenter: UITableViewDataSource, UITableViewDelegate {
     
     private func configure(favoritesCell: FavoritesPointCell, with point: ForecastPoint) {
         favoritesCell.configure(with: point)
-        favoritesModel.fetchForecast(for: point) 
+        //favoritesModel.fetchForecast(for: point)
     }
     
     private func configure(currentLocationCell: FavoritesPointCell) {
-        currentLocationCell.configure(with: nil)
         favoritesModel.fetchCurrentForecast()
     }
     

@@ -1,6 +1,11 @@
 protocol FavoritesModelDelegate: class {
     func update(with favorites: [ForecastPoint])
-    func updateCell(with point: ForecastPoint)
+   // func updateCell(with point: ForecastPoint)
+    func updateCurrentPointCell(with point: ForecastPoint)
+}
+
+protocol FavoritesModelOutput: class {
+    func favoritesWasSelected(point: ForecastPoint)
 }
 
 class FavoritesModel {
@@ -8,15 +13,14 @@ class FavoritesModel {
     private var forecastService: ForecastServiceProtocol
     private var store: FavoritesStoreProtocol
     private var appSettings: AppSettingsProtocol
-    private var forecastModel: ForecastModelProtocol
     
     weak var delegate: FavoritesModelDelegate?
+    weak var favoritesModelOutput: FavoritesModelOutput?
    
-    init(forecastAdapter: ForecastServiceProtocol, store: FavoritesStoreProtocol, appSettings: AppSettingsProtocol, forecastModel: ForecastModelProtocol) {
+    init(forecastAdapter: ForecastServiceProtocol, store: FavoritesStoreProtocol, appSettings: AppSettingsProtocol) {
         self.forecastService = forecastAdapter
         self.store = store
         self.appSettings = appSettings
-        self.forecastModel = forecastModel
     }
     
     func load() {
@@ -24,30 +28,34 @@ class FavoritesModel {
         delegate?.update(with: favorites)
     }
     
-    func fetchForecast(for point: ForecastPoint) {
-        forecastService.getForecast(for: point, completion: { [weak self] in
-            self?.delegate?.updateCell(with: $0)
-            }, failure: {print($0)})
+    func viewWillApear() {
+       // let favorites = store.loadForecastPoints()
+       fetchForecast()
+        fetchCurrentForecast()
     }
     
-    func fetchForecast(for favorites: [ForecastPoint]) -> [ForecastPoint] {
-        var favoritesWithWeather = favorites
+    func fetchForecast() {
+        var favoritesWithWeather = store.loadForecastPoints()
+        let favorites = store.loadForecastPoints()
         for point in favorites {
             guard let index = favorites.index(of: point) else  {
-                return favorites
+                return
             }
             forecastService.getForecast(for: point, completion: { [weak self] in
                 favoritesWithWeather[index] = $0
+                //self?.delegate?.updateCell(with: $0)
+                self?.delegate?.update(with: favoritesWithWeather)
                 }, failure: {print($0)})
         }
-        return favoritesWithWeather
     }
     
     func fetchCurrentForecast() {
         forecastService.getForecastForCurrentPoint(completion: {[weak self] in
-            self?.delegate?.updateCell(with: $0)
+            self?.delegate?.updateCurrentPointCell(with: $0)
             } , failure: {print($0)} )
     }
+    
+    
 }
 
 // MARK: - SearchResultControllerDelegate
@@ -84,7 +92,7 @@ extension FavoritesModel: FavoritesTablePresenterDelegate {
         guard let point = point else {
             return
         }
-        forecastModel.favoritesWasSelected(point: point)
+        favoritesModelOutput?.favoritesWasSelected(point: point)
         appSettings.setSelectedCoordinates(forecastPoint: point)
     }
     

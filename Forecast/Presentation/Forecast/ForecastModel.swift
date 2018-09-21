@@ -9,7 +9,6 @@ protocol ForecastModelDelegate: class {
 protocol ForecastModelProtocol: class {
     func viewWillAppear()
     func viewDidLoad()
-    func favoritesWasSelected(point: ForecastPoint)
 }
 
 class ForecastModel: ForecastModelProtocol {
@@ -41,9 +40,7 @@ class ForecastModel: ForecastModelProtocol {
             }, failure: {print($0)})
     }
     
-   func favoritesWasSelected(point: ForecastPoint) {
-        forecastPoint = point
-    }
+   
     
     // MARK: - Private
     
@@ -73,3 +70,12 @@ class ForecastModel: ForecastModelProtocol {
     }
     
 }
+
+    extension ForecastModel: FavoritesModelOutput {
+        
+        func favoritesWasSelected(point: ForecastPoint) {
+            forecastPoint = point
+        }
+    }
+    
+

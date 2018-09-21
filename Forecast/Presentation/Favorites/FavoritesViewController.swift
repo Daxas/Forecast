@@ -23,9 +23,16 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         configure()
         favoritesTablePresenter.delegate = favoritesModel
+        
         //favoritesModel.delegate = favoritesTablePresenter as? FavoritesModelDelegate
        favoritesModel.delegate = self
         favoritesModel.load()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        favoritesModel.viewWillApear()
     }
     
     // MARK: - Private
@@ -33,7 +40,7 @@ class FavoritesViewController: UIViewController {
     private func configure() {
         favoritesTableView.backgroundColor = UIColor.white
         navigationItem.title = "Favorites.title".localized()
-        navigationController?.tabBarItem.title = "Favorites.title".localized()
+        //navigationController?.tabBarItem.title = "Favorites.title".localized()
         navigationItem.rightBarButtonItem?.title = "Edit".localized()
         configureSearchController()
     }
@@ -82,9 +89,12 @@ extension FavoritesViewController: FavoritesModelDelegate {
         favoritesTablePresenter.update(with: favorites)
     }
     
-    func updateCell(with point: ForecastPoint) {
+    /*func updateCell(with point: ForecastPoint) {
         favoritesTablePresenter.updateCell(with: point)
-    }
+    }*/
     
+    func updateCurrentPointCell(with point: ForecastPoint) {
+        favoritesTablePresenter.updateCurrentPointCell(with: point)
+    }
 }
 
