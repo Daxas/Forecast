@@ -23,8 +23,6 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         configure()
         favoritesTablePresenter.delegate = favoritesModel
-        
-        //favoritesModel.delegate = favoritesTablePresenter as? FavoritesModelDelegate
        favoritesModel.delegate = self
         favoritesModel.load()
         
@@ -40,7 +38,6 @@ class FavoritesViewController: UIViewController {
     private func configure() {
         favoritesTableView.backgroundColor = UIColor.white
         navigationItem.title = "Favorites.title".localized()
-        //navigationController?.tabBarItem.title = "Favorites.title".localized()
         navigationItem.rightBarButtonItem?.title = "Edit".localized()
         configureSearchController()
     }

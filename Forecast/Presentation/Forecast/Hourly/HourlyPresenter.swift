@@ -43,10 +43,11 @@ class HourlyPresenter: NSObject {
             cell.timeLabel.text = ""
             return
         }
-        let item = forecast.hourlyData[indexPath.row]
+        let item = forecast.hourly.data[indexPath.row]
+        let date = Date(timeIntervalSince1970: item.time)
         cell.hourlyImage.image = UIImage(named: item.icon)
         cell.hourlyTempLabel.text = temperatureUtils.getTemperatureFrom(number: item.temperature)
-        cell.timeLabel.text = DateUtils.timeFormatter.string(from: item.time)
+        cell.timeLabel.text = DateUtils.timeFormatter.string(from: date)
         
     }
     
@@ -80,7 +81,7 @@ extension HourlyPresenter: UICollectionViewDataSource {
         guard let forecast = forecast else {
             return 0
         }
-        return section == 0 ? 1 : forecast.hourlyData.count
+        return section == 0 ? 1 : forecast.hourly.data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

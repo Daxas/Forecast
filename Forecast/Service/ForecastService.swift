@@ -16,9 +16,9 @@ class ForecastService: ForecastServiceProtocol {
     
    private var geoCoder: GeoCoder
    private var geoLocator: GeoLocatorProtocol
-   private var forecastClient: ForecastClientProtocol
+   private var forecastClient: NetWorkClientProtocol
     
-    init(geoCoder: GeoCoder, geoLocator: GeoLocatorProtocol, forecastClient: ForecastClientProtocol) {
+    init(geoCoder: GeoCoder, geoLocator: GeoLocatorProtocol, forecastClient: NetWorkClientProtocol) {
         self.geoCoder = geoCoder
         self.geoLocator = geoLocator
         self.forecastClient = forecastClient

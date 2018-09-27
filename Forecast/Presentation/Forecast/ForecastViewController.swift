@@ -87,7 +87,7 @@ class ForecastViewController: UIViewController {
         tempLabel.text = ""
         summaryLabel.text = "-"
         iconImage.image = nil
-        dailyTablePresenter.update(with: nil)
+       dailyTablePresenter.update(with: nil)
         hourlyCollectionPresenter.update(with: nil)
     }
     
@@ -128,9 +128,9 @@ extension ForecastViewController: ForecastModelDelegate {
     func updateWeatherLabels(with forecastPoint: ForecastPoint?) {
         stopSpinner()
         if let forecast = forecastPoint?.forecast {
-            tempLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
-            summaryLabel.text = forecast.summary.localized()
-            iconImage.image = UIImage(named: forecast.icon)
+            tempLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.currently.temperature)
+            summaryLabel.text = forecast.currently.summary.localized()
+            iconImage.image = UIImage(named: forecast.currently.icon)
             dailyTablePresenter.update(with: forecast)
             hourlyCollectionPresenter.update(with: forecast)
         } else {

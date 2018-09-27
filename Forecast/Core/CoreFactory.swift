@@ -2,7 +2,7 @@
 protocol CoreFactoryProtocol {
      func createGeoLocator() -> GeoLocatorProtocol
      func createGeoCoder() -> GeoCoder
-     func createForecastClient() -> ForecastClientProtocol
+     func createForecastClient() -> NetWorkClientProtocol
     
 }
 
@@ -16,8 +16,8 @@ class CoreFactory: CoreFactoryProtocol {
         return GeoCoder()
     }
     
-     func createForecastClient() -> ForecastClientProtocol {
-        return ForecastClient()
+     func createForecastClient() -> NetWorkClientProtocol {
+        return NetWorkClient()
     }
     
     

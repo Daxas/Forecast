@@ -21,11 +21,12 @@ class DailyPresenter: NSObject {
             cell.iconDaily.image = nil
             return
         }
-        let item = forecast.dailyData[indexPath.row]
-        cell.dateLabel.text =  dateUtils.date(date: item.time)
-        cell.weekDayLabel.text = dateUtils.weekDay(date: item.time)
-        cell.minTempLabel.text = temperatureUtils.getTemperatureFrom(number: item.minTemp)
-        cell.maxTempLabel.text = temperatureUtils.getTemperatureFrom(number: item.maxTemp)
+        let item = forecast.daily.data[indexPath.row]
+        let date = Date(timeIntervalSince1970: item.time)
+        cell.dateLabel.text =  dateUtils.date(date: date)
+        cell.weekDayLabel.text = dateUtils.weekDay(date: date)
+        cell.minTempLabel.text = temperatureUtils.getTemperatureFrom(number: item.temperatureMin)
+        cell.maxTempLabel.text = temperatureUtils.getTemperatureFrom(number: item.temperatureMax)
         cell.iconDaily.image = UIImage(named: (item.icon + "_"))
     }
     
@@ -44,7 +45,7 @@ extension DailyPresenter: UITableViewDataSource {
         guard let forecast = forecast else {
             return 0
         }
-        return forecast.dailyData.count
+        return forecast.daily.data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

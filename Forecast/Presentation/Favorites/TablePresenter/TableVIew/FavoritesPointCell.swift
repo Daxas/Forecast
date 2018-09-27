@@ -13,12 +13,12 @@ class FavoritesPointCell: UITableViewCell {
     
     func configure(with forecastPoint: ForecastPoint?) {
         if let forecastPoint = forecastPoint, let forecast = forecastPoint.forecast {
-            temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.temperature)
+            temperatureLabel.text = temperatureUtils.getTemperatureFrom(number: forecast.currently.temperature)
             if reuseIdentifier == FavoritesSections.current.cellIdentifier {
                 currentLocationLabel.text = "Current location".localized()
-                weatherIcon.image = UIImage(named: forecast.icon)
+                weatherIcon.image = UIImage(named: forecast.currently.icon)
             } else {
-                weatherIcon.image = UIImage(named: forecast.icon + "_")
+                weatherIcon.image = UIImage(named: forecast.currently.icon + "_")
             }
         } else {
             temperatureLabel.text = ""
